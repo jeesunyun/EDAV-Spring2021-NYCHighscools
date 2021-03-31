@@ -1,1 +1,4 @@
 # Missing values
+
+some data in high school directory not available in entire school demographics dataset
+Data on student composition unvailable
