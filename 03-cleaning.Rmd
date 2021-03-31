@@ -1,1 +1,66 @@
 # Data transformation
+```{r, message=FALSE}
+# load packages
+library(tidyverse)
+library(stringr)
+```
+
+```{r, message=FALSE}
+hs_demo <- readr::read_csv("datasets/hs_demo.csv")
+hs_dir <- readr::read_csv("datasets/2020_doe_hs_dir.csv")
+hs_dir.2019 <- readr::read_csv("datasets/2019_doe_hs_dir.csv")
+```
+
+```{r}
+names(hs_demo)
+# contains data not only for high school
+```
+
+```{r}
+names(hs_demo) <- str_replace_all(names(hs_demo), c(" "="_",  "%"="pct", "#"="n"))
+hs_demo_tidy <- hs_demo %>% 
+  dplyr::filter(Grade_9 != 0 & Year == "2019-20") %>% 
+  mutate(hs_enroll = Grade_9 + Grade_10 + Grade_11 + Grade_12,
+         non_hs = rowSums(dplyr::select(hs_demo_tidy, Grade_K : Grade_8)),
+         PK = `Grade_3K+PK_(Half_Day_&_Full_Day)`) %>% 
+  dplyr::select(-`Grade_3K+PK_(Half_Day_&_Full_Day)`) %>% 
+  dplyr::select(DBN, School_Name, Year, Total_Enrollment, hs_enroll, non_hs, everything()) %>% 
+  dplyr::filter( Grade_10 !=0 & Grade_11 !=10 & Grade_12 != 0 )
+
+```
+
+```{r}
+names(hs_dir)
+hs_dir_tidy <- hs_dir %>% 
+  dplyr::select(dbn, school_name, Borough, neighborhood, total_students, grades2019, 
+                language_classes, advancedplacement_courses, diplomaendorsements,graduation_rate,
+                attendance_rate, pct_stu_enough_variety, college_career_rate, specialized, 
+                admissionspriority11, admissionspriority21
+                )
+
+hs_dir_tidy.19 <- hs_dir.2019 %>% 
+    dplyr::select(dbn, school_name, Borough, neighborhood, total_students, grades2018, 
+                language_classes, advancedplacement_courses, diplomaendorsements,graduation_rate,
+                attendance_rate, pct_stu_enough_variety, college_career_rate, specialized, 
+                admissionspriority11, admissionspriority21
+                )
+
+hs_loc <- hs_dir %>% 
+  dplyr::select(dbn, school_name, borocode, Borough, neighborhood, postcode, Location1)
+```
+
+```{r}
+hs_data_comb <- hs_dir_tidy %>% 
+  left_join(hs_demo_tidy, by = c("dbn" = "DBN", "school_name" = "School_Name"))%>% 
+  dplyr::select(dbn, school_name, neighborhood, total_students, Total_Enrollment, hs_enroll, non_hs, grades2019, PK,
+                Grade_K:Grade_12, everything())
+
+hs_data_comb.19 <- hs_dir_tidy.19 %>% 
+  left_join(hs_demo_tidy, by = c("dbn" = "DBN", "school_name" = "School_Name"))%>% 
+  dplyr::select(dbn, school_name, neighborhood, total_students, Total_Enrollment, hs_enroll, non_hs, grades2018, PK,
+                Grade_K:Grade_12, everything())
+
+
+mismatch.n.19 <- hs_data_comb.19[which(hs_data_comb.19$total_students != hs_data_comb.19$Total_Enrollment), ]
+match.n.19 <- hs_data_comb.19[which(hs_data_comb.19$total_students == hs_data_comb.19$Total_Enrollment), ]
+```
