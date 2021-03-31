@@ -1,2 +1,6 @@
 # Data sources
 
+```{r}
+hs_demo <- readr::read_csv("datasets/hs_demo.csv")
+hs_dir <- readr::read_csv("datasets/2020_doe_hs_dir.csv")
+```
