@@ -1,4 +1,10 @@
 # Missing values
 
+Describe any patterns you discover in missing values.
+
+(suggested: 2 graphs plus commentary)
+
+
 some data in high school directory not available in entire school demographics dataset
 Data on student composition unvailable
+Also some number of total students do not equal for two datasets
