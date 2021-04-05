@@ -6,18 +6,20 @@ library(stringr)
 ```
 
 ```{r, message=FALSE}
-hs_demo <- readr::read_csv("datasets/hs_demo.csv")
-hs_dir <- readr::read_csv("datasets/2020_doe_hs_dir.csv")
-hs_dir.2019 <- readr::read_csv("datasets/2019_doe_hs_dir.csv")
+hs_demo <- read_csv("datasets/hs_demo.csv")
+hs_dir <- read_csv("datasets/2020_doe_hs_dir.csv")
+hs_dir.2019 <- read_csv("datasets/2019_doe_hs_dir.csv")
 ```
 
 ```{r}
 names(hs_demo)
 # contains data not only for high school
+# rename names easy to retract
+names(hs_demo) <- str_replace_all(names(hs_demo), c(" "="_",  "%"="pct", "#"="n"))
+head(names(hs_demo))
 ```
 
 ```{r}
-names(hs_demo) <- str_replace_all(names(hs_demo), c(" "="_",  "%"="pct", "#"="n"))
 hs_demo_tidy <- hs_demo %>% 
   dplyr::filter(Grade_9 != 0 & Year == "2019-20") %>% 
   mutate(hs_enroll = Grade_9 + Grade_10 + Grade_11 + Grade_12,
