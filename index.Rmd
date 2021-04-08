@@ -7,3 +7,10 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+This project aims to explore and visualize information related to high schools in NYC.
+Through this analysis, we hope to answer the following questions:
+
+1. How do the demographics differ across different neighborhoods?
+2. How do the demographics differ in schools of different neighborhoods? Is there a difference from the neighborhoods demographics?
+3. Are there certain patterns among schools that share similar features?
+*(4. How does this realte to high school performances?) maybe*
