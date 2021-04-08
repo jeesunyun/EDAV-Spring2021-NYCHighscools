@@ -1,4 +1,6 @@
 # Missing values
 
 some data in high school directory not available in entire school demographics dataset
-Data on student composition unvailable
+Data on student composition for those not included in both data sets are unavailable
+
+Missing data pattern: sequence of columns missing: obs from same dataset
