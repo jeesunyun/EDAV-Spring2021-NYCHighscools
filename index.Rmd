@@ -14,3 +14,7 @@ Through this analysis, we hope to answer the following questions:
 2. How do the demographics differ in schools of different neighborhoods? Is there a difference from the neighborhoods demographics?
 3. Are there certain patterns among schools that share similar features?
 *(4. How does this realte to high school performances?) maybe*
+
+Explain why you chose this topic, and the questions you are interested in studying. Provide context for readers who are not familiar with the topic.
+
+(suggested: approximately 1/2 page)

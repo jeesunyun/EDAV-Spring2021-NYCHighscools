@@ -15,3 +15,14 @@ Doing joins of these data by school names, we will be able to get a comprehensiv
 
 3. https://github.com/mfherman/nycgeo
 https://www.kaggle.com/bigironsphere/tutorial-maps-eda-and-models-with-nyc-census-data
+
+
+
+
+Describe the data sources: who is responsible for collecting the data? How is it collected? If there were a choice of options, explain how you chose.
+
+Provide some basic information about the dataset: types of variables, number of records, etc.
+
+Describe any issues / problems with the data, either known or that you discover.
+
+(suggested: approximately 1 page)

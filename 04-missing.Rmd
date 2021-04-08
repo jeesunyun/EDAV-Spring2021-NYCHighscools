@@ -1,6 +1,15 @@
 # Missing values
 
+Describe any patterns you discover in missing values.
+
+(suggested: 2 graphs plus commentary)
+
+
 some data in high school directory not available in entire school demographics dataset
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd4724c80bc83e261d978ab4c9c927c8a9b73773
 Data on student composition for those not included in both data sets are unavailable
 
 Missing data pattern: sequence of columns missing: obs from same dataset

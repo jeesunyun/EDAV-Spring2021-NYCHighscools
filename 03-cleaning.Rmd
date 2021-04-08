@@ -1,5 +1,10 @@
 # Data transformation
 
+Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code.
+
+(suggested: approximately 1/2 page)
+
+
 ```{r, message=FALSE}
 # load packages
 library(tidyverse)
@@ -55,6 +60,10 @@ The directory data has very extensive information each schools, from basic schoo
 However, we do not want more than 400 variables, so we select only the information relevant and informative to us.
 Such variables are: basic school information(DBN, school name, neighborhood) to characteristic information(programs, statistics, admissions).
 
+The directory data has very extensive information each schools, from basic school information to detailed descriptions of each program and admission information.
+However, we do not want more than 400 variables, so we select only the information relevant and informative to us.
+Such variables are: basic school information(DBN, school name, neighborhood) to characteristic information(programs, statistics, admissions).
+
 *Also, the programs take up many columns, so we can concatenate them into a single column of lists?*
 
 ```{r}
@@ -90,6 +99,28 @@ Only 5 schools have total number of students identical in both data sets.
 Since demograhic data is based on the total population from hs_demo data, use that?
 
 
+### Join data
+Since we have the names and the DBN which are unique, we join the two datasets using these columns as indicators.
+
+```{r}
+hs_join.2019 <- hs_dir_tidy.2019 %>% 
+  left_join(hs_demo_tidy, by = c("dbn" = "DBN", "school_name" = "School_Name"))%>% 
+  dplyr::select(dbn, school_name, neighborhood, total_students, Total_Enrollment, hs_enroll, non_hs, grades2018, PK,
+                Grade_K:Grade_12, everything()) %>% 
+  mutate(across(where(is.character), ~na_if(., "N/A")))
+# change character values indicated "N/A" into NAs
+head(hs_join.2019)
+```
+
+It is interesting that the total number of students are not equal in both data sets.
+```{r}
+mismatch.n.19 <- hs_join.2019[which(hs_join.2019$total_students != hs_join.2019$Total_Enrollment), ]; dim(mismatch.n.19)
+match.n.19 <- hs_join.2019[which(hs_join.2019$total_students == hs_join.2019$Total_Enrollment), ]; dim(match.n.19)
+```
+Only 5 schools have total number of students identical in both data sets.
+*Which number is safe to use?*
+Since demograhic data is based on the total population from hs_demo data, use that?
+
 ```{r}
 t(table(hs_join.2019$grades2018))
 # shows that schools mostly grades 9 to 1, and 6 to 12
@@ -99,6 +130,7 @@ gr6_to_gr12 <- hs_join.2019[which(hs_join.2019$grades2018 == "6 to 12"), ] %>%
   dplyr::select(-c(neighborhood, hs_enroll, non_hs, PK, Grade_K, Grade_1, Grade_2, Grade_3, Grade_4, Grade_5))
 
 gr9_to_gr12 <- hs_join.2019[which(hs_join.2019$grades2018 == "9 to 12"), ]
+<<<<<<< HEAD
 
 
 # what other characteristics for schools 6 to 10, 6 to 11, 7 to 12, K to 12 ?
@@ -106,6 +138,16 @@ gr9_to_gr12 <- hs_join.2019[which(hs_join.2019$grades2018 == "9 to 12"), ]
 ```
 
 
+### High school location data
+```{r}
+# location dataset for mapping coordinates
+hs_location <- hs_dir.2019 %>% 
+  dplyr::select(dbn, school_name, Borough, city, zip, Latitude, Longitude, `Census Tract`, nta)
+```
+
+# what other characteristics for schools 6 to 10, 6 to 11, 7 to 12, K to 12 ?
+# 9 to 14 is 2 years associate degree
+```
 
 
 ### High school location data
