@@ -1,5 +1,23 @@
 # Data sources
 
+
+We used data sets listed in [NYC Open Data](https://opendata.cityofnewyork.us/).
+Since we are exploring education data, most of the data are provided by the Department of Education.
+
+Below are the lists of datasets that we utilized.
+Doing joins of these data by school names, we will be able to get a comprehensive look at highschools and neighborhoods.
+
+1. [2019-20 Demographic Snapshot (DOE)](https://data.cityofnewyork.us/Education/2019-20-Demographic-Snapshot-School/nie4-bv6q)
+  * This gives us the demographics of all NYC schools.
+
+2. [2019 High school Directory (DOE)](https://data.cityofnewyork.us/Education/2019-DOE-High-School-Directory/uq7m-95z8)
+   [2020 High school Directory (DOE)](https://data.cityofnewyork.us/Education/2020-DOE-High-School-Directory/23z9-6uk9)
+  * This helps us to understand the characteristics of each of the NYC high schools (whether they are zoned, specialized, program descriptions, etc.)
+
+3. https://github.com/mfherman/nycgeo
+https://www.kaggle.com/bigironsphere/tutorial-maps-eda-and-models-with-nyc-census-data
+
+
 Describe the data sources: who is responsible for collecting the data? How is it collected? If there were a choice of options, explain how you chose.
 
 Provide some basic information about the dataset: types of variables, number of records, etc.
@@ -7,9 +25,3 @@ Provide some basic information about the dataset: types of variables, number of 
 Describe any issues / problems with the data, either known or that you discover.
 
 (suggested: approximately 1 page)
-
-
-```{r, message=FALSE}
-hs_demo <- readr::read_csv("datasets/hs_demo.csv")
-hs_dir <- readr::read_csv("datasets/2020_doe_hs_dir.csv")
-```

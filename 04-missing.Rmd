@@ -6,5 +6,7 @@ Describe any patterns you discover in missing values.
 
 
 some data in high school directory not available in entire school demographics dataset
-Data on student composition unvailable
-Also some number of total students do not equal for two datasets
+
+Data on student composition for those not included in both data sets are unavailable
+
+Missing data pattern: sequence of columns missing: obs from same dataset
