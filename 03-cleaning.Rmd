@@ -7,7 +7,7 @@ library(stringr)
 library(table1)
 ```
 
-## Data preparation for high school directory data and demographics join
+**Data preparation for high school directory data and demographics join**
 
 ```{r, message=FALSE, include= FALSE}
 # read in the datasets

@@ -26,7 +26,7 @@ All datasets from NYC governmental background follow a certain pattern: they hav
 These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.
 
 
-# Dataset information
+## Dataset information
 
 The examples of the datasets are provided below, displayed using the head function.
 
@@ -76,7 +76,7 @@ print(names(nyc_census_df))
 Some common and important columns are NTA codes, tracts ids, Race & Ethnicities, Income and Child Poverty. NTA codes are GIS information for geographic marks and locations in NYC. Every single NTA code will match a place mark.
 
 
-# Problems with NYC datasets health and census data.
+## Problems with NYC datasets health and census data.
 
 Data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.
 Also, NYC datasets is not very easy to use and understand. The researchers must investigate and read the description on how to interpret the information inside the datasets like NTA codes, track ids, longitude and latitude. There are many N/As inside the datasets which indicated some degree of incomplete of the raw data collection. From a programming perspective, the NYC datasets are not very suitable for R: the packages to process GIS information and spatial data require the researcher to read those detailed docs for specific packages like `nycgeo`.
