@@ -1,6 +1,15 @@
-# Data sources
+# Data Collection
 
-We used data sets listed in [NYC Open Data](https://opendata.cityofnewyork.us/).
+The data collection work is completed in basis of an group effort of 3 to ensure the integrity and the accountability of the data we use. The datasets are downloaded from official governmental or government-related organizations. The main datasets we use came from [NYC Open Data](https://opendata.cityofnewyork.us/) that stores all New York related datasets. It is one of the NYC.gov sites which is maintained officially through New York City government.
+
+All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.
+
+These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.
+
+
+# Data Source
+
+We used data sets listed in [NYC Open Data](https://opendata.cityofnewyork.us/) and from NYC health department.
 Since we are exploring education data, most of the data are provided by the Department of Education.
 
 Below are the lists of datasets that we utilized.
@@ -13,16 +22,38 @@ Doing joins of these data by school names, we will be able to get a comprehensiv
    [2020 High school Directory (DOE)](https://data.cityofnewyork.us/Education/2020-DOE-High-School-Directory/23z9-6uk9)
   * This helps us to understand the characteristics of each of the NYC high schools (whether they are zoned, specialized, program descriptions, etc.)
 
-3. https://github.com/mfherman/nycgeo
-https://www.kaggle.com/bigironsphere/tutorial-maps-eda-and-models-with-nyc-census-data
+
+Below are some references we took into account for this project.
+1. [nycgeo package documentation](https://github.com/mfherman/nycgeo)
+2. [EDA and Models with NYC Census Data](https://www.kaggle.com/bigironsphere/tutorial-maps-eda-and-models-with-nyc-census-data)
 
 
 
+# Datasets Examples.
 
-Describe the data sources: who is responsible for collecting the data? How is it collected? If there were a choice of options, explain how you chose.
+The examples of the datasets are provided below. Using the head function.
 
-Provide some basic information about the dataset: types of variables, number of records, etc.
+```{r}
+# New York Census Data in 2015.
+nyc_census_df <- read_csv("./datasets/nyc_census_tracts.csv")
+head(nyc_census_df, 5)
 
-Describe any issues / problems with the data, either known or that you discover.
+# NTA Health Data from NYC health.
+nta_health <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nta-health.csv")
+head(nta_health,5)
 
-(suggested: approximately 1 page)
+# Demonstration on Information of the datasets.
+print(paste('This dataframe of NYC census data included ', dim(nyc_census_df)[1], 'rows of info and ', dim(nyc_census_df)[2], 'columns.'))
+print(paste('The total number of missing rows of data ', sum(is.na(nyc_census_df)), 
+           round(100*sum(is.na(nyc_census_df))/(nrow(nyc_census_df)*ncol(nyc_census_df)), 2), '% of the total.'))
+print('Below are the columns names of the data, this includes the categories of the datas recorded:')
+print(names(nyc_census_df))
+
+```
+
+Some common and important columns are NTA codes, tracts ids, Race & Ethnicities, Income and Child Poverty. NTA codes are GIS information for geographic marks and locations in NYC. Every single NTA code will match a place mark.
+
+
+# Problems with NYC datasets health and census data.
+
+NYC datasets is not very easy to use and understand. The researchers must investigate and read the description on how to interpret the information inside the datasets like NTA codes, track ids, longitude and latitude. There are many N/As inside the datasets which indicated some degree of incomplete of the raw data collection. From a programming perspective, the NYC datasets are not very suitable for R: the packages to process GIS information and spatial data require the researcher to read those detailed docs for specific packages like `nycgeo`.
