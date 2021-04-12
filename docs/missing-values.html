@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Missing values | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 4 Missing values | YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>Chapter 4 Missing values | NYC High school demographics and performances</title>
+  <meta name="description" content="Chapter 4 Missing values | NYC High school demographics and performances" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Missing values | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 4 Missing values | NYC High school demographics and performances" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Missing values | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 4 Missing values | NYC High school demographics and performances" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Brian Hernandez, Jeesun Yun, Changxing Wang" />
 
 
-<meta name="date" content="2020-11-09" />
+<meta name="date" content="2021-04-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="data-transformation.html"/>
 <link rel="next" href="results.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 
@@ -68,13 +66,23 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">NYC High school</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#problems-with-nyc-datasets-health-and-census-data."><i class="fa fa-check"></i><b>2.2</b> Problems with NYC datasets health and census data.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.0.1</b> Demographics data</a></li>
+<li class="chapter" data-level="3.0.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.0.2</b> High school directory data</a></li>
+<li class="chapter" data-level="3.0.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.0.3</b> Join data</a></li>
+<li class="chapter" data-level="3.0.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.0.4</b> High school location data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-values-by-column"><i class="fa fa-check"></i><b>4.1</b> Missing values by column</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -89,7 +97,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics and performances</a>
           </h1>
         </div>
 
@@ -97,9 +105,160 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="missing-values" class="section level1" number="4">
+<div id="missing-values" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+<p>Some data in high school directory not available for all schools in the demographics dataset, and vice versa despite they are both from the DOE.</p>
+<div id="missing-values-by-column" class="section level2">
+<h2><span class="header-section-number">4.1</span> Missing values by column</h2>
+<p>In the directory dataset, there are too many variables to consider, as well as missing values, due to the difference among schools in their offered programs. For example, some schools might have 10 different programs, offered, while others may have only 1. Also, some might have several different admission requirements per program and some programs might not, etc.
+These are the reasons for the extensive amount of variables, and missing values, as can be seen below.</p>
+<pre><code>## # A tibble: 6 x 11
+##   ell_programs program1 program2 program3 program4 program5 program6 program7
+##   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   
+## 1 English as … Academy… Compute… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 2 English as … Interna… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 3 English as … Theater… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 4 English as … Social … &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 5 English as … Brookly… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 6 English as … West En… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## # … with 3 more variables: program8 &lt;chr&gt;, program9 &lt;chr&gt;, program10 &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 6 x 11
+##   ell_programs program1 program2 program3 program4 program5 program6 program7
+##   &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   
+## 1 English as … Discove… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 2 English as … Humanit… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 3 English as … Veterin… Carver … &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 4 English as … Enginee… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 5 English as … Constru… Archite… Academy… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 6 English as … Pre-Eng… &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## # … with 3 more variables: program8 &lt;chr&gt;, program9 &lt;chr&gt;, program10 &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 6 x 70
+##   admissionsprior… admissionsprior… admissionsprior… admissionsprior…
+##   &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
+## 1 Open to New Yor… &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
+## 2 &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
+## 3 Open to New Yor… &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
+## 4 Priority to con… Then to Distric… Then to Manhatt… Then to New Yor…
+## 5 &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;            
+## 6 Priority to con… Then to New Yor… &lt;NA&gt;             &lt;NA&gt;            
+## # … with 66 more variables: admissionspriority51 &lt;chr&gt;,
+## #   admissionspriority61 &lt;lgl&gt;, admissionspriority71 &lt;lgl&gt;,
+## #   admissionspriority12 &lt;chr&gt;, admissionspriority22 &lt;chr&gt;,
+## #   admissionspriority32 &lt;chr&gt;, admissionspriority42 &lt;chr&gt;,
+## #   admissionspriority52 &lt;lgl&gt;, admissionspriority62 &lt;lgl&gt;,
+## #   admissionspriority72 &lt;lgl&gt;, admissionspriority13 &lt;chr&gt;,
+## #   admissionspriority23 &lt;chr&gt;, admissionspriority33 &lt;chr&gt;,
+## #   admissionspriority43 &lt;lgl&gt;, admissionspriority53 &lt;lgl&gt;,
+## #   admissionspriority63 &lt;lgl&gt;, admissionspriority73 &lt;lgl&gt;,
+## #   admissionspriority14 &lt;chr&gt;, admissionspriority24 &lt;chr&gt;,
+## #   admissionspriority34 &lt;chr&gt;, admissionspriority44 &lt;chr&gt;,
+## #   admissionspriority54 &lt;lgl&gt;, admissionspriority64 &lt;lgl&gt;,
+## #   admissionspriority74 &lt;lgl&gt;, admissionspriority15 &lt;chr&gt;,
+## #   admissionspriority25 &lt;chr&gt;, admissionspriority35 &lt;chr&gt;,
+## #   admissionspriority45 &lt;lgl&gt;, admissionspriority55 &lt;lgl&gt;,
+## #   admissionspriority65 &lt;lgl&gt;, admissionspriority75 &lt;lgl&gt;,
+## #   admissionspriority16 &lt;chr&gt;, admissionspriority26 &lt;chr&gt;,
+## #   admissionspriority36 &lt;lgl&gt;, admissionspriority46 &lt;lgl&gt;,
+## #   admissionspriority56 &lt;lgl&gt;, admissionspriority66 &lt;lgl&gt;,
+## #   admissionspriority76 &lt;lgl&gt;, admissionspriority17 &lt;chr&gt;,
+## #   admissionspriority27 &lt;chr&gt;, admissionspriority37 &lt;lgl&gt;,
+## #   admissionspriority47 &lt;lgl&gt;, admissionspriority57 &lt;lgl&gt;,
+## #   admissionspriority67 &lt;lgl&gt;, admissionspriority77 &lt;lgl&gt;,
+## #   admissionspriority18 &lt;chr&gt;, admissionspriority28 &lt;chr&gt;,
+## #   admissionspriority38 &lt;chr&gt;, admissionspriority48 &lt;lgl&gt;,
+## #   admissionspriority58 &lt;lgl&gt;, admissionspriority68 &lt;lgl&gt;,
+## #   admissionspriority78 &lt;lgl&gt;, admissionspriority19 &lt;chr&gt;,
+## #   admissionspriority29 &lt;chr&gt;, admissionspriority39 &lt;lgl&gt;,
+## #   admissionspriority49 &lt;lgl&gt;, admissionspriority59 &lt;lgl&gt;,
+## #   admissionspriority69 &lt;lgl&gt;, admissionspriority79 &lt;lgl&gt;,
+## #   admissionspriority110 &lt;chr&gt;, admissionspriority210 &lt;lgl&gt;,
+## #   admissionspriority310 &lt;lgl&gt;, admissionspriority410 &lt;lgl&gt;,
+## #   admissionspriority510 &lt;lgl&gt;, admissionspriority610 &lt;lgl&gt;,
+## #   admissionspriority710 &lt;lgl&gt;</code></pre>
+<pre><code>## # A tibble: 427 x 120
+##    requirement1_1 requirement1_2 requirement1_3 requirement1_4 requirement1_5
+##    &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;         
+##  1 Attendance     &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  2 &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  3 Attendance     &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  4 Attendance     &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  5 &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  6 Attendance     &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  7 Individual In… Individual In… Individual In… Individual In… Individual In…
+##  8 &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+##  9 &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+## 10 Course Grades… &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;          
+## # … with 417 more rows, and 115 more variables: requirement1_6 &lt;chr&gt;,
+## #   requirement1_7 &lt;chr&gt;, requirement1_8 &lt;chr&gt;, requirement1_9 &lt;chr&gt;,
+## #   requirement1_10 &lt;chr&gt;, requirement2_1 &lt;chr&gt;, requirement2_2 &lt;chr&gt;,
+## #   requirement2_3 &lt;chr&gt;, requirement2_4 &lt;chr&gt;, requirement2_5 &lt;chr&gt;,
+## #   requirement2_6 &lt;chr&gt;, requirement2_7 &lt;chr&gt;, requirement2_8 &lt;chr&gt;,
+## #   requirement2_9 &lt;chr&gt;, requirement2_10 &lt;chr&gt;, requirement3_1 &lt;chr&gt;,
+## #   requirement3_2 &lt;chr&gt;, requirement3_3 &lt;chr&gt;, requirement3_4 &lt;chr&gt;,
+## #   requirement3_5 &lt;chr&gt;, requirement3_6 &lt;chr&gt;, requirement3_7 &lt;chr&gt;,
+## #   requirement3_8 &lt;chr&gt;, requirement3_9 &lt;chr&gt;, requirement3_10 &lt;chr&gt;,
+## #   requirement4_1 &lt;chr&gt;, requirement4_2 &lt;chr&gt;, requirement4_3 &lt;chr&gt;,
+## #   requirement4_4 &lt;chr&gt;, requirement4_5 &lt;chr&gt;, requirement4_6 &lt;chr&gt;,
+## #   requirement4_7 &lt;chr&gt;, requirement4_8 &lt;chr&gt;, requirement4_9 &lt;chr&gt;,
+## #   requirement4_10 &lt;chr&gt;, requirement5_1 &lt;chr&gt;, requirement5_2 &lt;chr&gt;,
+## #   requirement5_3 &lt;chr&gt;, requirement5_4 &lt;chr&gt;, requirement5_5 &lt;chr&gt;,
+## #   requirement5_6 &lt;chr&gt;, requirement5_7 &lt;chr&gt;, requirement5_8 &lt;chr&gt;,
+## #   requirement5_9 &lt;chr&gt;, requirement5_10 &lt;chr&gt;, requirement6_1 &lt;chr&gt;,
+## #   requirement6_2 &lt;chr&gt;, requirement6_3 &lt;chr&gt;, requirement6_4 &lt;chr&gt;,
+## #   requirement6_5 &lt;chr&gt;, requirement6_6 &lt;chr&gt;, requirement6_7 &lt;chr&gt;,
+## #   requirement6_8 &lt;chr&gt;, requirement6_9 &lt;chr&gt;, requirement6_10 &lt;chr&gt;,
+## #   requirement7_1 &lt;chr&gt;, requirement7_2 &lt;chr&gt;, requirement7_3 &lt;chr&gt;,
+## #   requirement7_4 &lt;lgl&gt;, requirement7_5 &lt;chr&gt;, requirement7_6 &lt;lgl&gt;,
+## #   requirement7_7 &lt;lgl&gt;, requirement7_8 &lt;lgl&gt;, requirement7_9 &lt;lgl&gt;,
+## #   requirement7_10 &lt;lgl&gt;, requirement8_1 &lt;chr&gt;, requirement8_2 &lt;chr&gt;,
+## #   requirement8_3 &lt;lgl&gt;, requirement8_4 &lt;lgl&gt;, requirement8_5 &lt;lgl&gt;,
+## #   requirement8_6 &lt;lgl&gt;, requirement8_7 &lt;lgl&gt;, requirement8_8 &lt;lgl&gt;,
+## #   requirement8_9 &lt;lgl&gt;, requirement8_10 &lt;lgl&gt;, requirement9_1 &lt;lgl&gt;,
+## #   requirement9_2 &lt;lgl&gt;, requirement9_3 &lt;lgl&gt;, requirement9_4 &lt;lgl&gt;,
+## #   requirement9_5 &lt;lgl&gt;, requirement9_6 &lt;lgl&gt;, requirement9_7 &lt;lgl&gt;,
+## #   requirement9_8 &lt;lgl&gt;, requirement9_9 &lt;lgl&gt;, requirement9_10 &lt;lgl&gt;,
+## #   requirement10_1 &lt;lgl&gt;, requirement10_2 &lt;lgl&gt;, requirement10_3 &lt;lgl&gt;,
+## #   requirement10_4 &lt;lgl&gt;, requirement10_5 &lt;lgl&gt;, requirement10_6 &lt;lgl&gt;,
+## #   requirement10_7 &lt;lgl&gt;, requirement10_8 &lt;lgl&gt;, requirement10_9 &lt;lgl&gt;,
+## #   requirement10_10 &lt;lgl&gt;, requirement11_1 &lt;lgl&gt;, requirement11_2 &lt;lgl&gt;,
+## #   requirement11_3 &lt;lgl&gt;, requirement11_4 &lt;lgl&gt;, requirement11_5 &lt;lgl&gt;, …</code></pre>
+<p>As such, we cannot assess the pattern of missing values properly in the raw data itself, other than knowing that the missing values are dur to difference in the number of offered programs.
+Thus, we try to see missing patterns in the tidied dataset.</p>
+<pre><code>##                 program10                  program9                  program8 
+##                       426                       423                       418 
+##               specialized                  program7                  program6 
+##                       418                       409                       401 
+##                  program5                  program4                  program3 
+##                       390                       377                       353 
+##       diplomaendorsements                  program2      admissionspriority21 
+##                       289                       276                       183 
+## advancedplacement_courses      admissionspriority11          language_classes 
+##                        52                        44                         8 
+##           attendance_rate    pct_stu_enough_variety                       dbn 
+##                         2                         1                         0 
+##               school_name                   Borough              neighborhood 
+##                         0                         0                         0 
+##            total_students                grades2018               finalgrades 
+##                         0                         0                         0 
+##                  program1           graduation_rate       college_career_rate 
+##                         0                         0                         0</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+There are too many variables and observations to be legible, so we drop out variables that have none missing values such as school name, dbn, etc. We also exclude programs, since the missing pattern is availability.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+The pattern is still difficult to observe becasue of the vast number of observations.
+Thus, let’s try to look at this by grouping them by borough.</p>
+<pre><code>## # A tibble: 5 x 4
+##   Borough   num_schools num_na percent_na
+##   &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+## 1 BROOKLYN          119    305       2.56
+## 2 BRONX             110    252       2.29
+## 3 MANHATTAN         107    244       2.28
+## 4 QUEENS             80    174       2.17
+## 5 STATEN IS          11     22       2</code></pre>
+<p>The data provided are mostly character data, not numerical scores to compare against.
+Also, the missing data in this data set seeems to be more related to the characteristic of the school rather than revealing a certain kind of pattern.</p>
 
+</div>
 </div>
             </section>
 
@@ -138,7 +297,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/04-missing.Rmd",
+"link": "https://github.com/jeesunyun/nyc-hs/edit/main/04-missing.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -146,7 +305,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/04-missing.Rmd",
+"link": "https://github.com/jeesunyun/nyc-hs/blob/main/04-missing.Rmd",
 "text": null
 },
 "download": null,

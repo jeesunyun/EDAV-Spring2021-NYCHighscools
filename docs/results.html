@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Results | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 5 Results | YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>Chapter 5 Results | NYC High school demographics and performances</title>
+  <meta name="description" content="Chapter 5 Results | NYC High school demographics and performances" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Results | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 5 Results | NYC High school demographics and performances" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Results | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 5 Results | NYC High school demographics and performances" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Brian Hernandez, Jeesun Yun, Changxing Wang" />
 
 
-<meta name="date" content="2020-11-09" />
+<meta name="date" content="2021-04-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="missing-values.html"/>
 <link rel="next" href="interactive-component.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 
@@ -68,13 +66,23 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">NYC High school</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#problems-with-nyc-datasets-health-and-census-data."><i class="fa fa-check"></i><b>2.2</b> Problems with NYC datasets health and census data.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.0.1</b> Demographics data</a></li>
+<li class="chapter" data-level="3.0.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.0.2</b> High school directory data</a></li>
+<li class="chapter" data-level="3.0.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.0.3</b> Join data</a></li>
+<li class="chapter" data-level="3.0.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.0.4</b> High school location data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-values-by-column"><i class="fa fa-check"></i><b>4.1</b> Missing values by column</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -89,7 +97,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics and performances</a>
           </h1>
         </div>
 
@@ -97,8 +105,36 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="results" class="section level1" number="5">
+<div id="results" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
+<p>Explore characteristics shared by schools</p>
+<pre><code>##       
+##        6 to 12 7 to 12 9 to 12 9 to 14 K to 12
+##   [1,]      74       1     335       7       4
+##       
+##        School is structured on credit needs, not grade level
+##   [1,]                                                     4</code></pre>
+<p>The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
+We want to see characteristics of these schools, especially in what classes and diploa are offered.
+We separate the columns of such columns by <code>&quot;,&quot;</code> since they are currently in a free text form and change them to categories.</p>
+<p><strong>Courses and Programs</strong></p>
+<pre><code>## # A tibble: 6 x 6
+##   dbn    school     Borough language_classes advancedplacement… diplomaendorsem…
+##   &lt;chr&gt;  &lt;chr&gt;      &lt;fct&gt;   &lt;fct&gt;            &lt;fct&gt;              &lt;fct&gt;           
+## 1 16K498 Brooklyn … BROOKL… Spanish          &quot;AP Chemistry&quot;     Math            
+## 2 16K498 Brooklyn … BROOKL… Spanish          &quot; AP English Lang… Math            
+## 3 16K498 Brooklyn … BROOKL… Spanish          &quot; AP English Lite… Math            
+## 4 16K498 Brooklyn … BROOKL… Spanish          &quot; AP Environmenta… Math            
+## 5 16K498 Brooklyn … BROOKL… Spanish          &quot; AP Spanish&quot;      Math            
+## 6 17K524 Internati… BROOKL… &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>Treat language classes and AP courses as factors and see if the classes available are different according to borough.</p></li>
+<li><p>What kind of programs are offered: art, science, etc</p></li>
+</ol>
+<p><strong>Demographics</strong>
+1. Demographics of high school students on New York in a whole
+2. How different demographics are represented by neighborhood
+3.</p>
 
 </div>
             </section>
@@ -138,7 +174,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/05-results.Rmd",
+"link": "https://github.com/jeesunyun/nyc-hs/edit/main/05-results.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -146,7 +182,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/05-results.Rmd",
+"link": "https://github.com/jeesunyun/nyc-hs/blob/main/05-results.Rmd",
 "text": null
 },
 "download": null,

@@ -1,0 +1,14 @@
+introduction
+data-sources
+dataset-information
+problems-with-nyc-datasets-health-and-census-data.
+data-transformation
+demographics-data
+high-school-directory-data
+join-data
+high-school-location-data
+missing-values
+missing-values-by-column
+results
+interactive-component
+conclusion
