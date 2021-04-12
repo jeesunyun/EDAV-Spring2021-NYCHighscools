@@ -1,10 +1,5 @@
 # Data transformation
 
-Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code.
-
-(suggested: approximately 1/2 page)
-
-
 ```{r, message=FALSE}
 # load packages
 library(tidyverse)
@@ -13,14 +8,19 @@ library(table1)
 ```
 
 ## Data preparation for high school directory data and demographics join
+
 ```{r, message=FALSE}
 # read in the datasets
 hs_demo <- read_csv("datasets/hs_demo.csv");
+
 hs_dir.2020 <- read_csv("datasets/2020_doe_hs_dir.csv");
+
 hs_dir.2019 <- read_csv("datasets/2019_doe_hs_dir.csv")
 ```
 
+
 ### Demographics data
+
 ```{r}
 names(hs_demo)[grepl("Grade", names(hs_demo))];
 unique(hs_demo["Year"])
@@ -37,6 +37,7 @@ We don't want schools that are not high schools; the grade range is different pe
 Here, we set for high school to be from grades 9 to 12, according to [New York city Department of Education description](https://www.schools.nyc.gov/enrollment/enroll-grade-by-grade/high-school). It is given that students in their 8th grade apply to high schools. We assume that schools that have grades 6 to 12, or K to 12, etc. have continuing students.
 
 Also, the dataset consists of information ranging from school years 2015 to 2019. We want to filter out years other than 2019 for initial processing of the data since the directory data are for 2019-2020.
+
 ```{r}
 # we dont want schools that are not high schools
 # create a new column that would contain enrollment for only those from Grade 9(hs) and other
@@ -51,7 +52,9 @@ hs_demo_tidy <- hs_demo %>%
 
 ```
 
+
 ### High school directory data
+
 ```{r}
 dim(hs_dir.2019)
 ```
@@ -72,11 +75,12 @@ hs_dir_tidy.2019 <- hs_dir.2019 %>%
                 program4, program5, program6, program7, program8, program9, program10,
                 language_classes, advancedplacement_courses, diplomaendorsements,graduation_rate,
                 attendance_rate, pct_stu_enough_variety, college_career_rate, specialized, 
-                admissionspriority11, admissionspriority21
-                )
+                admissionspriority11, admissionspriority21)
 ```
 
+
 ### Join data
+
 Since we have the names and the DBN which are unique, we join the two datasets using these columns as indicators.
 
 ```{r}
@@ -84,58 +88,81 @@ hs_join.2019 <- hs_dir_tidy.2019 %>%
   left_join(hs_demo_tidy, by = c("dbn" = "DBN"))%>% 
   dplyr::select(dbn, school_name, neighborhood, total_students, Total_Enrollment, hs_enroll, non_hs, grades2018, PK,
                 Grade_K:Grade_12, everything()) %>% 
-  mutate(across(where(is.character), ~na_if(., "N/A")))
-# change character values indicated "N/A" into NAs
-head(hs_join.2019)
+  mutate(across(where(is.character), ~na_if(., "N/A"))) %>% 
+  # change character values indicated "N/A" into NAs
+  mutate(across(where(is.character), ~str_replace_all(., c("%"= "")))) %>% 
+  mutate(pct_Poverty = as.numeric(pct_Poverty)*0.01)
+
+  head(hs_join.2019)
 ```
 
 It is interesting that the total number of students are not equal in both data sets.
+
 ```{r}
 mismatch.n.19 <- hs_join.2019[which(hs_join.2019$total_students != hs_join.2019$Total_Enrollment), ]; dim(mismatch.n.19)
 match.n.19 <- hs_join.2019[which(hs_join.2019$total_students == hs_join.2019$Total_Enrollment), ]; dim(match.n.19)
 ```
 Only 5 schools have total number of students identical in both data sets.
-*Which number is safe to use?*
-Since demograhic data is based on the total population from hs_demo data, use that?
 
 
-### Join data
-Since we have the names and the DBN which are unique, we join the two datasets using these columns as indicators.
-
+Investigating the data, we see that there are population data missing for 2 schools from the `Demographics` dataset.
+Column `Total_Emrollment` comes from Demographics data, and `total_students` come from Directory data.
 ```{r}
-hs_join.2019 <- hs_dir_tidy.2019 %>% 
-  left_join(hs_demo_tidy, by = c("dbn" = "DBN", "school_name" = "School_Name"))%>% 
-  dplyr::select(dbn, school_name, neighborhood, total_students, Total_Enrollment, hs_enroll, non_hs, grades2018, PK,
-                Grade_K:Grade_12, everything()) %>% 
-  mutate(across(where(is.character), ~na_if(., "N/A")))
-# change character values indicated "N/A" into NAs
-head(hs_join.2019)
+hs_join.2019[which(is.na(hs_join.2019["Total_Enrollment"])), ]
 ```
 
-It is interesting that the total number of students are not equal in both data sets.
 ```{r}
-mismatch.n.19 <- hs_join.2019[which(hs_join.2019$total_students != hs_join.2019$Total_Enrollment), ]; dim(mismatch.n.19)
-match.n.19 <- hs_join.2019[which(hs_join.2019$total_students == hs_join.2019$Total_Enrollment), ]; dim(match.n.19)
+hs_join.2019[which(is.na(hs_join.2019["Total_Enrollment"])), c('school_name', 'grades2018', 'finalgrades')]
 ```
-Only 5 schools have total number of students identical in both data sets.
-*Which number is safe to use?*
-Since demograhic data is based on the total population from hs_demo data, use that?
+
+We can see that these two schools share that they do not serve grades until 12th grade.
+According to aforementioned NYC high school description (grade 9 to 12), we can filter out these schools.
+Also, since the demographic data are from the Demographics dataset, we recalculate the other values into proportion with the demographics total population.
 
 ```{r}
-t(table(hs_join.2019$grades2018))
-# shows that schools mostly grades 9 to 1, and 6 to 12
-
-# what kind of charateristics in 6 to 12? See school characteristics
-gr6_to_gr12 <- hs_join.2019[which(hs_join.2019$grades2018 == "6 to 12"), ] %>% 
-  dplyr::select(-c(neighborhood, hs_enroll, non_hs, PK, Grade_K, Grade_1, Grade_2, Grade_3, Grade_4, Grade_5))
-
-gr9_to_gr12 <- hs_join.2019[which(hs_join.2019$grades2018 == "9 to 12"), ]
-<<<<<<< HEAD
-
-
-# what other characteristics for schools 6 to 10, 6 to 11, 7 to 12, K to 12 ?
-# 9 to 14 is 2 years associate degree
+hs_join.2019 <- hs_join.2019 %>% 
+  filter(!is.na(Total_Enrollment)) %>% 
+  mutate(attendance_rate = attendance_rate * total_students/Total_Enrollment,
+        graduation_rate = as.numeric(graduation_rate)* total_students/Total_Enrollment ,
+        pct_stu_enough_variety = pct_stu_enough_variety*total_students/Total_Enrollment ,
+        college_career_rate = as.numeric(college_career_rate) * total_students/Total_Enrollment)
 ```
+
+Take out the `total_students` column and the `School_Name` column, since two dataframes were joined by `dbn` and the school names are written differently.
+
+```{r}
+hs_final <- hs_join.2019 %>% 
+  dplyr::select(-c(School_Name, Total_Enrollment))
+```
+
+
+### Explore characteristics shared by schools
+
+```{r}
+# grades in schools
+t(table(hs_final$grades2018))
+```
+
+The table shows that schools are mostly from grades 9 to 12, and 6 to 12
+
+```{r}
+# what kind of charateristics in 6 to 12?
+gr6_to_gr12 <- hs_final[which(hs_final$grades2018 == "6 to 12"), ] %>% 
+  dplyr::select(-c(neighborhood, hs_enroll, non_hs, PK, Grade_K, Grade_1, Grade_2, Grade_3, Grade_4, Grade_5, finalgrades, )) %>% 
+  
+
+gr9_to_gr12 <- hs_final[which(hs_final$grades2018 == "9 to 12"), ]
+```
+
+
+
+
+group_by Borough
+
+
+
+
+
 
 
 ### High school location data
@@ -145,17 +172,9 @@ hs_location <- hs_dir.2019 %>%
   dplyr::select(dbn, school_name, Borough, city, zip, Latitude, Longitude, `Census Tract`, nta)
 ```
 
-# what other characteristics for schools 6 to 10, 6 to 11, 7 to 12, K to 12 ?
-# 9 to 14 is 2 years associate degree
-```
 
 
-### High school location data
-```{r}
-# location dataset for mapping coordinates
-hs_location <- hs_dir.2019 %>% 
-  dplyr::select(dbn, school_name, Borough, city, zip, Latitude, Longitude, `Census Tract`, nta)
-```
+
 
 ```{r}
 # for 2020
