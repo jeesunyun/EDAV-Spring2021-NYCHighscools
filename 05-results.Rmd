@@ -11,7 +11,7 @@ The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
 We want to see characteristics of these schools, especially in what classes and diploa are offered.
 We separate the columns of such columns by `","` since they are currently in a free text form and change them to categories.
 
-**Courses and Programs**
+## Courses and Programs
 ```{r}
 # what kind of charateristics in 6 to 12?
 ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$grades2018 == "9 to 12"), ] %>% 
@@ -23,7 +23,7 @@ ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$gr
   unnest(language_classes) %>% 
   unnest(advancedplacement_courses) %>% 
   unnest(diplomaendorsements) %>% 
-  dplyr::select(dbn,school, Borough, language_classes, advancedplacement_courses, diplomaendorsements) %>% 
+  dplyr::select(dbn,school,Borough, language_classes, advancedplacement_courses, diplomaendorsements) %>% 
   mutate(Borough = as.factor(Borough),
          language_classes = as.factor(language_classes),
          advancedplacement_courses = as.factor(advancedplacement_courses),
@@ -32,22 +32,45 @@ ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$gr
 head(ap_lang_diploma)
 ```
 
-```{r, message=FALSE, include=FALSE}
+```{r, message=FALSE, include=FAlSE}
 library(RColorBrewer)
 library(vcd)
 library(ggthemes)
 ```
 
 1. Treat language classes and AP courses as factors and see if the classes available are different according to borough.
-```{r}
+```{r, fig.width=15, fig.height=7}
 colors <- colorblind_pal()(5)
 
+ap_lang_diploma %>%  group_by(Borough, language_classes, advancedplacement_courses) %>% 
+  summarize(total= n()) %>% 
+  ggplot(aes(x= fct_infreq(language_classes), y= total))+
+  geom_bar(position= "dodge", stat= "identity")+
+  facet_grid(~Borough)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+  
+
+
 ```
+
 2. What kind of programs are offered: art, science, etc
 
 
 
-**Demographics**
-1. Demographics of high school students on New York in a whole
+## Demographics
+
+1. Demographics of high school students in New York in a whole
+
+```{r}
+final_demo <- hs_final %>%
+  dplyr::select(Borough, neighborhood, n_Female:pct_White)
+
+ggplot(final_demo, aes(x= , y= , fill= neighborhood))+
+  geom+
+  
+```
+
+
 2. How different demographics are represented by neighborhood
 3. 

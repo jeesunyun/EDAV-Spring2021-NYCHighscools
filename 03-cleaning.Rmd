@@ -8,15 +8,6 @@ library(stringr)
 
 
 ## Data preparation for high school directory data and demographics join
-```{r, message=FALSE, include= FALSE}
-# read in the datasets
-hs_demo <- read_csv("datasets/hs_demo.csv");
-
-hs_dir.2020 <- read_csv("datasets/2020_doe_hs_dir.csv");
-
-hs_dir.2019 <- read_csv("datasets/2019_doe_hs_dir.csv")
-```
-
 
 ### Demographics data
 
@@ -153,7 +144,11 @@ Take out the `total_students` column and the `School_Name` column, since two dat
 
 ```{r}
 hs_final <- hs_join.2019 %>% 
-  dplyr::select(-c(School_Name, Total_Enrollment))
+  dplyr::select(-c(School_Name, Total_Enrollment)) %>% 
+  mutate(attendance_rate = round(attendance_rate,2),
+         graduation_rate = round(graduation_rate, 2),
+         pct_stu_enough_variety = round(pct_stu_enough_variety, 2),
+         college_career_rate = round(college_career_rate,2))
 ```
 
 Add quartile of graduation rate to get a sense of how schools are performing
