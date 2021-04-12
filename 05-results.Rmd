@@ -16,13 +16,14 @@ We separate the columns of such columns by `","` since they are currently in a f
 # what kind of charateristics in 6 to 12?
 ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$grades2018 == "9 to 12"), ] %>% 
   dplyr::select(-c(neighborhood, hs_enroll, non_hs, PK, Grade_K, Grade_1, Grade_2, Grade_3, Grade_4, Grade_5, finalgrades)) %>%
-  mutate(language_classes = stringr::str_split(language_classes, pattern= ",")) %>% 
+  rownames_to_column('school') %>% 
+  mutate(language_classes = stringr::str_split(language_classes, pattern= ","),
+         advancedplacement_courses = stringr::str_split(advancedplacement_courses, pattern= ","),
+         diplomaendorsements = stringr::str_split(diplomaendorsements, pattern= ",")) %>% 
   unnest(language_classes) %>% 
-  mutate(advancedplacement_courses = stringr::str_split(advancedplacement_courses, pattern= ",")) %>% 
   unnest(advancedplacement_courses) %>% 
-  mutate(diplomaendorsements = stringr::str_split(diplomaendorsements, pattern= ",")) %>% 
   unnest(diplomaendorsements) %>% 
-  dplyr::select(dbn, school_name,Borough, language_classes, advancedplacement_courses, diplomaendorsements) %>% 
+  dplyr::select(dbn,school, Borough, language_classes, advancedplacement_courses, diplomaendorsements) %>% 
   mutate(Borough = as.factor(Borough),
          language_classes = as.factor(language_classes),
          advancedplacement_courses = as.factor(advancedplacement_courses),
@@ -31,7 +32,7 @@ ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$gr
 head(ap_lang_diploma)
 ```
 
-```{r, message=FALSE, include=FAlSE}
+```{r, message=FALSE, include=FALSE}
 library(RColorBrewer)
 library(vcd)
 library(ggthemes)
@@ -40,9 +41,6 @@ library(ggthemes)
 1. Treat language classes and AP courses as factors and see if the classes available are different according to borough.
 ```{r}
 colors <- colorblind_pal()(5)
-
-ggplot(ap_lang_diploma, aes(x= , y= ))
-
 
 ```
 2. What kind of programs are offered: art, science, etc

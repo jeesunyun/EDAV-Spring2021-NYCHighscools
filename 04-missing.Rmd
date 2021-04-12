@@ -7,10 +7,14 @@ Some data in high school directory not available for all schools in the demograp
 In the directory dataset, there are too many variables to consider, as well as missing values, due to the difference among schools in their offered programs. For example, some schools might have 10 different programs, offered, while others may have only 1. Also, some might have several different admission requirements per program and some programs might not, etc.
 These are the reasons for the extensive amount of variables, and missing values, as can be seen below.
 
+
+Variables that include "program" in the name:
 ```{r}
 head(hs_dir.2019[grepl("program", names(hs_dir.2019))])
-tail(hs_dir.2019[grepl("program", names(hs_dir.2019))])
+```
 
+Variables that onclude "admission" , "requirement" in the name:
+```{r}
 head(hs_dir.2019[grepl("admission", names(hs_dir.2019))])
 hs_dir.2019[grepl("requirement", names(hs_dir.2019))]
 ```
@@ -38,15 +42,18 @@ ggplot(dir.missing, aes(x= fct_reorder(key,-missing2, sum), y= fct_reorder(id, -
        subtitle= "missing patterns by column",
        x= "variables", y= "School Names")+
   scale_fill_viridis_d()+
-  theme_bw()
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
 ```
+
 There are too many variables and observations to be legible, so we drop out variables that have none missing values such as school name, dbn, etc. We also exclude programs, since the missing pattern is availability.
 
-```{r, fig.height= 10}
+```{r, fig.height= 15, fig.width= 10}
 dir.missing <- hs_dir_tidy.2019  %>%  
   mutate(across(where(is.numeric), ~as.character(.))) %>% 
   mutate(id= as.factor(stringr::str_trunc(rownames(hs_dir_tidy.2019), 20)))%>%
-  dplyr::select(-c(dbn, total_students, grades2018, finalgrades, neighborhood, Borough), -starts_with("program")) %>% 
+  dplyr::select(-c(dbn, school_name, total_students, grades2018, finalgrades, neighborhood, Borough), -starts_with("program")) %>% 
   pivot_longer(cols= -id, names_to = "key", values_to = "value") %>% 
   mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
   mutate(missing2 = ifelse(missing== "yes", 1, 0))
@@ -58,10 +65,38 @@ ggplot(dir.missing, aes(x= fct_reorder(key, -missing2, sum), y= fct_reorder(id, 
        subtitle= "missing patterns by column",
        x= "variables", y= "School Names")+
   scale_fill_viridis_d()+
-  theme_bw()
+  theme_bw()+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
+
 The pattern is still difficult to observe becasue of the vast number of observations.
+
+If we sample a few observations from this data instead:
+
+```{r, fig.width=10}
+dir.missing.sample <- hs_dir_tidy.2019[sample(nrow(hs_dir_tidy.2019), 50),]%>% 
+  mutate(across(where(is.numeric), ~as.character(.))) %>% 
+  pivot_longer(cols= -school_name, names_to = "key", values_to = "value") %>%
+   mutate(school_name= as.factor(stringr::str_trunc(school_name, 30)))%>%
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  mutate(missing2 = ifelse(missing== "yes", 1, 0))
+
+  
+
+ggplot(dir.missing.sample, aes(x= fct_reorder(key, -missing2, sum), y= fct_reorder(school_name, -missing2, sum), fill = missing))+
+  geom_tile(color = "white")+
+  labs(title= "Tidy high school directory with NAs added",
+       subtitle= "missing patterns by column",
+       x= "variables", y= "School Names")+
+  scale_fill_viridis_d()+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+
+```
+
+
 Thus, let's try to look at this by grouping them by borough.
 
 ```{r}

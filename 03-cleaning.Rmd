@@ -4,11 +4,10 @@
 # load packages
 library(tidyverse)
 library(stringr)
-library(table1)
 ```
 
-**Data preparation for high school directory data and demographics join**
 
+## Data preparation for high school directory data and demographics join
 ```{r, message=FALSE, include= FALSE}
 # read in the datasets
 hs_demo <- read_csv("datasets/hs_demo.csv");
@@ -21,24 +20,36 @@ hs_dir.2019 <- read_csv("datasets/2019_doe_hs_dir.csv")
 
 ### Demographics data
 
+Grades included in the demographics data
 ```{r}
 names(hs_demo)[grepl("Grade", names(hs_demo))];
+```
+
+School years included in the demographics data, and some variables included in the demographics data.
+```{r}
 unique(hs_demo["Year"]); names(hs_demo)[grepl("%", names(hs_demo))]; head(names(hs_demo))
 ```
 
 We can see that the data contains data not only for high school, and for school years other than 2019.
+
 The column names are difficult to retract due to spaces and special characters, so we rename columns that is easier to retract.
 
+* replace "%" to "pct" and spaces to "_"
 ```{r}
 # rename names easy to retract
 names(hs_demo) <- str_replace_all(names(hs_demo), c(" "="_",  "%"="pct", "#"="n"))
 names(hs_demo)[grepl("pct", names(hs_demo))]; head(names(hs_demo))
 ```
 
-We don't want schools that are not high schools; the grade range is different per school, so we filter out schools that do not have grades 10, 11, and 12. Then, create new columns that contain population counts for high school grades and non-highschool grades.
+
+We don't want schools that are not high schools; the grade range is different per school, so we filter out schools that do not have grades 10, 11, and 12. 
+Then, create new columns that contain population counts for high school grades and non-highschool grades.
+
 Here, we set for high school to be from grades 9 to 12, according to [New York city Department of Education description](https://www.schools.nyc.gov/enrollment/enroll-grade-by-grade/high-school). It is given that students in their 8th grade apply to high schools. We assume that schools that have grades 6 to 12, or K to 12, etc. have continuing students.
 
 Also, the dataset consists of information ranging from school years 2015 to 2019. We want to filter out years other than 2019 for initial processing of the data since the directory data are for 2019-2020.
+
+Moreover, we created new columns `hs_enroll` and `non_hs` to divide population that are in grades 9 to 12 to others.
 
 ```{r}
 # we dont want schools that are not high schools
@@ -58,6 +69,7 @@ head(hs_demo_tidy)
 
 ### High school directory data
 
+Dimension of the directory data:
 ```{r}
 dim(hs_dir.2019)
 ```
@@ -78,9 +90,6 @@ hs_dir_tidy.2019 <- hs_dir.2019 %>%
                 language_classes, advancedplacement_courses, diplomaendorsements,graduation_rate,
                 attendance_rate, pct_stu_enough_variety, college_career_rate, specialized, 
                 admissionspriority11, admissionspriority21)
-
-#hs_dir_tidy.2019 <- hs_dir_tidy.2019 %>% column_to_rownames(var = "school_name")
-
 head(hs_dir_tidy.2019)
 ```
 
@@ -95,18 +104,20 @@ hs_join.2019 <- hs_dir_tidy.2019 %>%
   dplyr::select(dbn, school_name, neighborhood, total_students, Total_Enrollment, hs_enroll, non_hs, grades2018, PK,
                 Grade_K:Grade_12, everything()) %>% 
   mutate(across(where(is.character), ~na_if(., "N/A"))) %>% 
-  # change character values indicated "N/A" into NAs
-  mutate(across(where(is.character), ~str_replace_all(., c("%"= "")))) %>% 
-  mutate(pct_Poverty = as.numeric(pct_Poverty)*0.01)
+  column_to_rownames(var = "school_name")
 
-
-head(hs_join.2019)
+print(head(hs_join.2019))
 ```
 
 It is interesting that the total number of students are not equal in both data sets.
 
+Number of observations with different reported population:
 ```{r}
 mismatch.n.19 <- hs_join.2019[which(hs_join.2019$total_students != hs_join.2019$Total_Enrollment), ]; dim(mismatch.n.19)
+```
+
+Number of observations with identical reported population:
+```{r}
 match.n.19 <- hs_join.2019[which(hs_join.2019$total_students == hs_join.2019$Total_Enrollment), ]; dim(match.n.19)
 ```
 
@@ -114,17 +125,19 @@ Only 5 schools have total number of students identical in both data sets.
 
 
 Investigating the data, we see that there are population data missing for 2 schools from the `Demographics` dataset.
-Column `Total_Emrollment` comes from Demographics data, and `total_students` come from Directory data.
+Column `Total_Enrollment` comes from Demographics data, and `total_students` come from Directory data.
+
+Schools that are in the Directory data but not in the demographics data:
 ```{r}
-hs_join.2019[which(is.na(hs_join.2019["Total_Enrollment"])), ]
+hs_join.2019[which(is.na(hs_join.2019["Total_Enrollment"])), 3:4]
 ```
 
 ```{r}
-hs_join.2019[which(is.na(hs_join.2019["Total_Enrollment"])), c('school_name', 'grades2018', 'finalgrades')]
+hs_join.2019[which(is.na(hs_join.2019["Total_Enrollment"])), c('grades2018', 'finalgrades')]
 ```
 
 We can see that these two schools share that they do not serve grades until 12th grade.
-According to aforementioned NYC high school description (grade 9 to 12), we can filter out these schools.
+According to the aforementioned NYC high school description (grade 9 to 12), we can filter out these schools.
 Also, since the demographic data are from the Demographics dataset, we recalculate the other values into proportion with the demographics total population.
 
 ```{r}
@@ -134,8 +147,6 @@ hs_join.2019 <- hs_join.2019 %>%
         graduation_rate = as.numeric(graduation_rate)* total_students/Total_Enrollment ,
         pct_stu_enough_variety = pct_stu_enough_variety*total_students/Total_Enrollment ,
         college_career_rate = as.numeric(college_career_rate) * total_students/Total_Enrollment)
-
-head(hs_join.2019)
 ```
 
 Take out the `total_students` column and the `School_Name` column, since two dataframes were joined by `dbn` and the school names are written differently.
@@ -143,8 +154,6 @@ Take out the `total_students` column and the `School_Name` column, since two dat
 ```{r}
 hs_final <- hs_join.2019 %>% 
   dplyr::select(-c(School_Name, Total_Enrollment))
-
-head(hs_final)
 ```
 
 Add quartile of graduation rate to get a sense of how schools are performing
@@ -162,7 +171,7 @@ write_csv(hs_final, "datasets/hs_final.csv")
 ```{r}
 # location dataset for mapping coordinates
 hs_location <- hs_dir.2019 %>% 
-  dplyr::select(dbn, school_name, Borough, city, zip, Latitude, Longitude, `Census Tract`, NTA)
+  dplyr::select(dbn,school_name,  Borough, city, zip, Latitude, Longitude, `Census Tract`, NTA)
 
 head(hs_location)
 ```
