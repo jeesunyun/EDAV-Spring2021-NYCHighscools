@@ -1,6 +1,6 @@
 # Results
 
-### Explore characteristics shared by schools
+Explore characteristics shared by schools
 
 ```{r}
 # grades in schools

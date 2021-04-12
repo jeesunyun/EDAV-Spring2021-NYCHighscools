@@ -2,9 +2,6 @@
 
 Some data in high school directory not available for all schools in the demographics dataset, and vice versa despite they are both from the DOE.
 
-
-Missing data pattern: sequence of columns missing: obs from same dataset
-
 ## Missing values by column
 
 In the directory dataset, there are too many variables to consider, as well as missing values, due to the difference among schools in their offered programs. For example, some schools might have 10 different programs, offered, while others may have only 1. Also, some might have several different admission requirements per program and some programs might not, etc.
