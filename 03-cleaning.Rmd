@@ -90,7 +90,6 @@ hs_dir_tidy.2019 <- hs_dir.2019 %>%
                 language_classes, advancedplacement_courses, diplomaendorsements,graduation_rate,
                 attendance_rate, pct_stu_enough_variety, college_career_rate, specialized, 
                 admissionspriority11, admissionspriority21)
-
 head(hs_dir_tidy.2019)
 ```
 
@@ -157,7 +156,16 @@ hs_final <- hs_join.2019 %>%
   dplyr::select(-c(School_Name, Total_Enrollment))
 ```
 
+Add quartile of graduation rate to get a sense of how schools are performing
+```{r}
+hs_final <- hs_final %>%
+  dplyr::mutate(graduation_quartile = dplyr::ntile(graduation_rate, 4)) 
+```
 
+Save final dataframe to a csv for use with D3
+```{r}
+write_csv(hs_final, "datasets/hs_final.csv")
+```
 
 ### High school location data
 ```{r}
