@@ -1,9 +1,55 @@
 # Results
 
-You have a lot of freedom to choose what to do, as long as you restrict yourselves to exploratory techniques (rather than modeling / prediction approaches). In addition, your analysis must be clearly documented and reproducible.
+Explore characteristics shared by schools
 
-Provide a short nontechnical summary of the most revealing findings of your analysis written for a nontechnical audience. Take extra care to clean up your graphs, ensuring that best practices for presentation are followed, as described in the  audience ready style section  below.
+```{r}
+# grades in schools
+t(table(hs_final$grades2018))
+```
 
-Use subheadings as appropriate. See  Todd Schneider’s blog posts (Links to an external site.)  for examples of thoughtful, informative subheadings.
+The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
+We want to see characteristics of these schools, especially in what classes and diploa are offered.
+We separate the columns of such columns by `","` since they are currently in a free text form and change them to categories.
 
-The number of graphs will vary by project; we suggest a target of 10. (A plot with multiple facets counts as 1 graph).  If you go over, make sure they are high quality and include commentary.  A project with 10 good graphs plus commentary will receive a better grade than a project with 10 good graphs and 10 mediocre ones.
+**Courses and Programs**
+```{r}
+# what kind of charateristics in 6 to 12?
+ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$grades2018 == "9 to 12"), ] %>% 
+  dplyr::select(-c(neighborhood, hs_enroll, non_hs, PK, Grade_K, Grade_1, Grade_2, Grade_3, Grade_4, Grade_5, finalgrades)) %>%
+  mutate(language_classes = stringr::str_split(language_classes, pattern= ",")) %>% 
+  unnest(language_classes) %>% 
+  mutate(advancedplacement_courses = stringr::str_split(advancedplacement_courses, pattern= ",")) %>% 
+  unnest(advancedplacement_courses) %>% 
+  mutate(diplomaendorsements = stringr::str_split(diplomaendorsements, pattern= ",")) %>% 
+  unnest(diplomaendorsements) %>% 
+  dplyr::select(dbn, school_name,Borough, language_classes, advancedplacement_courses, diplomaendorsements) %>% 
+  mutate(Borough = as.factor(Borough),
+         language_classes = as.factor(language_classes),
+         advancedplacement_courses = as.factor(advancedplacement_courses),
+         diplomaendorsements = as.factor(diplomaendorsements))
+
+head(ap_lang_diploma)
+```
+
+```{r, message=FALSE, include=FAlSE}
+library(RColorBrewer)
+library(vcd)
+library(ggthemes)
+```
+
+1. Treat language classes and AP courses as factors and see if the classes available are different according to borough.
+```{r}
+colors <- colorblind_pal()(5)
+
+ggplot(ap_lang_diploma, aes(x= , y= ))
+
+
+```
+2. What kind of programs are offered: art, science, etc
+
+
+
+**Demographics**
+1. Demographics of high school students on New York in a whole
+2. How different demographics are represented by neighborhood
+3. 

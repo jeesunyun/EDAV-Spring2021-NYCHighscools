@@ -1,15 +1,85 @@
 # Missing values
 
-Describe any patterns you discover in missing values.
+Some data in high school directory not available for all schools in the demographics dataset, and vice versa despite they are both from the DOE.
 
-(suggested: 2 graphs plus commentary)
+## Missing values by column
 
+In the directory dataset, there are too many variables to consider, as well as missing values, due to the difference among schools in their offered programs. For example, some schools might have 10 different programs, offered, while others may have only 1. Also, some might have several different admission requirements per program and some programs might not, etc.
+These are the reasons for the extensive amount of variables, and missing values, as can be seen below.
 
-some data in high school directory not available in entire school demographics dataset
-<<<<<<< HEAD
-=======
+```{r}
+head(hs_dir.2019[grepl("program", names(hs_dir.2019))])
+tail(hs_dir.2019[grepl("program", names(hs_dir.2019))])
 
->>>>>>> dd4724c80bc83e261d978ab4c9c927c8a9b73773
-Data on student composition for those not included in both data sets are unavailable
+head(hs_dir.2019[grepl("admission", names(hs_dir.2019))])
+hs_dir.2019[grepl("requirement", names(hs_dir.2019))]
+```
 
-Missing data pattern: sequence of columns missing: obs from same dataset
+As such, we cannot assess the pattern of missing values properly in the raw data itself, other than knowing that the missing values are dur to difference in the number of offered programs.
+Thus, we try to see missing patterns in the tidied dataset.
+
+```{r}
+colSums(is.na(hs_dir_tidy.2019)) %>% 
+  sort(decreasing= TRUE)
+```   
+
+```{r, fig.height=10}
+dir.missing <- hs_dir_tidy.2019  %>%  
+  mutate(across(where(is.numeric), ~as.character(.))) %>% 
+  mutate(id= as.factor(stringr::str_trunc(rownames(hs_dir_tidy.2019), 20)))%>%
+  pivot_longer(cols= -id, names_to = "key", values_to = "value") %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  mutate(missing2 = ifelse(missing== "yes", 1, 0))
+  
+
+ggplot(dir.missing, aes(x= fct_reorder(key,-missing2, sum), y= fct_reorder(id, -missing2, sum), fill = missing))+
+  geom_tile(color = "white")+
+  labs(title= "Tidy high school directory with NAs added",
+       subtitle= "missing patterns by column",
+       x= "variables", y= "School Names")+
+  scale_fill_viridis_d()+
+  theme_bw()
+```
+There are too many variables and observations to be legible, so we drop out variables that have none missing values such as school name, dbn, etc. We also exclude programs, since the missing pattern is availability.
+
+```{r, fig.height= 10}
+dir.missing <- hs_dir_tidy.2019  %>%  
+  mutate(across(where(is.numeric), ~as.character(.))) %>% 
+  mutate(id= as.factor(stringr::str_trunc(rownames(hs_dir_tidy.2019), 20)))%>%
+  dplyr::select(-c(dbn, total_students, grades2018, finalgrades, neighborhood, Borough), -starts_with("program")) %>% 
+  pivot_longer(cols= -id, names_to = "key", values_to = "value") %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  mutate(missing2 = ifelse(missing== "yes", 1, 0))
+  
+
+ggplot(dir.missing, aes(x= fct_reorder(key, -missing2, sum), y= fct_reorder(id, -missing2, sum), fill = missing))+
+  geom_tile(color = "white")+
+  labs(title= "Tidy high school directory with NAs added",
+       subtitle= "missing patterns by column",
+       x= "variables", y= "School Names")+
+  scale_fill_viridis_d()+
+  theme_bw()
+
+```
+The pattern is still difficult to observe becasue of the vast number of observations.
+Thus, let's try to look at this by grouping them by borough.
+
+```{r}
+missing_boro <- hs_dir_tidy.2019  %>%  
+  mutate(across(where(is.numeric), ~as.character(.))) %>% 
+  mutate(id= as.factor(stringr::str_trunc(rownames(hs_dir_tidy.2019), 20)))%>%
+  dplyr::select(-c(dbn, total_students, grades2018, finalgrades, neighborhood), -starts_with("program")) %>% 
+  pivot_longer(cols= -c(id, Borough), names_to = "key", values_to = "value") %>% 
+  mutate(missing = ifelse(is.na(value), "yes", "no")) %>% 
+  group_by(Borough) %>% 
+  summarize(num_schools = n_distinct(id), 
+            num_na = sum(is.na(value)),
+            percent_na = round(num_na/num_schools, 2)) %>% 
+  arrange(-percent_na)
+
+missing_boro
+```
+
+The data provided are mostly character data, not numerical scores to compare against.
+Also, the missing data in this data set seeems to be more related to the characteristic of the school rather than revealing a certain kind of pattern.
+
