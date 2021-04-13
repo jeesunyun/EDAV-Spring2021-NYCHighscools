@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Data sources | NYC High school demographics and performances</title>
-  <meta name="description" content="Chapter 2 Data sources | NYC High school demographics and performances" />
+  <title>Chapter 2 Data sources | NYC High school demographics analysis</title>
+  <meta name="description" content="Chapter 2 Data sources | NYC High school demographics analysis" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Data sources | NYC High school demographics and performances" />
+  <meta property="og:title" content="Chapter 2 Data sources | NYC High school demographics analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Data sources | NYC High school demographics and performances" />
+  <meta name="twitter:title" content="Chapter 2 Data sources | NYC High school demographics analysis" />
   
   
   
@@ -50,6 +50,26 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<script src="libs/FlatGeoBuf-3.3.3/fgb.js"></script>
+<script src="libs/FlatGeoBuf-3.3.3/flatgeobuf-geojson.min.js"></script>
+<script src="libs/chromajs-2.1.0/chroma.min.js"></script>
+<link id="locations_sf-1-attachment" rel="attachment" href="libs/locations_sf-0.0.1/locations_sf_layer.fgb"/>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 
@@ -71,19 +91,37 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
-<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a></li>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-sources.html"><a href="data-sources.html#school-demographics-and-high-school-directory-data"><i class="fa fa-check"></i><b>2.1.1</b> School demographics and high school directory data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-sources.html"><a href="data-sources.html#nyc-censys-and-health-data"><i class="fa fa-check"></i><b>2.1.2</b> NYC censys and health data</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#problems-with-nyc-datasets-health-and-census-data."><i class="fa fa-check"></i><b>2.2</b> Problems with NYC datasets health and census data.</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
-<li class="chapter" data-level="3.0.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.0.1</b> Demographics data</a></li>
-<li class="chapter" data-level="3.0.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.0.2</b> High school directory data</a></li>
-<li class="chapter" data-level="3.0.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.0.3</b> Join data</a></li>
-<li class="chapter" data-level="3.0.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.0.4</b> High school location data</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-preparation-for-high-school-directory-data-and-demographics-join"><i class="fa fa-check"></i><b>3.1</b> Data preparation for high school directory data and demographics join</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.1.1</b> Demographics data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.1.2</b> High school directory data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.1.3</b> Join data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.1.4</b> High school location data</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
 <li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-values-by-column"><i class="fa fa-check"></i><b>4.1</b> Missing values by column</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#preparing-nycgeo-package-and-the-base-map-boundaries"><i class="fa fa-check"></i><b>5.1</b> Preparing NYCgeo package and the base map (boundaries)</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#explore-characteristics-shared-by-schools"><i class="fa fa-check"></i><b>5.2</b> Explore characteristics shared by schools</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#courses-and-programs"><i class="fa fa-check"></i><b>5.2.1</b> Courses and Programs</a></li>
+<li class="chapter" data-level="5.2.2" data-path="results.html"><a href="results.html#demographics"><i class="fa fa-check"></i><b>5.2.2</b> Demographics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#different-categories-of-schools-in-nyc"><i class="fa fa-check"></i><b>5.3</b> Different Categories of schools in NYC</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="results.html"><a href="results.html#geo-spatitial-interactive-map-of-nyc-school-datasets"><i class="fa fa-check"></i><b>5.3.1</b> Geo-spatitial Interactive Map of NYC school datasets</a></li>
+<li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#maps-high-schools"><i class="fa fa-check"></i><b>5.3.2</b> Maps high schools</a></li>
+<li class="chapter" data-level="5.3.3" data-path="results.html"><a href="results.html#graph-of-the-vocational-high-school"><i class="fa fa-check"></i><b>5.3.3</b> Graph of the vocational high school</a></li>
+<li class="chapter" data-level="5.3.4" data-path="results.html"><a href="results.html#intermediate-schools"><i class="fa fa-check"></i><b>5.3.4</b> Intermediate schools</a></li>
+<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#special-education-school-mapping"><i class="fa fa-check"></i><b>5.3.5</b> Special education school mapping</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -97,7 +135,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics and performances</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics analysis</a>
           </h1>
         </div>
 
@@ -112,207 +150,79 @@ Since we are exploring education data, most of the data are provided by the Depa
 <p>Below are the lists of datasets that we utilized.
 Doing joins of these data by school names, we will be able to get a comprehensive look at highschools and neighborhoods.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://data.cityofnewyork.us/Education/2019-20-Demographic-Snapshot-School/nie4-bv6q">2019-20 Demographic Snapshot (DOE)</a></li>
-</ol>
+<li><a href="https://data.cityofnewyork.us/Education/2019-20-Demographic-Snapshot-School/nie4-bv6q">2019-20 Demographic Snapshot (DOE)</a>
 <ul>
 <li>This gives us the demographics of all NYC schools.</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
+</ul></li>
 <li><a href="https://data.cityofnewyork.us/Education/2019-DOE-High-School-Directory/uq7m-95z8">2019 High school Directory (DOE)</a>
-<a href="https://data.cityofnewyork.us/Education/2020-DOE-High-School-Directory/23z9-6uk9">2020 High school Directory (DOE)</a></li>
-</ol>
+<a href="https://data.cityofnewyork.us/Education/2020-DOE-High-School-Directory/23z9-6uk9">2020 High school Directory (DOE)</a>
 <ul>
 <li>This helps us to understand the characteristics of each of the NYC high schools (whether they are zoned, specialized, program descriptions, etc.)</li>
-</ul>
+</ul></li>
+</ol>
 <p>Below are some references we took into account for this project.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://github.com/mfherman/nycgeo">nycgeo package documentation</a></li>
+<li><a href="https://github.com/mfherman/nycgeo"><code>nycgeo</code> package documentation</a></li>
 <li><a href="https://www.kaggle.com/bigironsphere/tutorial-maps-eda-and-models-with-nyc-census-data">EDA and Models with NYC Census Data</a></li>
 </ol>
 <p>The data collection work is completed in basis of an group effort of 3 to ensure the integrity and the accountability of the data we use. The datasets are downloaded from official governmental or government-related organizations. The main datasets we use came from <a href="https://opendata.cityofnewyork.us/">NYC Open Data</a> that stores all New York related datasets. It is one of the NYC.gov sites which is maintained officially through New York City government.</p>
-<p>All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.</p>
-<p>These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.</p>
 <div id="dataset-information" class="section level2">
 <h2><span class="header-section-number">2.1</span> Dataset information</h2>
-<p>The examples of the datasets are provided below, displayed using the head function.</p>
-<pre><code>## # A tibble: 6 x 39
-##   DBN   `School Name` Year  `Total Enrollme… `Grade 3K+PK (H… `Grade K`
-##   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;            &lt;dbl&gt;     &lt;dbl&gt;
-## 1 01M0… P.S. 015 Rob… 2015…              176               14        32
-## 2 01M0… P.S. 015 Rob… 2016…              178               17        28
-## 3 01M0… P.S. 015 Rob… 2017…              190               17        28
-## 4 01M0… P.S. 015 Rob… 2018…              174               13        20
-## 5 01M0… P.S. 015 Rob… 2019…              190               14        29
-## 6 01M0… P.S. 019 Ash… 2015…              270               21        47
-## # … with 33 more variables: `Grade 1` &lt;dbl&gt;, `Grade 2` &lt;dbl&gt;, `Grade 3` &lt;dbl&gt;,
-## #   `Grade 4` &lt;dbl&gt;, `Grade 5` &lt;dbl&gt;, `Grade 6` &lt;dbl&gt;, `Grade 7` &lt;dbl&gt;, `Grade
-## #   8` &lt;dbl&gt;, `Grade 9` &lt;dbl&gt;, `Grade 10` &lt;dbl&gt;, `Grade 11` &lt;dbl&gt;, `Grade
-## #   12` &lt;dbl&gt;, `# Female` &lt;dbl&gt;, `% Female` &lt;dbl&gt;, `# Male` &lt;dbl&gt;, `%
-## #   Male` &lt;dbl&gt;, `# Asian` &lt;dbl&gt;, `% Asian` &lt;dbl&gt;, `# Black` &lt;dbl&gt;, `%
-## #   Black` &lt;dbl&gt;, `# Hispanic` &lt;dbl&gt;, `% Hispanic` &lt;dbl&gt;, `# Multiple Race
-## #   Categories Not Represented` &lt;dbl&gt;, `% Multiple Race Categories Not
-## #   Represented` &lt;dbl&gt;, `# White` &lt;dbl&gt;, `% White` &lt;dbl&gt;, `# Students with
-## #   Disabilities` &lt;dbl&gt;, `% Students with Disabilities` &lt;dbl&gt;, `# English
-## #   Language Learners` &lt;dbl&gt;, `% English Language Learners` &lt;dbl&gt;, `#
-## #   Poverty` &lt;chr&gt;, `% Poverty` &lt;chr&gt;, `Economic Need Index` &lt;chr&gt;</code></pre>
+<p>The examples of the datasets are provided below, displayed using the <code>head()</code> function.<br />
+</p>
+<p><strong>The pieces of datasets presented in this project do not project the entire dataset, but are mostly the first 5-6 rows, and 5 columns due to vast numbers of columns.</strong></p>
+<div id="school-demographics-and-high-school-directory-data" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> School demographics and high school directory data</h3>
+<pre><code>## # A tibble: 6 x 5
+##   DBN    `School Name`       Year   `Total Enrollmen… `Grade 3K+PK (Half Day &amp; …
+##   &lt;chr&gt;  &lt;chr&gt;               &lt;chr&gt;              &lt;dbl&gt;                      &lt;dbl&gt;
+## 1 01M015 P.S. 015 Roberto C… 2015-…               176                         14
+## 2 01M015 P.S. 015 Roberto C… 2016-…               178                         17
+## 3 01M015 P.S. 015 Roberto C… 2017-…               190                         17
+## 4 01M015 P.S. 015 Roberto C… 2018-…               174                         13
+## 5 01M015 P.S. 015 Roberto C… 2019-…               190                         14
+## 6 01M019 P.S. 019 Asher Levy 2015-…               270                         21</code></pre>
 <pre><code>## [1] &quot;This dataframe of high school demographics data included  9096 rows of info and  39 columns.&quot;</code></pre>
 <pre><code>## [1] &quot;The total number of missing data is  0 0 % of the total.&quot;</code></pre>
-<pre><code>## [1] &quot;Below are the columns names of the data, this includes the categories of the datas recorded:&quot;</code></pre>
-<pre><code>##  [1] &quot;DBN&quot;                                       
-##  [2] &quot;School Name&quot;                               
-##  [3] &quot;Year&quot;                                      
-##  [4] &quot;Total Enrollment&quot;                          
-##  [5] &quot;Grade 3K+PK (Half Day &amp; Full Day)&quot;         
-##  [6] &quot;Grade K&quot;                                   
-##  [7] &quot;Grade 1&quot;                                   
-##  [8] &quot;Grade 2&quot;                                   
-##  [9] &quot;Grade 3&quot;                                   
-## [10] &quot;Grade 4&quot;                                   
-## [11] &quot;Grade 5&quot;                                   
-## [12] &quot;Grade 6&quot;                                   
-## [13] &quot;Grade 7&quot;                                   
-## [14] &quot;Grade 8&quot;                                   
-## [15] &quot;Grade 9&quot;                                   
-## [16] &quot;Grade 10&quot;                                  
-## [17] &quot;Grade 11&quot;                                  
-## [18] &quot;Grade 12&quot;                                  
-## [19] &quot;# Female&quot;                                  
-## [20] &quot;% Female&quot;                                  
-## [21] &quot;# Male&quot;                                    
-## [22] &quot;% Male&quot;                                    
-## [23] &quot;# Asian&quot;                                   
-## [24] &quot;% Asian&quot;                                   
-## [25] &quot;# Black&quot;                                   
-## [26] &quot;% Black&quot;                                   
-## [27] &quot;# Hispanic&quot;                                
-## [28] &quot;% Hispanic&quot;                                
-## [29] &quot;# Multiple Race Categories Not Represented&quot;
-## [30] &quot;% Multiple Race Categories Not Represented&quot;
-## [31] &quot;# White&quot;                                   
-## [32] &quot;% White&quot;                                   
-## [33] &quot;# Students with Disabilities&quot;              
-## [34] &quot;% Students with Disabilities&quot;              
-## [35] &quot;# English Language Learners&quot;               
-## [36] &quot;% English Language Learners&quot;               
-## [37] &quot;# Poverty&quot;                                 
-## [38] &quot;% Poverty&quot;                                 
-## [39] &quot;Economic Need Index&quot;</code></pre>
-<pre><code>## # A tibble: 6 x 462
-##   dbn   school_name boro  overview_paragr… school_10th_sea… academicopportu…
-##   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;           
-## 1 16K4… Brooklyn H… K     The mission of … Y                iLearnNYC: Prog…
-## 2 17K5… Internatio… K     We are a small … Y                We are a Perfor…
-## 3 02M5… Repertory … M     We offer a coll… Y                iLearnNYC: Prog…
-## 4 05M6… Thurgood M… M     Thurgood Marsha… Y                We offer a Rege…
-## 5 15K4… Brooklyn F… K     Brooklyn Fronti… &lt;NA&gt;             Partnership wit…
-## 6 03M2… West End S… M     We promote and … &lt;NA&gt;             Passages: Our S…
-## # … with 456 more variables: academicopportunities2 &lt;chr&gt;,
-## #   academicopportunities3 &lt;chr&gt;, academicopportunities4 &lt;chr&gt;,
-## #   academicopportunities5 &lt;chr&gt;, ell_programs &lt;chr&gt;, language_classes &lt;chr&gt;,
-## #   advancedplacement_courses &lt;chr&gt;, diplomaendorsements &lt;chr&gt;,
-## #   neighborhood &lt;chr&gt;, shared_space &lt;chr&gt;, campus_name &lt;chr&gt;,
-## #   building_code &lt;chr&gt;, location &lt;chr&gt;, phone_number &lt;chr&gt;, fax_number &lt;chr&gt;,
-## #   school_email &lt;chr&gt;, website &lt;chr&gt;, subway &lt;chr&gt;, bus &lt;chr&gt;,
-## #   grades2018 &lt;chr&gt;, finalgrades &lt;chr&gt;, total_students &lt;dbl&gt;,
-## #   start_time &lt;chr&gt;, end_time &lt;chr&gt;, addtl_info1 &lt;chr&gt;,
-## #   extracurricular_activities &lt;chr&gt;, psal_sports_boys &lt;chr&gt;,
-## #   psal_sports_girls &lt;chr&gt;, psal_sports_coed &lt;chr&gt;, school_sports &lt;chr&gt;,
-## #   graduation_rate &lt;chr&gt;, attendance_rate &lt;dbl&gt;, pct_stu_enough_variety &lt;dbl&gt;,
-## #   college_career_rate &lt;chr&gt;, pct_stu_safe &lt;dbl&gt;, girls &lt;dbl&gt;, boys &lt;dbl&gt;,
-## #   pbat &lt;dbl&gt;, international &lt;dbl&gt;, specialized &lt;dbl&gt;, transfer &lt;dbl&gt;,
-## #   ptech &lt;dbl&gt;, earlycollege &lt;dbl&gt;, geoeligibility &lt;chr&gt;,
-## #   school_accessibility_description &lt;dbl&gt;, prgdesc1 &lt;chr&gt;, prgdesc2 &lt;chr&gt;,
-## #   prgdesc3 &lt;chr&gt;, prgdesc4 &lt;chr&gt;, prgdesc5 &lt;chr&gt;, prgdesc6 &lt;chr&gt;,
-## #   prgdesc7 &lt;chr&gt;, prgdesc8 &lt;chr&gt;, prgdesc9 &lt;chr&gt;, prgdesc10 &lt;chr&gt;,
-## #   directions1 &lt;lgl&gt;, directions2 &lt;lgl&gt;, directions3 &lt;lgl&gt;, directions4 &lt;lgl&gt;,
-## #   directions5 &lt;lgl&gt;, directions6 &lt;lgl&gt;, directions7 &lt;lgl&gt;, directions8 &lt;lgl&gt;,
-## #   directions9 &lt;lgl&gt;, directions10 &lt;lgl&gt;, requirement1_1 &lt;chr&gt;,
-## #   requirement1_2 &lt;chr&gt;, requirement1_3 &lt;chr&gt;, requirement1_4 &lt;chr&gt;,
-## #   requirement1_5 &lt;chr&gt;, requirement1_6 &lt;chr&gt;, requirement1_7 &lt;chr&gt;,
-## #   requirement1_8 &lt;chr&gt;, requirement1_9 &lt;chr&gt;, requirement1_10 &lt;chr&gt;,
-## #   requirement2_1 &lt;chr&gt;, requirement2_2 &lt;chr&gt;, requirement2_3 &lt;chr&gt;,
-## #   requirement2_4 &lt;chr&gt;, requirement2_5 &lt;chr&gt;, requirement2_6 &lt;chr&gt;,
-## #   requirement2_7 &lt;chr&gt;, requirement2_8 &lt;chr&gt;, requirement2_9 &lt;chr&gt;,
-## #   requirement2_10 &lt;chr&gt;, requirement3_1 &lt;chr&gt;, requirement3_2 &lt;chr&gt;,
-## #   requirement3_3 &lt;chr&gt;, requirement3_4 &lt;chr&gt;, requirement3_5 &lt;chr&gt;,
-## #   requirement3_6 &lt;chr&gt;, requirement3_7 &lt;chr&gt;, requirement3_8 &lt;chr&gt;,
-## #   requirement3_9 &lt;chr&gt;, requirement3_10 &lt;chr&gt;, requirement4_1 &lt;chr&gt;,
-## #   requirement4_2 &lt;chr&gt;, requirement4_3 &lt;chr&gt;, requirement4_4 &lt;chr&gt;,
-## #   requirement4_5 &lt;chr&gt;, …</code></pre>
+<pre><code>## [1] &quot;Below are the first 6 columns names of the data, this includes the categories of the datas recorded:&quot;</code></pre>
+<pre><code>## [1] &quot;DBN&quot;                               &quot;School Name&quot;                      
+## [3] &quot;Year&quot;                              &quot;Total Enrollment&quot;                 
+## [5] &quot;Grade 3K+PK (Half Day &amp; Full Day)&quot; &quot;Grade K&quot;</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   dbn    school_name          boro  overview_paragraph          school_10th_sea…
+##   &lt;chr&gt;  &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;                       &lt;chr&gt;           
+## 1 16K498 Brooklyn High Schoo… K     The mission of Brooklyn Hi… Y               
+## 2 17K524 International High … K     We are a small school that… Y               
+## 3 02M531 Repertory Company H… M     We offer a college-prepara… Y               
+## 4 05M670 Thurgood Marshall A… M     Thurgood Marshall Academy … Y               
+## 5 15K423 Brooklyn Frontiers … K     Brooklyn Frontiers High Sc… &lt;NA&gt;            
+## 6 03M291 West End Secondary … M     We promote and support sch… &lt;NA&gt;</code></pre>
 <pre><code>## [1] &quot;This dataframe of high school demographics data included  427 rows of info and  462 columns.&quot;</code></pre>
-<pre><code>## [1] &quot;The total number of missing data is  160305 81.26 % of the total.&quot;</code></pre>
-<pre><code>## [1] &quot;Below are the columns names of the data, this includes the categories of the datas recorded:&quot;</code></pre>
+<pre><code>## [1] &quot;The total number of missing data is  160305 , 81.26 % of the total.&quot;</code></pre>
+<pre><code>## [1] &quot;Below are the first 6 columns names of the data, this includes the categories of the datas recorded:&quot;</code></pre>
 <pre><code>## [1] &quot;dbn&quot;                    &quot;school_name&quot;            &quot;boro&quot;                  
 ## [4] &quot;overview_paragraph&quot;     &quot;school_10th_seats&quot;      &quot;academicopportunities1&quot;</code></pre>
 <p>The demographics data includes data related to grades, race and ethnicity, disabilities, and economic status.
 The directory data had 462 variables, which were too many to list them all, but includes detailed information on the school, from location to program descriptions.</p>
-<pre><code>## # A tibble: 5 x 36
-##   CensusTract County Borough TotalPop   Men Women Hispanic White Black Native
-##         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 36005000100 Bronx  Bronx       7703  7133   570     29.9   6.1  60.9    0.2
-## 2 36005000200 Bronx  Bronx       5403  2659  2744     75.8   2.3  16      0  
-## 3 36005000400 Bronx  Bronx       5915  2896  3019     62.7   3.6  30.7    0  
-## 4 36005001600 Bronx  Bronx       5879  2558  3321     65.1   1.6  32.4    0  
-## 5 36005001900 Bronx  Bronx       2591  1206  1385     55.4   9    29      0  
-## # … with 26 more variables: Asian &lt;dbl&gt;, Citizen &lt;dbl&gt;, Income &lt;dbl&gt;,
-## #   IncomeErr &lt;dbl&gt;, IncomePerCap &lt;dbl&gt;, IncomePerCapErr &lt;dbl&gt;, Poverty &lt;dbl&gt;,
-## #   ChildPoverty &lt;dbl&gt;, Professional &lt;dbl&gt;, Service &lt;dbl&gt;, Office &lt;dbl&gt;,
-## #   Construction &lt;dbl&gt;, Production &lt;dbl&gt;, Drive &lt;dbl&gt;, Carpool &lt;dbl&gt;,
-## #   Transit &lt;dbl&gt;, Walk &lt;dbl&gt;, OtherTransp &lt;dbl&gt;, WorkAtHome &lt;dbl&gt;,
-## #   MeanCommute &lt;dbl&gt;, Employed &lt;dbl&gt;, PrivateWork &lt;dbl&gt;, PublicWork &lt;dbl&gt;,
-## #   SelfEmployed &lt;dbl&gt;, FamilyWork &lt;dbl&gt;, Unemployment &lt;dbl&gt;</code></pre>
-<pre><code>## # A tibble: 5 x 196
-##   NTA_Name NTA_Code TotalPop Female PopU18 Pop18t24 Pop25t44 Pop45t64 Pop65pl
-##   &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 Brookly… BK09        23532   51     12.8      9.4     42.2     22.5    13.1
-## 2 Sheepsh… BK17        63459   53.6   19.1      7.4     25.3     29.7    18.6
-## 3 Brighto… BK19        33146   53.1   17.6      7.4     24.5     28.4    22.1
-## 4 Seagate… BK21        29229   53.1   22.5     12.2     21.2     24.9    19.3
-## 5 West Br… BK23        14977   58.8    7.6      5.3     18.8     31.9    36.3
-## # … with 187 more variables: Hispanic &lt;dbl&gt;, WhiteNonHisp &lt;dbl&gt;,
-## #   BlackNonHisp &lt;dbl&gt;, AsianPI &lt;dbl&gt;, OtherRace &lt;dbl&gt;, ForeignBorn &lt;dbl&gt;,
-## #   ForeignBorn_lower95CL &lt;dbl&gt;, ForeignBorn_upper95CL &lt;dbl&gt;, LimitedEng &lt;dbl&gt;,
-## #   LimitedEng_lower95CL &lt;dbl&gt;, LimitedEng_upper95CL &lt;dbl&gt;,
-## #   MostCommonLang1 &lt;chr&gt;, MostCommonLang2 &lt;chr&gt;, MostCommonLang3 &lt;chr&gt;,
-## #   MostCommonCountry1 &lt;chr&gt;, MostCommonCountry2 &lt;chr&gt;,
-## #   MostCommonCountry3 &lt;chr&gt;, EduLessThanHS &lt;dbl&gt;,
-## #   EduLessThanHS_lower95CL &lt;dbl&gt;, EduLessThanHS_upper95CL &lt;dbl&gt;,
-## #   Poverty &lt;dbl&gt;, Poverty_lower95CL &lt;dbl&gt;, Poverty_upper95CL &lt;dbl&gt;,
-## #   PovertyU18 &lt;dbl&gt;, PovertyU18_lower95CL &lt;dbl&gt;, PovertyU18_upper95CL &lt;dbl&gt;,
-## #   Poverty65pl &lt;dbl&gt;, Poverty65pl_lower95CL &lt;dbl&gt;,
-## #   Poverty65pl_upper95CL &lt;dbl&gt;, FoodStampSNAP &lt;dbl&gt;,
-## #   FoodStampSNAP_lower95CL &lt;dbl&gt;, FoodStampSNAP_upper95CL &lt;dbl&gt;,
-## #   Unemployment &lt;dbl&gt;, Unemployment_lower95CL &lt;dbl&gt;,
-## #   Unemployment_upper95CL &lt;dbl&gt;, Disability &lt;dbl&gt;, Disability_lower95CL &lt;dbl&gt;,
-## #   Disability_upper95CL &lt;dbl&gt;, DisabilityU18 &lt;dbl&gt;,
-## #   DisabilityU18_lower95CL &lt;dbl&gt;, DisabilityU18_upper95CL &lt;dbl&gt;,
-## #   Disability65pl &lt;dbl&gt;, Disability65pl_lower95CL &lt;dbl&gt;,
-## #   Disability65pl_upper95CL &lt;dbl&gt;, DisabilityHearing &lt;dbl&gt;,
-## #   DisabilityHearing_lower95CL &lt;dbl&gt;, DisabilityHearing_upper95CL &lt;dbl&gt;,
-## #   DisabilityVision &lt;dbl&gt;, DisabilityVision_lower95CL &lt;dbl&gt;,
-## #   DisabilityVision_upper95CL &lt;dbl&gt;, DisabilityCognitive &lt;dbl&gt;,
-## #   DisabilityCognitive_lower95CL &lt;dbl&gt;, DisabilityCognitive_upper95CL &lt;dbl&gt;,
-## #   DisabilityAmbulatory &lt;dbl&gt;, DisabilityAmbulatory_lower95CL &lt;dbl&gt;,
-## #   DisabilityAmbulatory_upper95CL &lt;dbl&gt;, DisabilitySelfCare &lt;dbl&gt;,
-## #   DisabilitySelfCare_lower95CL &lt;dbl&gt;, DisabilitySelfCare_upper95CL &lt;dbl&gt;,
-## #   DisabilityIndepLiv &lt;dbl&gt;, DisabilityIndepLiv_lower95CL &lt;dbl&gt;,
-## #   DisabilityIndepLiv_upper95CL &lt;dbl&gt;, SeniorLiveAlone &lt;dbl&gt;,
-## #   SeniorLiveAlone_lower95CL &lt;dbl&gt;, SeniorLiveAlone_upper95CL &lt;dbl&gt;,
-## #   HomeDeliveredMeals &lt;dbl&gt;, SeniorCenterParticipation &lt;dbl&gt;,
-## #   AssaultHosp &lt;dbl&gt;, AssaultHosp_lower95CL &lt;dbl&gt;,
-## #   AssaultHosp_upper95cl &lt;dbl&gt;, AssaultHosp_reliability &lt;dbl&gt;,
-## #   JailIncarceration &lt;dbl&gt;, TeenBirths &lt;dbl&gt;, TeenBirths_lower95CL &lt;dbl&gt;,
-## #   TeenBirths_upper95CL &lt;dbl&gt;, TeenBirths_reliability &lt;dbl&gt;,
-## #   PrematureMortality &lt;dbl&gt;, PrematureMortality_lower95CL &lt;dbl&gt;,
-## #   PrematureMortality_upper95CL &lt;dbl&gt;, PretermBirths &lt;dbl&gt;,
-## #   PretermBirths_lower95CL &lt;dbl&gt;, PretermBirths_upper95CL &lt;dbl&gt;, SMM &lt;dbl&gt;,
-## #   SMM_lower95CL &lt;dbl&gt;, SMM_upper95CL &lt;dbl&gt;, SMM_reliability &lt;dbl&gt;,
-## #   ED_All &lt;dbl&gt;, ED_All_lower95CL &lt;dbl&gt;, ED_All_upper95CL &lt;dbl&gt;,
-## #   ED_TreatRelease &lt;dbl&gt;, ED_TreatRelease_lower95CL &lt;dbl&gt;,
-## #   ED_TreatRelease_upper95CL &lt;dbl&gt;, ED_Inpatient &lt;dbl&gt;,
-## #   ED_Inpatient_lower95CL &lt;dbl&gt;, ED_Inpatient_upper95CL &lt;dbl&gt;,
-## #   ED_Prevent &lt;dbl&gt;, ED_Prevent_lower95CL &lt;dbl&gt;, ED_Prevent_upper95CL &lt;dbl&gt;,
-## #   ED_Falls &lt;dbl&gt;, ED_Falls_lower95CL &lt;dbl&gt;, …</code></pre>
+</div>
+<div id="nyc-censys-and-health-data" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> NYC censys and health data</h3>
+<pre><code>## # A tibble: 5 x 5
+##   CensusTract County Borough TotalPop   Men
+##         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 36005000100 Bronx  Bronx       7703  7133
+## 2 36005000200 Bronx  Bronx       5403  2659
+## 3 36005000400 Bronx  Bronx       5915  2896
+## 4 36005001600 Bronx  Bronx       5879  2558
+## 5 36005001900 Bronx  Bronx       2591  1206</code></pre>
+<pre><code>## # A tibble: 5 x 5
+##   NTA_Name                                       NTA_Code TotalPop Female PopU18
+##   &lt;chr&gt;                                          &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Brooklyn Heights-Cobble Hill                   BK09        23532   51     12.8
+## 2 Sheepshead Bay-Gerritsen Beach-Manhattan Beach BK17        63459   53.6   19.1
+## 3 Brighton Beach                                 BK19        33146   53.1   17.6
+## 4 Seagate-Coney Island                           BK21        29229   53.1   22.5
+## 5 West Brighton                                  BK23        14977   58.8    7.6</code></pre>
 <pre><code>## [1] &quot;This dataframe of NYC census data included  2167 rows of info and  36 columns.&quot;</code></pre>
 <pre><code>## [1] &quot;The total number of missing rows of data  1269 1.63 % of the total.&quot;</code></pre>
 <pre><code>## [1] &quot;Below are the columns names of the data, this includes the categories of the datas recorded:&quot;</code></pre>
@@ -326,11 +236,30 @@ The directory data had 462 variables, which were too many to list them all, but 
 ## [29] &quot;WorkAtHome&quot;      &quot;MeanCommute&quot;     &quot;Employed&quot;        &quot;PrivateWork&quot;    
 ## [33] &quot;PublicWork&quot;      &quot;SelfEmployed&quot;    &quot;FamilyWork&quot;      &quot;Unemployment&quot;</code></pre>
 <p>Some common and important columns are NTA codes, tracts ids, Race &amp; Ethnicities, Income and Child Poverty. NTA codes are GIS information for geographic marks and locations in NYC. Every single NTA code will match a place mark.</p>
+<p>All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.</p>
+<p>These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.</p>
+<p>For some information like Census codes, the R uses incorrect scientific notation, so we got rid of it.</p>
+<pre><code>## # A tibble: 2,167 x 5
+##    CensusTract County Borough TotalPop   Men
+##          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+##  1 36005000100 Bronx  Bronx       7703  7133
+##  2 36005000200 Bronx  Bronx       5403  2659
+##  3 36005000400 Bronx  Bronx       5915  2896
+##  4 36005001600 Bronx  Bronx       5879  2558
+##  5 36005001900 Bronx  Bronx       2591  1206
+##  6 36005002000 Bronx  Bronx       8516  3301
+##  7 36005002300 Bronx  Bronx       4774  2130
+##  8 36005002400 Bronx  Bronx        150   109
+##  9 36005002500 Bronx  Bronx       5355  2338
+## 10 36005002701 Bronx  Bronx       3016  1375
+## # … with 2,157 more rows</code></pre>
+</div>
 </div>
 <div id="problems-with-nyc-datasets-health-and-census-data." class="section level2">
 <h2><span class="header-section-number">2.2</span> Problems with NYC datasets health and census data.</h2>
-<p>Data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.
-Also, NYC datasets is not very easy to use and understand. The researchers must investigate and read the description on how to interpret the information inside the datasets like NTA codes, track ids, longitude and latitude. There are many N/As inside the datasets which indicated some degree of incomplete of the raw data collection. From a programming perspective, the NYC datasets are not very suitable for R: the packages to process GIS information and spatial data require the researcher to read those detailed docs for specific packages like <code>nycgeo</code>.</p>
+<p>Data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.<br />
+</p>
+<p>Also, NYC datasets is not very easy to use and understand. The researchers must investigate and read the description on how to interpret the information inside the datasets like NTA codes, track ids, longitude and latitude. There are many N/As inside the datasets which indicated some degree of incomplete of the raw data collection. From a programming perspective, the NYC datasets are not very suitable for R: the packages to process GIS information and spatial data require the researcher to read those detailed docs for specific packages like <code>nycgeo</code>.</p>
 
 </div>
 </div>

@@ -21,9 +21,10 @@ library(mapview)
 ```
 
 
-## Preparing NYCgeo package and the base map (boundaries).
+## Preparing NYCgeo package and the base map (boundaries)
 
 1. A visualization of the NYC map by census tract boundaries
+
 ```{r}
 #remotes::install_github("mfherman/nycgeo")
 #install.packages("sf")
@@ -41,10 +42,13 @@ ggplot(nyc_tracts) + geom_sf() + theme_minimal()
 
 ```
 
+
 This map boundary of NYC will be the basis for the geospatial plots.
 
 
+
 2. NYC Census Data Examples - NYC residents College degree census
+
 ```{r}
 # Example Demonstration.
 
@@ -68,16 +72,21 @@ ggplot(mn_ntas) +
 
 ```
 
+
+
 To confirm that the map boundary that we created above works, we implemented an example map that shows the percentage of people that has a Bachelor's degree and aboce in NYC.
 We can see that the area that has the most university graduates are in Manhattan, especially up to what appears to be Morningside Heights, and in Brooklym close to Manhattan. 
 
 
+
 ## Explore characteristics shared by schools
 
+**Grades in schools**
 ```{r}
 # grades in schools
 t(table(hs_final$grades2018))
 ```
+
 
 The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
 We want to see characteristics of these schools, especially in what classes and diploa are offered.
@@ -85,6 +94,7 @@ We separate the columns of such columns by `","` since they are currently in a f
 
 
 ### Courses and Programs
+
 ```{r}
 # what kind of charateristics in 6 to 12?
 ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$grades2018 == "9 to 12"), ] %>% 
@@ -105,6 +115,8 @@ ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$gr
 
 
 1. Available language classes according to borough
+
+
 ```{r, fig.width=9, fig.height=7}
 
 
@@ -123,9 +135,12 @@ ggplot(lang_by_boro, aes(x= fct_rev(fct_reorder(language_classes, total, sum)), 
 
 ```
 
+
 The order of language classes in the x-axis are ordered by their total frequency. Thus, Spanish is the most taught foreign language in high schools, followed by French, Italian, and Mandarin.
 
 However, it is difficult to see in the above graph which borough offers the most language classes, so we create a treemap to observe.
+
+
 
 ```{r, fig.height=7, fig.width=10}
 
@@ -135,7 +150,11 @@ treemap::treemap(lang_by_boro, c("Borough", "language_classes"), "total",
 
 ```
 
+
+
 2. AP courses available by borough
+
+
 
 ```{r, fig.height=7}
 ap_by_boro <- ap_lang_diploma %>%  group_by(Borough, advancedplacement_courses) %>% 
@@ -162,7 +181,6 @@ In accordance to the language courses, Staten Island has the least schools and t
 
 1. Demographics of high school students in New York in a whole
 
-(a) Number of students per borough, per neighborhood
 
 ```{r}
 final_demo <- hs_final %>%
@@ -180,7 +198,7 @@ final_demo %>% group_by(Borough) %>%
 
 2. Population of students and number of schools per neighborhood
 
-```{r, fig.height=10, fig.width=15}
+```{r, fig.height=15, fig.width=20}
 pop_nta <- hs_location %>% group_by(NTA) %>% 
   summarize(total_students = sum(total_students))
 
@@ -255,7 +273,8 @@ ggplot(mn_ntas) +
 Here in this graph, the higher the ratio would indicate that there are more schools per number of students, where as the darker areas indicate that there are fewer schools per students than other neighborhoods.
 
 
-3. 
+
+3. Student demographics by borough
 
 ```{r, fig.width=9}
 demo_pivot <- final_demo %>% pivot_longer(cols = -c(Borough, neighborhood, total_students), names_to = "count",
@@ -300,6 +319,7 @@ ggplot(d, aes(x= fct_rev(fct_reorder(count, value, sum)), y= value))+
 1. Find all categories of the schools in NYC.
 ```{r, fig.height=7, fig.width=9}
 # List all the school categories.
+nyc_schools <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nyc-schools.csv")
 school_categories <- unique(nyc_schools$factype)
 school_categories
 

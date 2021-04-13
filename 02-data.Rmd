@@ -28,7 +28,9 @@ The data collection work is completed in basis of an group effort of 3 to ensure
 
 ## Dataset information
 
-The examples of the datasets are provided below, displayed using the `head()` function.
+The examples of the datasets are provided below, displayed using the `head()` function.\
+
+**The pieces of datasets presented in this project do not project the entire dataset, but are mostly the first 5-6 rows, and 5 columns due to vast numbers of columns.**
 ```{r, message=FALSE}
 library(tidyverse)
 ```
@@ -37,7 +39,7 @@ library(tidyverse)
 ```{r, message=FALSE}
 # read in the datasets
 hs_demo <- read_csv("datasets/hs_demo.csv");
-head(hs_demo)
+head(hs_demo)[1:5]
 
 print(paste('This dataframe of high school demographics data included ', dim(hs_demo)[1], 'rows of info and ', dim(hs_demo)[2], 'columns.'))
 print(paste('The total number of missing data is ', sum(is.na(hs_demo)), 
@@ -47,7 +49,7 @@ print(head(names(hs_demo)))
 
 
 hs_dir.2019 <- read_csv("datasets/2019_doe_hs_dir.csv");
-head(hs_dir.2019)
+head(hs_dir.2019)[1:5]
 
 print(paste('This dataframe of high school demographics data included ', dim(hs_dir.2019)[1], 'rows of info and ', dim(hs_dir.2019)[2], 'columns.'))
 print(paste('The total number of missing data is ', sum(is.na(hs_dir.2019)), ",",
@@ -62,11 +64,11 @@ The directory data had 462 variables, which were too many to list them all, but 
 ### NYC censys and health data
 ```{r}
 nyc.df <- read_csv("datasets/nyc_census_tracts.txt")
-head(nyc.df, 5)
+head(nyc.df, 5)[1:5]
 
 # NTA Health Data from NYC health
 nta_health <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nta-health.csv")
-head(nta_health,5)
+head(nta_health,5)[1:5]
 
 # Demonstration on Information of the datasets
 print(paste('This dataframe of NYC census data included ', dim(nyc.df)[1], 'rows of info and ', dim(nyc.df)[2], 'columns.'))
@@ -89,7 +91,7 @@ These structural datasets greatly benefited our project. NTA codes column in man
 For some information like Census codes, the R uses incorrect scientific notation, so we got rid of it.
 ```{r}
 # Check the datasets.
-head(nyc.df, 10000)
+head(nyc.df, 10000)[1:5]
 ```
 
 ## Problems with NYC datasets health and census data.
