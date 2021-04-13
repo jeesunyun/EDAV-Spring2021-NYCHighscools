@@ -22,6 +22,11 @@ geo-spatitial-interactive-map-of-nyc-school-datasets
 maps-high-schools
 graph-of-the-vocational-high-school
 intermediate-schools
+student-diversity-satisfaction-vs.actual-school-diversity
 special-education-school-mapping
 interactive-component
+our-process
+our-solution
 conclusion
+limitations
+lessons-learned

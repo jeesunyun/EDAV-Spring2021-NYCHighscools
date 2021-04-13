@@ -119,11 +119,18 @@
 <li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#maps-high-schools"><i class="fa fa-check"></i><b>5.3.2</b> Maps high schools</a></li>
 <li class="chapter" data-level="5.3.3" data-path="results.html"><a href="results.html#graph-of-the-vocational-high-school"><i class="fa fa-check"></i><b>5.3.3</b> Graph of the vocational high school</a></li>
 <li class="chapter" data-level="5.3.4" data-path="results.html"><a href="results.html#intermediate-schools"><i class="fa fa-check"></i><b>5.3.4</b> Intermediate schools</a></li>
-<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#special-education-school-mapping"><i class="fa fa-check"></i><b>5.3.5</b> Special education school mapping</a></li>
+<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#student-diversity-satisfaction-vs.actual-school-diversity"><i class="fa fa-check"></i><b>5.3.5</b> Student Diversity Satisfaction vs. Actual School Diversity</a></li>
+<li class="chapter" data-level="5.3.6" data-path="results.html"><a href="results.html#special-education-school-mapping"><i class="fa fa-check"></i><b>5.3.6</b> Special education school mapping</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a><ul>
+<li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#our-process"><i class="fa fa-check"></i><b>6.1</b> Our Process</a></li>
+<li class="chapter" data-level="6.2" data-path="interactive-component.html"><a href="interactive-component.html#our-solution"><i class="fa fa-check"></i><b>6.2</b> Our Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a><ul>
+<li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#limitations"><i class="fa fa-check"></i><b>7.1</b> Limitations</a></li>
+<li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#lessons-learned"><i class="fa fa-check"></i><b>7.2</b> Lessons learned</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -145,12 +152,18 @@
             <section class="normal" id="section-">
 <div id="interactive-component" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Interactive component</h1>
-<p>Select one (or more) of your key findings to present in an interactive or animated format using D3 version 6. Be thoughtful about how you use interactivity and/or animation: using these features to add value in a way that would not be possible with a static graph.</p>
-<p>Design with the goal of users walking away with a new understanding of the data and a clear understanding of the purpose of the visualization. If the tool is interactive, provide clear instructions on how the user should engage. Thoughtfulness is more important than technical prowess; in all aspects of the project, think quality, not quantity.</p>
-<p>Interactive graphs must follow all of the best practices as with static graphs in terms of perception, labeling, accuracy, etc.</p>
-<p>Please see this chapter on sharing your D3 code online (Links to an external site.) for options for sharing the interactive portion of your project. You are encouraged to share experiences on Piazza (Links to an external site.) to help classmates with the publishing process.</p>
-<p>Note: the interactive component is worth approximately 25% of the final project grade. Therefore, do not spend 90% of your time on it… concentrate on the exploratory data analysis piece.</p>
+<div id="our-process" class="section level2">
+<h2><span class="header-section-number">6.1</span> Our Process</h2>
+<p>When working with the data, one of the questions that arose in our minds was whether or not the perception students’ had on the diversity of their own schools was grounded in reality. Upon investigating this question, we noticed that generally, as demographic representation rose across schools, so did the students’ satisfaction with their school’s diversity. We noticed a limitation of our visualization where the individual identity of the schools was lost. This graph also made it difficult to actually compare the relative proportions of each school, since we weren’t able to track schools across the different facets.</p>
+<p>We figured that a great way to see how the proportions change as student diversity sentiment increases would be to create an animation of sorts, a lot like <a href="https://observablehq.com/@mbostock/bar-chart-race-with-scrubber">this</a>, where we could easily get a general sense of changing proportions across the dataset. Unfortunately, after much time trying to get the modules of Observable working locally, as well as some failed attempts on the Observable platform itself, we decided to code something on our own in D3 that would hopefully be as similar to the Observable notebook as possible.</p>
+</div>
+<div id="our-solution" class="section level2">
+<h2><span class="header-section-number">6.2</span> Our Solution</h2>
+<p><a href="https://vizhub.com/bhernandev/ddf32c3cb542443681d9b0a9152c5f66?edit=files">Hosted on VizHub</a></p>
+<p>In the end we implemented something that we believe is just as good if not better than the original linked Observable notebook. Implemented with D3 and some JQuery, we were able to implement a slider that allows us to scroll through schools from the lowest diversity sentiment to the highest. This updates a bar graph below the slider, that shows the actual diversity breakdown of the given school.</p>
+<p>We actually think that this solution is better than the bar chart race since the static positions of the bars gives us a stronger ability to actually track how the demographics are changing and is also much less distracting. We were also able to have a vertical bar chart instead of the horizontal one from the notebook, which also facilitates quick comparisons of the demographic breakdowns.</p>
 
+</div>
 </div>
             </section>
 
