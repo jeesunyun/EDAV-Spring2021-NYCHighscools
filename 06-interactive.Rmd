@@ -1,12 +1,15 @@
 # Interactive component
 
+## Our Process
+When working with the data, one of the questions that arose in our minds was whether or not the perception students' had on the diversity of their own schools was grounded in reality. Upon investigating this question, we noticed that generally, as demographic representation rose across schools, so did the students' satisfaction with their school's diversity. We noticed a limitation of our visualization where the individual identity of the schools was lost. This graph also made it difficult to actually compare the relative proportions of each school, since we weren't able to track schools across the different facets. 
 
-Select one (or more) of your key findings to present in an interactive or animated format using D3 version 6. Be thoughtful about how you use interactivity and/or animation: using these features to add value in a way that would not be possible with a static graph.
+We figured that a great way to see how the proportions change as student diversity sentiment increases would be to create an animation of sorts, a lot like [this](https://observablehq.com/@mbostock/bar-chart-race-with-scrubber), where we could easily get a general sense of changing proportions across the dataset. Unfortunately, after much time trying to get the modules of Observable working locally, as well as some failed attempts on the Observable platform itself, we decided to code something on our own in D3 that would hopefully be as similar to the Observable notebook as possible.
 
-Design with the goal of users walking away with a new understanding of the data and a clear understanding of the purpose of the visualization. If the tool is interactive, provide clear instructions on how the user should engage. Thoughtfulness  is more important than technical prowess; in all aspects of the project, think quality, not quantity.
 
-Interactive graphs must follow all of the best practices as with static graphs in terms of perception, labeling, accuracy, etc.
+## Our Solution
 
-Please see  this chapter on sharing your D3 code online (Links to an external site.)  for options for sharing the interactive portion of your project. You are encouraged to share experiences on  Piazza (Links to an external site.)  to help classmates with the publishing process.
+[Hosted on VizHub](https://vizhub.com/bhernandev/ddf32c3cb542443681d9b0a9152c5f66?edit=files)
 
-Note: the interactive component is worth approximately 25% of the final project grade. Therefore, do not spend 90% of your time on it… concentrate on the exploratory data analysis piece.
+In the end we implemented something that we believe is just as good if not better than the original linked Observable notebook. Implemented with D3 and some JQuery,  we were able to implement a slider that allows us to scroll through schools from the lowest diversity sentiment to the highest. This updates a bar graph below the slider, that shows the actual diversity breakdown of the given school.
+
+We actually think that this solution is better than the bar chart race since the static positions of the bars gives us a stronger ability to actually track how the demographics are changing and is also much less distracting. We were also able to have a vertical bar chart instead of the horizontal one from the notebook, which also facilitates quick comparisons of the demographic breakdowns.
