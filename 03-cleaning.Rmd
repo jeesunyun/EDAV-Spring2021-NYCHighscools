@@ -166,9 +166,10 @@ write_csv(hs_final, "datasets/hs_final.csv")
 ```{r}
 # location dataset for mapping coordinates
 hs_location <- hs_dir.2019 %>% 
-  dplyr::select(dbn,school_name,  Borough, city, zip, Latitude, Longitude, `Census Tract`, NTA)
+  dplyr::select(dbn,school_name, total_students, Borough, city, zip, Latitude, Longitude, `Census Tract`, NTA)
 
 head(hs_location)
 ```
 
 This dataframe contains only the information on the location extracted from the high school directory file.
+

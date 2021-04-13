@@ -1,6 +1,78 @@
 # Results
 
-Explore characteristics shared by schools
+```{r}
+# load packages
+library(rgdal) #geospatial data handling
+library(corrplot) #correlation plots
+library(grid) #plotting functions
+library(gridExtra) #further plotting functions
+library(RColorBrewer) #visualisation palettes
+library(reshape2) #data wrangling for plots
+library(mice) #multiple imputation
+library(xgboost) #gradient-boosting regression
+library(ggrepel)
+library(vcd)
+library(ggthemes)
+library(ggmap)
+library(sf)
+library(mapview)
+
+
+```
+
+
+## Preparing NYCgeo package and the base map (boundaries).
+
+1. A visualization of the NYC map by census tract boundaries
+```{r}
+#remotes::install_github("mfherman/nycgeo")
+#install.packages("sf")
+
+library(nycgeo)
+library(sf)
+# Demonstrate the NYCgeo package with the NYC map.
+nyc_tracts <- nyc_boundaries(
+  geography = "tract",
+  filter_by = "borough",
+  region = c("brooklyn", "queens", "manhattan", "bronx", "staten island")
+  )
+
+ggplot(nyc_tracts) + geom_sf() + theme_minimal()
+
+```
+
+This map boundary of NYC will be the basis for the geospatial plots.
+
+
+2. NYC Census Data Examples - NYC residents College degree census
+```{r}
+# Example Demonstration.
+
+mn_ntas <- nyc_boundaries(
+  geography = "nta",
+  filter_by = "borough",
+  region = c("brooklyn", "queens", "manhattan", "bronx", "staten island"),
+  add_acs_data = TRUE
+  )
+
+ggplot(mn_ntas) +
+  geom_sf(aes(fill = pop_ba_above_pct_est)) +
+  scale_fill_viridis_c(
+    name = "Bachelor's or above",
+    labels = scales::percent_format(),
+    option = "magma"
+    ) +
+  theme_void() +
+  theme(panel.grid = element_line()) +
+  labs(title = "College Degree Map of NYC")
+
+```
+
+To confirm that the map boundary that we created above works, we implemented an example map that shows the percentage of people that has a Bachelor's degree and aboce in NYC.
+We can see that the area that has the most university graduates are in Manhattan, especially up to what appears to be Morningside Heights, and in Brooklym close to Manhattan. 
+
+
+## Explore characteristics shared by schools
 
 ```{r}
 # grades in schools
@@ -11,7 +83,8 @@ The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
 We want to see characteristics of these schools, especially in what classes and diploa are offered.
 We separate the columns of such columns by `","` since they are currently in a free text form and change them to categories.
 
-## Courses and Programs
+
+### Courses and Programs
 ```{r}
 # what kind of charateristics in 6 to 12?
 ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$grades2018 == "9 to 12"), ] %>% 
@@ -28,49 +101,363 @@ ap_lang_diploma <- hs_final[which(hs_final$grades2018 == "6 to 12" | hs_final$gr
          language_classes = as.factor(language_classes),
          advancedplacement_courses = as.factor(advancedplacement_courses),
          diplomaendorsements = as.factor(diplomaendorsements))
-
-head(ap_lang_diploma)
 ```
 
-```{r, message=FALSE, include=FAlSE}
-library(RColorBrewer)
-library(vcd)
-library(ggthemes)
-```
 
-1. Treat language classes and AP courses as factors and see if the classes available are different according to borough.
-```{r, fig.width=15, fig.height=7}
-colors <- colorblind_pal()(5)
+1. Available language classes according to borough
+```{r, fig.width=9, fig.height=7}
 
-ap_lang_diploma %>%  group_by(Borough, language_classes, advancedplacement_courses) %>% 
+
+lang_by_boro <- ap_lang_diploma %>%  group_by(Borough, language_classes) %>% 
   summarize(total= n()) %>% 
-  ggplot(aes(x= fct_infreq(language_classes), y= total))+
+  mutate(across(where(is.factor), ~str_remove_all(., " ")),
+         language_classes = as.factor(language_classes))
+
+ggplot(lang_by_boro, aes(x= fct_rev(fct_reorder(language_classes, total, sum)), y= total))+
   geom_bar(position= "dodge", stat= "identity")+
-  facet_grid(~Borough)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-  
-
+  facet_grid(rows= vars(Borough))+
+  theme(axis.text.x = element_text(angle = 40, vjust = 1, hjust=1))+
+  labs(title= "Language classes offered in schools by borough", 
+       y= "Number of schools",
+       x= "Languages")
 
 ```
 
-2. What kind of programs are offered: art, science, etc
+The order of language classes in the x-axis are ordered by their total frequency. Thus, Spanish is the most taught foreign language in high schools, followed by French, Italian, and Mandarin.
+
+However, it is difficult to see in the above graph which borough offers the most language classes, so we create a treemap to observe.
+
+```{r, fig.height=7, fig.width=10}
+
+treemap::treemap(lang_by_boro, c("Borough", "language_classes"), "total",
+        title = "Treemap for Language Classes by Borough"
+        )
+
+```
+
+2. AP courses available by borough
+
+```{r, fig.height=7}
+ap_by_boro <- ap_lang_diploma %>%  group_by(Borough, advancedplacement_courses) %>% 
+  summarize(total= n()) %>% 
+  mutate(across(where(is.factor), ~str_remove_all(., " ")),
+         advancedplacement_courses = as.factor(advancedplacement_courses))
 
 
+ggplot(ap_by_boro, aes(x= fct_rev(fct_reorder(advancedplacement_courses, total, sum)), y= total))+
+  geom_bar(position= "dodge", stat= "identity")+
+  facet_grid(rows= vars(Borough))+
+  theme(axis.text.x = element_text(angle = 40, vjust = 1, hjust=1),
+        plot.margin = margin(0.5, 0.5, 0.5, 1.5, "cm"))+
+  labs(title= "AP classes offered in schools by borough", 
+       y= "Number of schools",
+       x= "Languages")
+```
 
-## Demographics
+The order of the x-axis shows the most offered AP courses, insinuating a certain popularity of such AP courses in high schools. 
+In accordance to the language courses, Staten Island has the least schools and thus the least variety of courses offered.
+
+
+### Demographics
 
 1. Demographics of high school students in New York in a whole
 
+(a) Number of students per borough, per neighborhood
+
 ```{r}
 final_demo <- hs_final %>%
-  dplyr::select(Borough, neighborhood, n_Female:pct_White)
+  dplyr::select(Borough, neighborhood,total_students, n_Female:pct_White)
 
-ggplot(final_demo, aes(x= , y= , fill= neighborhood))+
-  geom+
+final_demo %>% group_by(Borough) %>% 
+  summarize(total_students= sum(total_students)) %>% 
+  ggplot(aes(Borough, total_students))+
+  geom_col()+
+  labs(title= "Number of stuents per borough in NYC (counts)",
+       y= "Students")+
+  geom_text(aes(label = total_students), vjust = -0.2)
   
 ```
 
+2. Population of students and number of schools per neighborhood
 
-2. How different demographics are represented by neighborhood
+```{r, fig.height=10, fig.width=15}
+pop_nta <- hs_location %>% group_by(NTA) %>% 
+  summarize(total_students = sum(total_students))
+
+schools_nta <- hs_location %>% group_by(NTA) %>% 
+  summarize(count = n())
+
+mn_ntas <- nyc_boundaries(
+  geography = "nta",
+  filter_by = "borough",
+  region = c("brooklyn", "queens", "manhattan", "bronx", "staten island"),
+  add_acs_data = TRUE)%>%
+  left_join(schools_nta, by= c("nta_name" = "NTA")) %>% 
+  left_join(pop_nta, by= c("nta_name" = "NTA"))
+
+
+
+p1 <- ggplot(mn_ntas) +
+  geom_sf(aes(fill = total_students)) +
+  scale_fill_viridis_c(
+    name = "High school students",
+    option = "magma"
+    ) +
+  theme_void() +
+  theme(panel.grid = element_line(),
+        title= element_text(size=12, face= 'bold'),
+        legend.text = element_text(size=10),
+        legend.title =  element_text(size= 11) )+
+  labs(title = "Population of Students")
+
+p2 <- ggplot(mn_ntas) +
+  geom_sf(aes(fill = count)) +
+  scale_fill_viridis_c(
+    name = "High schools",
+    option = "magma"
+    ) +
+  theme_void() +
+  theme(panel.grid = element_line(),
+        title= element_text(size=12, face= 'bold'),
+        legend.text = element_text(size=10),
+        legend.title =  element_text(size= 11) ) +
+  labs(title = "Number of high schools")
+
+grid.arrange(p1, p2, ncol=2)
+
+```
+
+Largely, the number of students that go to school in a certain area seem sto be in proportion to the number of schools in the corresponding neighborhood.
+However, in certain neighborhood in Queens and in Lower Manhattan seems to have outliers, where there are more students than surrounding neighborhoods that have more schools.
+
+So, we would like to see how many schools there are per 100 students.
+
+```{r, fig.height=7}
+mn_ntas <- mn_ntas %>% 
+  mutate(prop_stu_hs = round(count/(total_students/100),2))
+
+ggplot(mn_ntas) +
+  geom_sf(aes(fill = prop_stu_hs)) +
+  scale_fill_viridis_c(
+    name = "schools per 100 students (%)",
+    option = "magma"
+    ) +
+  theme_void() +
+  theme(panel.grid = element_line(),
+        title= element_text(size=15, face= 'bold'),
+        legend.text = element_text(size=11),
+        legend.title =  element_text(size= 12) ) +
+  labs(title = "Proportion of schools to students")
+
+
+```
+
+Here in this graph, the higher the ratio would indicate that there are more schools per number of students, where as the darker areas indicate that there are fewer schools per students than other neighborhoods.
+
+
 3. 
+
+```{r, fig.width=9}
+demo_pivot <- final_demo %>% pivot_longer(cols = -c(Borough, neighborhood, total_students), names_to = "count",
+                            values_to = "value")
+
+demo_pivot %>%  filter(!grepl("pct", count)) %>% 
+group_by(Borough, count) %>% 
+  summarize(n= n()) %>% 
+  filter(!grepl("Female|Male", count))%>% 
+  treemap::treemap(c("count", "Borough"), "n",
+        title = "Treemap for Student Demographics by Borough"
+        )
+```
+
+Although the number of students per borough are significantly different, it is suaprising that the proportion of students of a certain race among big boroughs like Brooklyn and Manhattan are similar.
+
+```{r}
+d <- demo_pivot %>%  filter(!grepl("pct", count)) %>% 
+group_by(Borough, count) %>% 
+  summarize(value= sum(value)) %>% 
+  filter(!grepl("Female|Male", count))
+
+d$count <- stringr::str_replace_all(d$count, "n_Multiple_Race_Categories_Not_Represented", "Not Represented")
+d$count <- stringr::str_remove_all(d$count, "n_")
+  
+colors <- RColorBrewer::brewer.pal(5, "Blues")
+
+ggplot(d, aes(x= fct_rev(fct_reorder(count, value, sum)), y= value))+
+  geom_bar(position= "dodge", stat= "identity")+
+  facet_grid(~Borough)+
+  theme(axis.text.x = element_text(angle = 40, vjust = 1, hjust=1),
+        plot.margin = margin(0.5, 0.5, 0.5, 1.5, "cm"))+
+  labs(title= "Racial composition of high school students by borough", 
+       y= "Number of students",
+       x= "Race")
+
+```
+
+
+## Different Categories of schools in NYC
+
+1. Find all categories of the schools in NYC.
+```{r, fig.height=7, fig.width=9}
+# List all the school categories.
+school_categories <- unique(nyc_schools$factype)
+school_categories
+
+# Show a histogram of overall school information using ggplot2
+
+plot_hist <- ggplot(nyc_schools, aes(x = fct_infreq(factype))) +
+        geom_histogram(stat = "count") + 
+        labs(title="School Overview",
+             subtitle="count for each category of school",
+                     y="Count", x="School Types") +
+        theme(legend.title = element_text(size = 8),
+               legend.text = element_text(size = 5))+
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
+          plot.margin = margin(0.5, 0.5, 0.5, 1, "cm"))
+
+plot_hist
+```
+
+This does not only limit to highschools, but is an overview of all different categories of schooling in NYC.
+As seen previously in the data cleaning process, high schools are not strictly from grades 9 to 12 but there are also schools from grade 6 to 12, or K to 12(all grades) schools.
+
+Thus, it would be inefficient and ineffective to plot something like below, only showing for highschools:
+
+```{r}
+nyc_schools[grepl("High School", nyc_schools$factype), ]%>% 
+ggplot(aes(x = fct_infreq(factype))) +
+        geom_histogram(stat = "count") + 
+        labs(title="School Overview",
+             subtitle="count for each category of high school",
+                     y="Count", x="School Types") +
+    theme(plot.margin = margin(0.5, 0.5, 0.5, 1, "cm"))
+
+```
+
+
+
+
+### Geo-spatitial Interactive Map of NYC school datasets
+
+```{r}
+# Backup Datasets: nyc_schools <- read_csv("./2019_doe_hs_dir.csv")
+nyc_schools <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nyc-schools.csv")
+schools_df <- as.data.frame(nyc_schools)
+
+# Register Google API Keys.
+register_google(key = "AIzaSyChyjtcHL2bjFPmOaxqXFcmEcSOJCzSmqo", write = TRUE)
+
+locations_df <- mutate_geocode(schools_df, facname)
+
+# Convert the datafram back to the tibble format. 
+locations <- as_tibble(locations_df)
+
+# Project the coordinates to the Google Map.
+locations_sf <- st_as_sf(locations, coords = c("longitude", "latitude"), crs = 4326)
+
+# Generate the overview of the map.
+mapview(locations_sf)
+```
+
+
+### Maps high schools
+
+```{r}
+
+library(ggmap)
+nyc <- c(lon = -74.0059, lat = 40.7128)
+nyc_map <- get_map(location = nyc, zoom = 11)
+
+charter_high_school_df <- locations_df[locations_df$factype == c( 
+                                                          "Secondary School - Charter"
+                                                          , "High School - Charter"
+                                                          , "K-12 all grades School - Charter"),]
+
+  
+public_high_school_df <- locations_df[locations_df$factype == c(
+                                                           "Secondary School - Public"
+                                                          , "High School - Public"
+                                                          , "Academic High School"
+                                                          , "K-12 all grades School - Public"),]
+# Coding the graph.
+plot_charter_vs_public_high_school_df <- ggmap(nyc_map) +
+  geom_point(data = charter_high_school_df,
+             aes(x = longitude, y = latitude, color = "Charter"), alpha = 0.55) +
+  geom_point(data = public_high_school_df,
+             aes(x = longitude, y = latitude, color = "Public"), alpha = 0.55) +
+  scale_color_manual(values = c(Charter = "red", Public = "blue")) +
+  labs(title="Charter School vs. Public School for High Schools (K-8 : K-12)",
+             subtitle="Geo Map of NYC Charter/Public schools(High School)",
+                     y="Count", x="School Types") +
+        theme(legend.title = element_text(size = 8),
+               legend.text = element_text(size = 5))
+
+plot_charter_vs_public_high_school_df
+```
+
+### Graph of the vocational high school
+
+```{r}
+vocational_high_school_df <- locations_df[locations_df$factype == c("Special Education School" , "Educational Skills Center" ,"Alternative High School"), ]
+
+plot_vocational_school_df <- ggmap(nyc_map) +
+  geom_point(data = vocational_high_school_df,
+             aes(x = longitude, y = latitude), color = "red",alpha = 0.75)
+  labs(title="Vocational High Schools",
+             subtitle="Geo Map of NYC Vocational schools",
+                     y="Count", x="School Types") +
+        theme(legend.title = element_text(size = 8),
+               legend.text = element_text(size = 5)) +
+        geom_text_repel(data = vocational_high_school_df, aes(x = lon, y = lat, label = place))
+
+plot_vocational_school_df
+
+```
+
+### Intermediate schools
+
+```{r}
+
+non_intermediate_school_df <- locations_df[locations_df$factype == c("K-8 School - Charter" , "K-8 School - Public" ,"K-12 School - Charter","K-12 School - Public"), ]
+
+
+intermediate_school_df <- locations_df[locations_df$factype == c("Intermediate School" , "Junior High-Intermediate-Middle School - Public" ,"Junior High-Intermediate-Middle School - Charter"), ]
+
+plot_intermediate_school_df <- ggmap(nyc_map) +
+  geom_point(data = intermediate_school_df,
+             aes(x = longitude, y = latitude, color = "Non-intermediate",), alpha = 0.75) +
+  geom_point(data = non_intermediate_school_df,
+             aes(x = longitude, y = latitude, color = "Intermediate"), alpha = 0.75)
+  labs(title="Vocational High Schools",
+             subtitle="Geo Map of NYC Intermediate/Non-Intermediate schools",
+                     y="Count", x="School Types") +
+        theme(legend.title = element_text(size = 8),
+               legend.text = element_text(size = 5)) +
+        geom_text_repel(data = intermediate_school_df, aes(x = lon, y = lat, label = place))
+
+plot_intermediate_school_df
+```
+
+
+### Special education school mapping
+
+```{r}
+special_education_school_df <- locations_df[locations_df$factype == "Special Education School", ]
+special_education_school_df
+
+plot_special_education_school_df <- ggmap(nyc_map) +
+  geom_point(data = special_education_school_df,
+             aes(x = longitude, y = latitude), color = "red",alpha = 0.55)
+  labs(title="special Education Schools",
+             subtitle="Geo Map of NYC Charter/Public schools",
+                     y="Count", x="School Types") +
+        theme(legend.title = element_text(size = 8),
+               legend.text = element_text(size = 5)) +
+        geom_text_repel(data = special_education_school_df, aes(x = lon, y = lat, label = place)) 
+
+plot_special_education_school_df
+
+```
+
+
+
