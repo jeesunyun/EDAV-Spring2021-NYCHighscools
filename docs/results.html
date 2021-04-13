@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Results | NYC High school demographics and performances</title>
-  <meta name="description" content="Chapter 5 Results | NYC High school demographics and performances" />
+  <title>Chapter 5 Results | NYC High school demographics analysis</title>
+  <meta name="description" content="Chapter 5 Results | NYC High school demographics analysis" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Results | NYC High school demographics and performances" />
+  <meta property="og:title" content="Chapter 5 Results | NYC High school demographics analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Results | NYC High school demographics and performances" />
+  <meta name="twitter:title" content="Chapter 5 Results | NYC High school demographics analysis" />
   
   
   
@@ -50,6 +50,26 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<script src="libs/FlatGeoBuf-3.3.3/fgb.js"></script>
+<script src="libs/FlatGeoBuf-3.3.3/flatgeobuf-geojson.min.js"></script>
+<script src="libs/chromajs-2.1.0/chroma.min.js"></script>
+<link id="locations_sf-1-attachment" rel="attachment" href="libs/locations_sf-0.0.1/locations_sf_layer.fgb"/>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 
@@ -71,19 +91,37 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
-<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a></li>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-sources.html"><a href="data-sources.html#school-demographics-and-high-school-directory-data"><i class="fa fa-check"></i><b>2.1.1</b> School demographics and high school directory data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-sources.html"><a href="data-sources.html#nyc-censys-and-health-data"><i class="fa fa-check"></i><b>2.1.2</b> NYC censys and health data</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#problems-with-nyc-datasets-health-and-census-data."><i class="fa fa-check"></i><b>2.2</b> Problems with NYC datasets health and census data.</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
-<li class="chapter" data-level="3.0.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.0.1</b> Demographics data</a></li>
-<li class="chapter" data-level="3.0.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.0.2</b> High school directory data</a></li>
-<li class="chapter" data-level="3.0.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.0.3</b> Join data</a></li>
-<li class="chapter" data-level="3.0.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.0.4</b> High school location data</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-preparation-for-high-school-directory-data-and-demographics-join"><i class="fa fa-check"></i><b>3.1</b> Data preparation for high school directory data and demographics join</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.1.1</b> Demographics data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.1.2</b> High school directory data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.1.3</b> Join data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.1.4</b> High school location data</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
 <li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-values-by-column"><i class="fa fa-check"></i><b>4.1</b> Missing values by column</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#preparing-nycgeo-package-and-the-base-map-boundaries"><i class="fa fa-check"></i><b>5.1</b> Preparing NYCgeo package and the base map (boundaries)</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#explore-characteristics-shared-by-schools"><i class="fa fa-check"></i><b>5.2</b> Explore characteristics shared by schools</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#courses-and-programs"><i class="fa fa-check"></i><b>5.2.1</b> Courses and Programs</a></li>
+<li class="chapter" data-level="5.2.2" data-path="results.html"><a href="results.html#demographics"><i class="fa fa-check"></i><b>5.2.2</b> Demographics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#different-categories-of-schools-in-nyc"><i class="fa fa-check"></i><b>5.3</b> Different Categories of schools in NYC</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="results.html"><a href="results.html#geo-spatitial-interactive-map-of-nyc-school-datasets"><i class="fa fa-check"></i><b>5.3.1</b> Geo-spatitial Interactive Map of NYC school datasets</a></li>
+<li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#maps-high-schools"><i class="fa fa-check"></i><b>5.3.2</b> Maps high schools</a></li>
+<li class="chapter" data-level="5.3.3" data-path="results.html"><a href="results.html#graph-of-the-vocational-high-school"><i class="fa fa-check"></i><b>5.3.3</b> Graph of the vocational high school</a></li>
+<li class="chapter" data-level="5.3.4" data-path="results.html"><a href="results.html#intermediate-schools"><i class="fa fa-check"></i><b>5.3.4</b> Intermediate schools</a></li>
+<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#special-education-school-mapping"><i class="fa fa-check"></i><b>5.3.5</b> Special education school mapping</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -97,7 +135,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics and performances</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics analysis</a>
           </h1>
         </div>
 
@@ -107,7 +145,23 @@
             <section class="normal" id="section-">
 <div id="results" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
-<p>Explore characteristics shared by schools</p>
+<div id="preparing-nycgeo-package-and-the-base-map-boundaries" class="section level2">
+<h2><span class="header-section-number">5.1</span> Preparing NYCgeo package and the base map (boundaries)</h2>
+<ol style="list-style-type: decimal">
+<li>A visualization of the NYC map by census tract boundaries</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>This map boundary of NYC will be the basis for the geospatial plots.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>NYC Census Data Examples - NYC residents College degree census</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>To confirm that the map boundary that we created above works, we implemented an example map that shows the percentage of people that has a Bachelor’s degree and aboce in NYC.
+We can see that the area that has the most university graduates are in Manhattan, especially up to what appears to be Morningside Heights, and in Brooklym close to Manhattan.</p>
+</div>
+<div id="explore-characteristics-shared-by-schools" class="section level2">
+<h2><span class="header-section-number">5.2</span> Explore characteristics shared by schools</h2>
+<p><strong>Grades in schools</strong></p>
 <pre><code>##       
 ##        6 to 12 7 to 12 9 to 12 9 to 14 K to 12
 ##   [1,]      74       1     335       7       4
@@ -117,25 +171,161 @@
 <p>The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
 We want to see characteristics of these schools, especially in what classes and diploa are offered.
 We separate the columns of such columns by <code>&quot;,&quot;</code> since they are currently in a free text form and change them to categories.</p>
-<p><strong>Courses and Programs</strong></p>
-<pre><code>## # A tibble: 6 x 6
-##   dbn    school     Borough language_classes advancedplacement… diplomaendorsem…
-##   &lt;chr&gt;  &lt;chr&gt;      &lt;fct&gt;   &lt;fct&gt;            &lt;fct&gt;              &lt;fct&gt;           
-## 1 16K498 Brooklyn … BROOKL… Spanish          &quot;AP Chemistry&quot;     Math            
-## 2 16K498 Brooklyn … BROOKL… Spanish          &quot; AP English Lang… Math            
-## 3 16K498 Brooklyn … BROOKL… Spanish          &quot; AP English Lite… Math            
-## 4 16K498 Brooklyn … BROOKL… Spanish          &quot; AP Environmenta… Math            
-## 5 16K498 Brooklyn … BROOKL… Spanish          &quot; AP Spanish&quot;      Math            
-## 6 17K524 Internati… BROOKL… &lt;NA&gt;              &lt;NA&gt;              &lt;NA&gt;</code></pre>
+<div id="courses-and-programs" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Courses and Programs</h3>
 <ol style="list-style-type: decimal">
-<li><p>Treat language classes and AP courses as factors and see if the classes available are different according to borough.</p></li>
-<li><p>What kind of programs are offered: art, science, etc</p></li>
+<li>Available language classes according to borough</li>
 </ol>
-<p><strong>Demographics</strong>
-1. Demographics of high school students on New York in a whole
-2. How different demographics are represented by neighborhood
-3.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-39-1.png" width="864" /></p>
+<p>The order of language classes in the x-axis are ordered by their total frequency. Thus, Spanish is the most taught foreign language in high schools, followed by French, Italian, and Mandarin.</p>
+<p>However, it is difficult to see in the above graph which borough offers the most language classes, so we create a treemap to observe.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-40-1.png" width="960" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>AP courses available by borough</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>The order of the x-axis shows the most offered AP courses, insinuating a certain popularity of such AP courses in high schools.
+In accordance to the language courses, Staten Island has the least schools and thus the least variety of courses offered.</p>
+</div>
+<div id="demographics" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Demographics</h3>
+<ol style="list-style-type: decimal">
+<li>Demographics of high school students in New York in a whole</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Population of students and number of schools per neighborhood</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-43-1.png" width="1920" /></p>
+<p>Largely, the number of students that go to school in a certain area seem sto be in proportion to the number of schools in the corresponding neighborhood.
+However, in certain neighborhood in Queens and in Lower Manhattan seems to have outliers, where there are more students than surrounding neighborhoods that have more schools.</p>
+<p>So, we would like to see how many schools there are per 100 students.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>Here in this graph, the higher the ratio would indicate that there are more schools per number of students, where as the darker areas indicate that there are fewer schools per students than other neighborhoods.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Student demographics by borough</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-45-1.png" width="864" /></p>
+<p>Although the number of students per borough are significantly different, it is suaprising that the proportion of students of a certain race among big boroughs like Brooklyn and Manhattan are similar.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+</div>
+</div>
+<div id="different-categories-of-schools-in-nyc" class="section level2">
+<h2><span class="header-section-number">5.3</span> Different Categories of schools in NYC</h2>
+<ol style="list-style-type: decimal">
+<li>Find all categories of the schools in NYC.</li>
+</ol>
+<pre><code>##  [1] &quot;Charter School&quot;                                  
+##  [2] &quot;Elementary School&quot;                               
+##  [3] &quot;Intermediate School&quot;                             
+##  [4] &quot;Academic High School&quot;                            
+##  [5] &quot;High school - Public&quot;                            
+##  [6] &quot;Special Education School&quot;                        
+##  [7] &quot;Junior High-Intermediate-Middle School - Public&quot; 
+##  [8] &quot;Elementary School - Public&quot;                      
+##  [9] &quot;K-8 School - Charter&quot;                            
+## [10] &quot;K-8 School - Public&quot;                             
+## [11] &quot;Secondary School - Public&quot;                       
+## [12] &quot;Elementary School - Charter&quot;                     
+## [13] &quot;K-12 all grades School - Charter&quot;                
+## [14] &quot;Junior High-Intermediate-Middle School - Charter&quot;
+## [15] &quot;High school - Charter&quot;                           
+## [16] &quot;K-12 all grades School - Public&quot;                 
+## [17] &quot;School&quot;                                          
+## [18] &quot;Secondary School - Charter&quot;                      
+## [19] &quot;Vocational High School&quot;                          
+## [20] &quot;Educational Skills Center&quot;                       
+## [21] &quot;Alternative High School&quot;                         
+## [22] &quot;Public School&quot;</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-47-1.png" width="864" /></p>
+<p>This does not only limit to highschools, but is an overview of all different categories of schooling in NYC.
+As seen previously in the data cleaning process, high schools are not strictly from grades 9 to 12 but there are also schools from grade 6 to 12, or K to 12(all grades) schools.</p>
+<p>Thus, it would be inefficient and ineffective to plot something like below, only showing for highschools:</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div id="geo-spatitial-interactive-map-of-nyc-school-datasets" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Geo-spatitial Interactive Map of NYC school datasets</h3>
+<div id="htmlwidget-d03d66bbb9db826c470c" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d03d66bbb9db826c470c">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["point",440]},{"method":"addFlatGeoBuf","args":["locations_sf","locations_sf",null,true,"mvFeatureId",{"radius":6,"stroke":true,"color":"#333333","weight":1,"opacity":0.9,"fill":true,"fillColor":"#6666FF","fillOpacity":0.6},{"className":"","pane":"point"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-74.244011,40.50777,-73.708684,40.90354,"locations_sf","Zoom to locations_sf","<strong> locations_sf <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"locations_sf",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#6666FF"],"labels":["locations_sf"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"","extra":null,"layerId":null,"className":"info legend","group":"locations_sf"}]}],"fitBounds":[40.50777,-74.244011,40.90354,-73.708684,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+<div id="maps-high-schools" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Maps high schools</h3>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+</div>
+<div id="graph-of-the-vocational-high-school" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Graph of the vocational high school</h3>
+<pre><code>## NULL</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+</div>
+<div id="intermediate-schools" class="section level3">
+<h3><span class="header-section-number">5.3.4</span> Intermediate schools</h3>
+<pre><code>## NULL</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+</div>
+<div id="special-education-school-mapping" class="section level3">
+<h3><span class="header-section-number">5.3.5</span> Special education school mapping</h3>
+<pre><code>##         uid                        facname                  factype latitude
+## 15     8671                          PS 34 Special Education School 40.85028
+## 115   22605          PS 25 &amp; PS 4 Portable Special Education School 40.53969
+## 187  136781                         PS 148 Special Education School 40.78633
+## 333   47522            PS 177 &amp; Playground Special Education School 40.74327
+## 340  167497                          PS 58 Special Education School 40.76416
+## 411  124528 PS 811 (Old PS 187-Cmhc)&amp;Plygd Special Education School 40.75646
+## 561   87078                          PS 77 Special Education School 40.67873
+## 723  193182                         PS 369 Special Education School 40.68733
+## 817   75115                         PS 148 Special Education School 40.69925
+## 832   83564       Special Education School Special Education School 40.81658
+## 852  122213                         PS 371 Special Education School 40.65417
+## 1016 164809                         PS 186 Special Education School 40.83140
+## 1148  86898       PS 753 (Old Sterling HS) Special Education School 40.68263
+## 1361 115499                    IS 24 Annex Special Education School 40.56403
+## 1616  97115               PS 9 (Old PS 86) Special Education School 40.71831
+## 1704 119297             PS 751 (Old PS 25) Special Education School 40.72572
+## 1724 149828                  PS 721 Ax Otc Special Education School 40.84273
+## 1734 122158       PS 226-Special Education Special Education School 40.73477
+## 1749  69845                          PS 75 Special Education School 40.69865
+## 1784 122535                   Jhs 47 Annex Special Education School 40.73700
+## 1798 136789                   PS 169 (Ecf) Special Education School 40.78082
+## 1951 115500              PS 32 Mini-School Special Education School 40.55443
+## 1984  91388                          PS 17 Special Education School 40.83584
+## 1985 112920     Speacial Ed School P.S 721 Special Education School 40.73577
+## 2095  88964                         PS 179 Special Education School 40.74175
+## 2168   9492                          PS 40 Special Education School 40.64093
+## 2181 116384       Special Education School Special Education School 40.74741
+## 2202 163841                         PS 396 Special Education School 40.64895
+##      longitude lon lat
+## 15   -73.88380  NA  NA
+## 115  -74.23694  NA  NA
+## 187  -73.97922  NA  NA
+## 333  -73.78733  NA  NA
+## 340  -73.98591  NA  NA
+## 411  -73.72870  NA  NA
+## 561  -73.97669  NA  NA
+## 723  -73.98326  NA  NA
+## 817  -73.94522  NA  NA
+## 832  -73.84824  NA  NA
+## 852  -74.00530  NA  NA
+## 1016 -73.89781  NA  NA
+## 1148 -73.96921  NA  NA
+## 1361 -74.15150  NA  NA
+## 1616 -73.91236  NA  NA
+## 1704 -73.98786  NA  NA
+## 1724 -73.83891  NA  NA
+## 1734 -73.99529  NA  NA
+## 1749 -73.90492  NA  NA
+## 1784 -73.97809  NA  NA
+## 1798 -73.95558  NA  NA
+## 1951 -74.14824  NA  NA
+## 1984 -73.88721  NA  NA
+## 1985 -73.86796  NA  NA
+## 2095 -73.77827  NA  NA
+## 2168 -74.09533  NA  NA
+## 2181 -73.99282  NA  NA
+## 2202 -73.95693  NA  NA</code></pre>
+<pre><code>## NULL</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 
+</div>
+</div>
 </div>
             </section>
 

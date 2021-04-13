@@ -1,5 +1,6 @@
 # Conclusion
 
+## Limitations
 Discuss limitations and future directions, lessons learned.
 
-(suggested: approximately 1/2 page)
+## Lessons learned

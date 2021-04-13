@@ -1,8 +1,11 @@
 introduction
 data-sources
 dataset-information
+school-demographics-and-high-school-directory-data
+nyc-censys-and-health-data
 problems-with-nyc-datasets-health-and-census-data.
 data-transformation
+data-preparation-for-high-school-directory-data-and-demographics-join
 demographics-data
 high-school-directory-data
 join-data
@@ -10,5 +13,15 @@ high-school-location-data
 missing-values
 missing-values-by-column
 results
+preparing-nycgeo-package-and-the-base-map-boundaries
+explore-characteristics-shared-by-schools
+courses-and-programs
+demographics
+different-categories-of-schools-in-nyc
+geo-spatitial-interactive-map-of-nyc-school-datasets
+maps-high-schools
+graph-of-the-vocational-high-school
+intermediate-schools
+special-education-school-mapping
 interactive-component
 conclusion

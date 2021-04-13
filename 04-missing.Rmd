@@ -13,10 +13,10 @@ Variables that include "program" in the name:
 head(hs_dir.2019[grepl("program", names(hs_dir.2019))])
 ```
 
-Variables that onclude "admission" , "requirement" in the name:
+Variables that include "admission" , "requirement" in the name:
 ```{r}
-head(hs_dir.2019[grepl("admission", names(hs_dir.2019))])
-hs_dir.2019[grepl("requirement", names(hs_dir.2019))]
+head(hs_dir.2019[grepl("admission", names(hs_dir.2019))])[1:5]
+head(hs_dir.2019[grepl("requirement", names(hs_dir.2019))])[1:5]
 ```
 
 As such, we cannot assess the pattern of missing values properly in the raw data itself, other than knowing that the missing values are dur to difference in the number of offered programs.
@@ -38,12 +38,15 @@ dir.missing <- hs_dir_tidy.2019  %>%
 
 ggplot(dir.missing, aes(x= fct_reorder(key,-missing2, sum), y= fct_reorder(id, -missing2, sum), fill = missing))+
   geom_tile(color = "white")+
-  labs(title= "Tidy high school directory with NAs added",
-       subtitle= "missing patterns by column",
+  labs(title= "Missing patterns by column",
+       subtitle= "This is not a good presentation, the rows are not legible",
        x= "variables", y= "School Names")+
   scale_fill_viridis_d()+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        title= element_text(size= 12, face = "bold"),
+        legend.title = element_text(size= 11),
+        legend.text = element_text(size = 10))
 
 ```
 
@@ -61,19 +64,21 @@ dir.missing <- hs_dir_tidy.2019  %>%
 
 ggplot(dir.missing, aes(x= fct_reorder(key, -missing2, sum), y= fct_reorder(id, -missing2, sum), fill = missing))+
   geom_tile(color = "white")+
-  labs(title= "Tidy high school directory with NAs added",
-       subtitle= "missing patterns by column",
+  labs(title= "Missing patterns by column",
+       subtitle= "This is still not visible",
        x= "variables", y= "School Names")+
   scale_fill_viridis_d()+
-  theme_bw()+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        title= element_text(size= 14, face = "bold"),
+        legend.title = element_text(size= 11),
+        legend.text = element_text(size = 10))
 ```
 
 The pattern is still difficult to observe becasue of the vast number of observations.
 
 If we sample a few observations from this data instead:
 
-```{r, fig.width=10}
+```{r, fig.width=10, fig.height=7}
 dir.missing.sample <- hs_dir_tidy.2019[sample(nrow(hs_dir_tidy.2019), 50),]%>% 
   mutate(across(where(is.numeric), ~as.character(.))) %>% 
   pivot_longer(cols= -school_name, names_to = "key", values_to = "value") %>%
@@ -90,7 +95,10 @@ ggplot(dir.missing.sample, aes(x= fct_reorder(key, -missing2, sum), y= fct_reord
        x= "variables", y= "School Names")+
   scale_fill_viridis_d()+
   theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1),
+         title= element_text(size= 14, face = "bold"),
+        legend.title = element_text(size= 11),
+        legend.text = element_text(size = 10))
 
 
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Data transformation | NYC High school demographics and performances</title>
-  <meta name="description" content="Chapter 3 Data transformation | NYC High school demographics and performances" />
+  <title>Chapter 3 Data transformation | NYC High school demographics analysis</title>
+  <meta name="description" content="Chapter 3 Data transformation | NYC High school demographics analysis" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Data transformation | NYC High school demographics and performances" />
+  <meta property="og:title" content="Chapter 3 Data transformation | NYC High school demographics analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Data transformation | NYC High school demographics and performances" />
+  <meta name="twitter:title" content="Chapter 3 Data transformation | NYC High school demographics analysis" />
   
   
   
@@ -50,6 +50,26 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<script src="libs/FlatGeoBuf-3.3.3/fgb.js"></script>
+<script src="libs/FlatGeoBuf-3.3.3/flatgeobuf-geojson.min.js"></script>
+<script src="libs/chromajs-2.1.0/chroma.min.js"></script>
+<link id="locations_sf-1-attachment" rel="attachment" href="libs/locations_sf-0.0.1/locations_sf_layer.fgb"/>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 
@@ -71,19 +91,37 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
-<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a></li>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-sources.html"><a href="data-sources.html#school-demographics-and-high-school-directory-data"><i class="fa fa-check"></i><b>2.1.1</b> School demographics and high school directory data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-sources.html"><a href="data-sources.html#nyc-censys-and-health-data"><i class="fa fa-check"></i><b>2.1.2</b> NYC censys and health data</a></li>
+</ul></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#problems-with-nyc-datasets-health-and-census-data."><i class="fa fa-check"></i><b>2.2</b> Problems with NYC datasets health and census data.</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a><ul>
-<li class="chapter" data-level="3.0.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.0.1</b> Demographics data</a></li>
-<li class="chapter" data-level="3.0.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.0.2</b> High school directory data</a></li>
-<li class="chapter" data-level="3.0.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.0.3</b> Join data</a></li>
-<li class="chapter" data-level="3.0.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.0.4</b> High school location data</a></li>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#data-preparation-for-high-school-directory-data-and-demographics-join"><i class="fa fa-check"></i><b>3.1</b> Data preparation for high school directory data and demographics join</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-transformation.html"><a href="data-transformation.html#demographics-data"><i class="fa fa-check"></i><b>3.1.1</b> Demographics data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-transformation.html"><a href="data-transformation.html#high-school-directory-data"><i class="fa fa-check"></i><b>3.1.2</b> High school directory data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-transformation.html"><a href="data-transformation.html#join-data"><i class="fa fa-check"></i><b>3.1.3</b> Join data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-transformation.html"><a href="data-transformation.html#high-school-location-data"><i class="fa fa-check"></i><b>3.1.4</b> High school location data</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a><ul>
 <li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#missing-values-by-column"><i class="fa fa-check"></i><b>4.1</b> Missing values by column</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#preparing-nycgeo-package-and-the-base-map-boundaries"><i class="fa fa-check"></i><b>5.1</b> Preparing NYCgeo package and the base map (boundaries)</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#explore-characteristics-shared-by-schools"><i class="fa fa-check"></i><b>5.2</b> Explore characteristics shared by schools</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#courses-and-programs"><i class="fa fa-check"></i><b>5.2.1</b> Courses and Programs</a></li>
+<li class="chapter" data-level="5.2.2" data-path="results.html"><a href="results.html#demographics"><i class="fa fa-check"></i><b>5.2.2</b> Demographics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#different-categories-of-schools-in-nyc"><i class="fa fa-check"></i><b>5.3</b> Different Categories of schools in NYC</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="results.html"><a href="results.html#geo-spatitial-interactive-map-of-nyc-school-datasets"><i class="fa fa-check"></i><b>5.3.1</b> Geo-spatitial Interactive Map of NYC school datasets</a></li>
+<li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#maps-high-schools"><i class="fa fa-check"></i><b>5.3.2</b> Maps high schools</a></li>
+<li class="chapter" data-level="5.3.3" data-path="results.html"><a href="results.html#graph-of-the-vocational-high-school"><i class="fa fa-check"></i><b>5.3.3</b> Graph of the vocational high school</a></li>
+<li class="chapter" data-level="5.3.4" data-path="results.html"><a href="results.html#intermediate-schools"><i class="fa fa-check"></i><b>5.3.4</b> Intermediate schools</a></li>
+<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#special-education-school-mapping"><i class="fa fa-check"></i><b>5.3.5</b> Special education school mapping</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -97,7 +135,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics and performances</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NYC High school demographics analysis</a>
           </h1>
         </div>
 
@@ -107,9 +145,11 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
-<p><strong>Data preparation for high school directory data and demographics join</strong></p>
+<div id="data-preparation-for-high-school-directory-data-and-demographics-join" class="section level2">
+<h2><span class="header-section-number">3.1</span> Data preparation for high school directory data and demographics join</h2>
 <div id="demographics-data" class="section level3">
-<h3><span class="header-section-number">3.0.1</span> Demographics data</h3>
+<h3><span class="header-section-number">3.1.1</span> Demographics data</h3>
+<p>Grades included in the demographics data:</p>
 <pre><code>##  [1] &quot;Grade 3K+PK (Half Day &amp; Full Day)&quot; &quot;Grade K&quot;                          
 ##  [3] &quot;Grade 1&quot;                           &quot;Grade 2&quot;                          
 ##  [5] &quot;Grade 3&quot;                           &quot;Grade 4&quot;                          
@@ -117,6 +157,7 @@
 ##  [9] &quot;Grade 7&quot;                           &quot;Grade 8&quot;                          
 ## [11] &quot;Grade 9&quot;                           &quot;Grade 10&quot;                         
 ## [13] &quot;Grade 11&quot;                          &quot;Grade 12&quot;</code></pre>
+<p>School years included in the demographics data, and some variables included in the demographics data:</p>
 <pre><code>## # A tibble: 5 x 1
 ##   Year   
 ##   &lt;chr&gt;  
@@ -138,8 +179,11 @@
 <pre><code>## [1] &quot;DBN&quot;                               &quot;School Name&quot;                      
 ## [3] &quot;Year&quot;                              &quot;Total Enrollment&quot;                 
 ## [5] &quot;Grade 3K+PK (Half Day &amp; Full Day)&quot; &quot;Grade K&quot;</code></pre>
-<p>We can see that the data contains data not only for high school, and for school years other than 2019.
-The column names are difficult to retract due to spaces and special characters, so we rename columns that is easier to retract.</p>
+<p>We can see that the data contains data not only for high school, and for school years other than 2019.</p>
+<p>The column names are difficult to retract due to spaces and special characters, so we rename columns that is easier to retract.</p>
+<ul>
+<li>replace “%” to “pct” and spaces to &quot;_&quot;</li>
+</ul>
 <pre><code>##  [1] &quot;pct_Female&quot;                                  
 ##  [2] &quot;pct_Male&quot;                                    
 ##  [3] &quot;pct_Asian&quot;                                   
@@ -153,32 +197,24 @@ The column names are difficult to retract due to spaces and special characters, 
 <pre><code>## [1] &quot;DBN&quot;                               &quot;School_Name&quot;                      
 ## [3] &quot;Year&quot;                              &quot;Total_Enrollment&quot;                 
 ## [5] &quot;Grade_3K+PK_(Half_Day_&amp;_Full_Day)&quot; &quot;Grade_K&quot;</code></pre>
-<p>We don’t want schools that are not high schools; the grade range is different per school, so we filter out schools that do not have grades 10, 11, and 12. Then, create new columns that contain population counts for high school grades and non-highschool grades.
-Here, we set for high school to be from grades 9 to 12, according to <a href="https://www.schools.nyc.gov/enrollment/enroll-grade-by-grade/high-school">New York city Department of Education description</a>. It is given that students in their 8th grade apply to high schools. We assume that schools that have grades 6 to 12, or K to 12, etc. have continuing students.</p>
+<p>We don’t want schools that are not high schools; the grade range is different per school, so we filter out schools that do not have grades 10, 11, and 12.
+Then, create new columns that contain population counts for high school grades and non-highschool grades.</p>
+<p>Here, we set for high school to be from grades 9 to 12, according to <a href="https://www.schools.nyc.gov/enrollment/enroll-grade-by-grade/high-school">New York city Department of Education description</a>. It is given that students in their 8th grade apply to high schools. We assume that schools that have grades 6 to 12, or K to 12, etc. have continuing students.</p>
 <p>Also, the dataset consists of information ranging from school years 2015 to 2019. We want to filter out years other than 2019 for initial processing of the data since the directory data are for 2019-2020.</p>
-<pre><code>## # A tibble: 6 x 41
-##   DBN   School_Name Year  Total_Enrollment hs_enroll non_hs Grade_K Grade_1
-##   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-## 1 01M2… Orchard Co… 2019…              226       226      0       0       0
-## 2 01M4… University… 2019…              492       492      0       0       0
-## 3 01M4… East Side … 2019…              680       364    316       0       0
-## 4 01M4… Forsyth Sa… 2019…              181       181      0       0       0
-## 5 01M5… Marta Vall… 2019…               97        97      0       0       0
-## 6 01M5… Lower East… 2019…              531       531      0       0       0
-## # … with 33 more variables: Grade_2 &lt;dbl&gt;, Grade_3 &lt;dbl&gt;, Grade_4 &lt;dbl&gt;,
-## #   Grade_5 &lt;dbl&gt;, Grade_6 &lt;dbl&gt;, Grade_7 &lt;dbl&gt;, Grade_8 &lt;dbl&gt;, Grade_9 &lt;dbl&gt;,
-## #   Grade_10 &lt;dbl&gt;, Grade_11 &lt;dbl&gt;, Grade_12 &lt;dbl&gt;, n_Female &lt;dbl&gt;,
-## #   pct_Female &lt;dbl&gt;, n_Male &lt;dbl&gt;, pct_Male &lt;dbl&gt;, n_Asian &lt;dbl&gt;,
-## #   pct_Asian &lt;dbl&gt;, n_Black &lt;dbl&gt;, pct_Black &lt;dbl&gt;, n_Hispanic &lt;dbl&gt;,
-## #   pct_Hispanic &lt;dbl&gt;, n_Multiple_Race_Categories_Not_Represented &lt;dbl&gt;,
-## #   pct_Multiple_Race_Categories_Not_Represented &lt;dbl&gt;, n_White &lt;dbl&gt;,
-## #   pct_White &lt;dbl&gt;, n_Students_with_Disabilities &lt;dbl&gt;,
-## #   pct_Students_with_Disabilities &lt;dbl&gt;, n_English_Language_Learners &lt;dbl&gt;,
-## #   pct_English_Language_Learners &lt;dbl&gt;, n_Poverty &lt;chr&gt;, pct_Poverty &lt;chr&gt;,
-## #   Economic_Need_Index &lt;chr&gt;, PK &lt;dbl&gt;</code></pre>
+<p>Moreover, we created new columns <code>hs_enroll</code> and <code>non_hs</code> to divide population that are in grades 9 to 12 to others.</p>
+<pre><code>## # A tibble: 6 x 5
+##   DBN    School_Name                           Year   Total_Enrollment hs_enroll
+##   &lt;chr&gt;  &lt;chr&gt;                                 &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;
+## 1 01M292 Orchard Collegiate Academy            2019-…              226       226
+## 2 01M448 University Neighborhood High School   2019-…              492       492
+## 3 01M450 East Side Community School            2019-…              680       364
+## 4 01M458 Forsyth Satellite Academy             2019-…              181       181
+## 5 01M509 Marta Valle High School               2019-…               97        97
+## 6 01M515 Lower East Side Preparatory High Sch… 2019-…              531       531</code></pre>
 </div>
 <div id="high-school-directory-data" class="section level3">
-<h3><span class="header-section-number">3.0.2</span> High school directory data</h3>
+<h3><span class="header-section-number">3.1.2</span> High school directory data</h3>
+<p>Dimension of the directory data:</p>
 <pre><code>## [1] 427 462</code></pre>
 <p>The directory data has very extensive information each schools, from basic school information to detailed descriptions of each program and admission information.
 However, we do not want more than 400 variables, so we select only the information relevant and informative to us.
@@ -186,25 +222,18 @@ Such variables are: basic school information(DBN, school name, neighborhood) to 
 <p>The directory data has very extensive information each schools, from basic school information to detailed descriptions of each program and admission information.
 However, we do not want more than 400 variables, so we select only the information relevant and informative to us.
 Such variables are: basic school information(DBN, school name, neighborhood) to characteristic information(programs, statistics, admissions).</p>
-<pre><code>## # A tibble: 6 x 27
-##   dbn   school_name Borough neighborhood total_students grades2018 finalgrades
-##   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      
-## 1 16K4… Brooklyn H… BROOKL… Bedford-Stu…            594 9 to 12    9 to 12    
-## 2 17K5… Internatio… BROOKL… Crown Heigh…            417 9 to 12    9 to 12    
-## 3 02M5… Repertory … MANHAT… Midtown                 242 9 to 12    9 to 12    
-## 4 05M6… Thurgood M… MANHAT… Central Har…            547 6 to 12    6 to 12    
-## 5 15K4… Brooklyn F… BROOKL… DUMBO-Downt…            168 9 to 12    9 to 12    
-## 6 03M2… West End S… MANHAT… Lincoln Squ…            339 6 to 10    6 to 10 - …
-## # … with 20 more variables: program1 &lt;chr&gt;, program2 &lt;chr&gt;, program3 &lt;chr&gt;,
-## #   program4 &lt;chr&gt;, program5 &lt;chr&gt;, program6 &lt;chr&gt;, program7 &lt;chr&gt;,
-## #   program8 &lt;chr&gt;, program9 &lt;chr&gt;, program10 &lt;chr&gt;, language_classes &lt;chr&gt;,
-## #   advancedplacement_courses &lt;chr&gt;, diplomaendorsements &lt;chr&gt;,
-## #   graduation_rate &lt;chr&gt;, attendance_rate &lt;dbl&gt;, pct_stu_enough_variety &lt;dbl&gt;,
-## #   college_career_rate &lt;chr&gt;, specialized &lt;dbl&gt;, admissionspriority11 &lt;chr&gt;,
-## #   admissionspriority21 &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   dbn    school_name                     Borough neighborhood     total_students
+##   &lt;chr&gt;  &lt;chr&gt;                           &lt;chr&gt;   &lt;chr&gt;                     &lt;dbl&gt;
+## 1 16K498 Brooklyn High School for Law a… BROOKL… Bedford-Stuyves…            594
+## 2 17K524 International High School at P… BROOKL… Crown Heights S…            417
+## 3 02M531 Repertory Company High School … MANHAT… Midtown                     242
+## 4 05M670 Thurgood Marshall Academy for … MANHAT… Central Harlem …            547
+## 5 15K423 Brooklyn Frontiers High School  BROOKL… DUMBO-Downtown …            168
+## 6 03M291 West End Secondary School       MANHAT… Lincoln Square              339</code></pre>
 </div>
 <div id="join-data" class="section level3">
-<h3><span class="header-section-number">3.0.3</span> Join data</h3>
+<h3><span class="header-section-number">3.1.3</span> Join data</h3>
 <p>Since we have the names and the DBN which are unique, we join the two datasets using these columns as indicators.</p>
 <pre><code>##                                                             dbn
 ## Brooklyn High School for Law and Technology              16K498
@@ -234,420 +263,28 @@ Such variables are: basic school information(DBN, school name, neighborhood) to 
 ## Thurgood Marshall Academy for Learning and Social Change              541
 ## Brooklyn Frontiers High School                                        186
 ## West End Secondary School                                              NA
-##                                                          hs_enroll non_hs
-## Brooklyn High School for Law and Technology                    578      0
-## International High School at Prospect Heights                  370      0
-## Repertory Company High School for Theatre Arts                 237      0
-## Thurgood Marshall Academy for Learning and Social Change       374    167
-## Brooklyn Frontiers High School                                 186      0
-## West End Secondary School                                       NA     NA
-##                                                          grades2018 PK Grade_K
-## Brooklyn High School for Law and Technology                 9 to 12  0       0
-## International High School at Prospect Heights               9 to 12  0       0
-## Repertory Company High School for Theatre Arts              9 to 12  0       0
-## Thurgood Marshall Academy for Learning and Social Change    6 to 12  0       0
-## Brooklyn Frontiers High School                              9 to 12  0       0
-## West End Secondary School                                   6 to 10 NA      NA
-##                                                          Grade_1 Grade_2
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0       0
-## Brooklyn Frontiers High School                                 0       0
-## West End Secondary School                                     NA      NA
-##                                                          Grade_3 Grade_4
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0       0
-## Brooklyn Frontiers High School                                 0       0
-## West End Secondary School                                     NA      NA
-##                                                          Grade_5 Grade_6
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0      53
-## Brooklyn Frontiers High School                                 0       0
-## West End Secondary School                                     NA      NA
-##                                                          Grade_7 Grade_8
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change      58      56
-## Brooklyn Frontiers High School                                 0       0
-## West End Secondary School                                     NA      NA
-##                                                          Grade_9 Grade_10
-## Brooklyn High School for Law and Technology                  152      161
-## International High School at Prospect Heights                 88       85
-## Repertory Company High School for Theatre Arts                61       67
-## Thurgood Marshall Academy for Learning and Social Change     109      101
-## Brooklyn Frontiers High School                                39       54
-## West End Secondary School                                     NA       NA
-##                                                          Grade_11 Grade_12
-## Brooklyn High School for Law and Technology                   128      137
-## International High School at Prospect Heights                  90      107
-## Repertory Company High School for Theatre Arts                 58       51
-## Thurgood Marshall Academy for Learning and Social Change       76       88
-## Brooklyn Frontiers High School                                 69       24
-## West End Secondary School                                      NA       NA
-##                                                            Borough
-## Brooklyn High School for Law and Technology               BROOKLYN
-## International High School at Prospect Heights             BROOKLYN
-## Repertory Company High School for Theatre Arts           MANHATTAN
-## Thurgood Marshall Academy for Learning and Social Change MANHATTAN
-## Brooklyn Frontiers High School                            BROOKLYN
-## West End Secondary School                                MANHATTAN
-##                                                                                                          finalgrades
-## Brooklyn High School for Law and Technology                                                                  9 to 12
-## International High School at Prospect Heights                                                                9 to 12
-## Repertory Company High School for Theatre Arts                                                               9 to 12
-## Thurgood Marshall Academy for Learning and Social Change                                                     6 to 12
-## Brooklyn Frontiers High School                                                                               9 to 12
-## West End Secondary School                                6 to 10 - This school is expanding to serve grades 6 to 12.
-##                                                                                               program1
-## Brooklyn High School for Law and Technology                                 Academy for Social Justice
-## International High School at Prospect Heights            International High School at Prospect Heights
-## Repertory Company High School for Theatre Arts                                            Theater Arts
-## Thurgood Marshall Academy for Learning and Social Change           Social Change and Community Service
-## Brooklyn Frontiers High School                                          Brooklyn Frontiers High School
-## West End Secondary School                                                    West End Secondary School
-##                                                                     program2
-## Brooklyn High School for Law and Technology              Computer Technology
-## International High School at Prospect Heights                           &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                          &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change                &lt;NA&gt;
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## West End Secondary School                                               &lt;NA&gt;
-##                                                          program3 program4
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## West End Secondary School                                    &lt;NA&gt;     &lt;NA&gt;
-##                                                          program5 program6
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## West End Secondary School                                    &lt;NA&gt;     &lt;NA&gt;
-##                                                          program7 program8
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## West End Secondary School                                    &lt;NA&gt;     &lt;NA&gt;
-##                                                          program9 program10
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;      &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;      &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;      &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;      &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;      &lt;NA&gt;
-## West End Secondary School                                    &lt;NA&gt;      &lt;NA&gt;
-##                                                          language_classes
-## Brooklyn High School for Law and Technology                       Spanish
-## International High School at Prospect Heights                        &lt;NA&gt;
-## Repertory Company High School for Theatre Arts            French, Spanish
-## Thurgood Marshall Academy for Learning and Social Change          Spanish
-## Brooklyn Frontiers High School                                     French
-## West End Secondary School                                            &lt;NA&gt;
-##                                                                                                                                                                                                                              advancedplacement_courses
-## Brooklyn High School for Law and Technology                                                                             AP Chemistry, AP English Language and Composition, AP English Literature and Composition, AP Environmental Science, AP Spanish
-## International High School at Prospect Heights                                                                                                                                                                                                     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts           AP Biology, AP English Language and Composition, AP English Literature and Composition, AP Environmental Science, AP Psychology, AP Spanish, AP U.S. Government and Politics, AP U.S. History
-## Thurgood Marshall Academy for Learning and Social Change                                                                                                                                        AP English Literature and Composition, AP U.S. History
-## Brooklyn Frontiers High School                                                                                                                                                                                                                    &lt;NA&gt;
-## West End Secondary School                                                                                                                                                                                                                         &lt;NA&gt;
-##                                                          diplomaendorsements
-## Brooklyn High School for Law and Technology                             Math
-## International High School at Prospect Heights                           &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                          Arts
-## Thurgood Marshall Academy for Learning and Social Change                &lt;NA&gt;
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## West End Secondary School                                               &lt;NA&gt;
-##                                                          graduation_rate
-## Brooklyn High School for Law and Technology                         0.74
-## International High School at Prospect Heights                       0.63
-## Repertory Company High School for Theatre Arts                      0.96
-## Thurgood Marshall Academy for Learning and Social Change            0.81
-## Brooklyn Frontiers High School                                      &lt;NA&gt;
-## West End Secondary School                                           &lt;NA&gt;
-##                                                          attendance_rate
-## Brooklyn High School for Law and Technology                         0.85
-## International High School at Prospect Heights                       0.88
-## Repertory Company High School for Theatre Arts                      0.91
-## Thurgood Marshall Academy for Learning and Social Change            0.91
-## Brooklyn Frontiers High School                                      0.76
-## West End Secondary School                                             NA
-##                                                          pct_stu_enough_variety
-## Brooklyn High School for Law and Technology                                0.58
-## International High School at Prospect Heights                              0.92
-## Repertory Company High School for Theatre Arts                             0.68
-## Thurgood Marshall Academy for Learning and Social Change                   0.59
-## Brooklyn Frontiers High School                                             0.68
-## West End Secondary School                                                  0.91
-##                                                          college_career_rate
-## Brooklyn High School for Law and Technology                             0.49
-## International High School at Prospect Heights                           0.53
-## Repertory Company High School for Theatre Arts                          0.87
-## Thurgood Marshall Academy for Learning and Social Change                 0.6
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## West End Secondary School                                               &lt;NA&gt;
-##                                                          specialized
-## Brooklyn High School for Law and Technology                       NA
-## International High School at Prospect Heights                     NA
-## Repertory Company High School for Theatre Arts                    NA
-## Thurgood Marshall Academy for Learning and Social Change          NA
-## Brooklyn Frontiers High School                                    NA
-## West End Secondary School                                         NA
-##                                                                        admissionspriority11
-## Brooklyn High School for Law and Technology                 Open to New York City residents
-## International High School at Prospect Heights                                          &lt;NA&gt;
-## Repertory Company High School for Theatre Arts              Open to New York City residents
-## Thurgood Marshall Academy for Learning and Social Change Priority to continuing 8th graders
-## Brooklyn Frontiers High School                                                         &lt;NA&gt;
-## West End Secondary School                                Priority to continuing 8th graders
-##                                                                              admissionspriority21
-## Brooklyn High School for Law and Technology                                                  &lt;NA&gt;
-## International High School at Prospect Heights                                                &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                                               &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change Then to District 5 students or residents
-## Brooklyn Frontiers High School                                                               &lt;NA&gt;
-## West End Secondary School                                         Then to New York City residents
-##                                                                                                School_Name
-## Brooklyn High School for Law and Technology                    Brooklyn High School for Law and Technology
-## International High School at Prospect Heights                International High School at Prospect Heights
-## Repertory Company High School for Theatre Arts              Repertory Company High School for Theatre Arts
-## Thurgood Marshall Academy for Learning and Social Change Thurgood Marshall Academy for Learning and Social
-## Brooklyn Frontiers High School                                              Brooklyn Frontiers High School
-## West End Secondary School                                                                             &lt;NA&gt;
-##                                                             Year n_Female
-## Brooklyn High School for Law and Technology              2019-20      244
-## International High School at Prospect Heights            2019-20      139
-## Repertory Company High School for Theatre Arts           2019-20      188
-## Thurgood Marshall Academy for Learning and Social Change 2019-20      285
-## Brooklyn Frontiers High School                           2019-20       83
-## West End Secondary School                                   &lt;NA&gt;       NA
-##                                                          pct_Female n_Male
-## Brooklyn High School for Law and Technology                   0.422    334
-## International High School at Prospect Heights                 0.376    231
-## Repertory Company High School for Theatre Arts                0.793     49
-## Thurgood Marshall Academy for Learning and Social Change      0.527    256
-## Brooklyn Frontiers High School                                0.446    103
-## West End Secondary School                                        NA     NA
-##                                                          pct_Male n_Asian
-## Brooklyn High School for Law and Technology                 0.578      20
-## International High School at Prospect Heights               0.624      62
-## Repertory Company High School for Theatre Arts              0.207       3
-## Thurgood Marshall Academy for Learning and Social Change    0.473       9
-## Brooklyn Frontiers High School                              0.554       7
-## West End Secondary School                                      NA      NA
-##                                                          pct_Asian n_Black
-## Brooklyn High School for Law and Technology                  0.035     351
-## International High School at Prospect Heights                0.168      79
-## Repertory Company High School for Theatre Arts               0.013      74
-## Thurgood Marshall Academy for Learning and Social Change     0.017     363
-## Brooklyn Frontiers High School                               0.038     110
-## West End Secondary School                                       NA      NA
-##                                                          pct_Black n_Hispanic
-## Brooklyn High School for Law and Technology                  0.607        176
-## International High School at Prospect Heights                0.214        185
-## Repertory Company High School for Theatre Arts               0.312         95
-## Thurgood Marshall Academy for Learning and Social Change     0.671        153
-## Brooklyn Frontiers High School                               0.591         60
-## West End Secondary School                                       NA         NA
-##                                                          pct_Hispanic
-## Brooklyn High School for Law and Technology                     0.304
-## International High School at Prospect Heights                   0.500
-## Repertory Company High School for Theatre Arts                  0.401
-## Thurgood Marshall Academy for Learning and Social Change        0.283
-## Brooklyn Frontiers High School                                  0.323
-## West End Secondary School                                          NA
-##                                                          n_Multiple_Race_Categories_Not_Represented
-## Brooklyn High School for Law and Technology                                                      16
-## International High School at Prospect Heights                                                     9
-## Repertory Company High School for Theatre Arts                                                   14
-## Thurgood Marshall Academy for Learning and Social Change                                          9
-## Brooklyn Frontiers High School                                                                    3
-## West End Secondary School                                                                        NA
-##                                                          pct_Multiple_Race_Categories_Not_Represented
-## Brooklyn High School for Law and Technology                                                     0.028
-## International High School at Prospect Heights                                                   0.024
-## Repertory Company High School for Theatre Arts                                                  0.059
-## Thurgood Marshall Academy for Learning and Social Change                                        0.017
-## Brooklyn Frontiers High School                                                                  0.016
-## West End Secondary School                                                                          NA
-##                                                          n_White pct_White
-## Brooklyn High School for Law and Technology                   15     0.026
-## International High School at Prospect Heights                 35     0.095
-## Repertory Company High School for Theatre Arts                51     0.215
-## Thurgood Marshall Academy for Learning and Social Change       7     0.013
-## Brooklyn Frontiers High School                                 6     0.032
-## West End Secondary School                                     NA        NA
-##                                                          n_Students_with_Disabilities
-## Brooklyn High School for Law and Technology                                       125
-## International High School at Prospect Heights                                      15
-## Repertory Company High School for Theatre Arts                                     42
-## Thurgood Marshall Academy for Learning and Social Change                          137
-## Brooklyn Frontiers High School                                                     76
-## West End Secondary School                                                          NA
-##                                                          pct_Students_with_Disabilities
-## Brooklyn High School for Law and Technology                                       0.216
-## International High School at Prospect Heights                                     0.041
-## Repertory Company High School for Theatre Arts                                    0.177
-## Thurgood Marshall Academy for Learning and Social Change                          0.253
-## Brooklyn Frontiers High School                                                    0.409
-## West End Secondary School                                                            NA
-##                                                          n_English_Language_Learners
-## Brooklyn High School for Law and Technology                                       42
-## International High School at Prospect Heights                                    311
-## Repertory Company High School for Theatre Arts                                     0
-## Thurgood Marshall Academy for Learning and Social Change                          21
-## Brooklyn Frontiers High School                                                     7
-## West End Secondary School                                                         NA
-##                                                          pct_English_Language_Learners
-## Brooklyn High School for Law and Technology                                      0.073
-## International High School at Prospect Heights                                    0.841
-## Repertory Company High School for Theatre Arts                                   0.000
-## Thurgood Marshall Academy for Learning and Social Change                         0.039
-## Brooklyn Frontiers High School                                                   0.038
-## West End Secondary School                                                           NA
-##                                                          n_Poverty pct_Poverty
-## Brooklyn High School for Law and Technology                    477       82.5%
-## International High School at Prospect Heights                  302       81.6%
-## Repertory Company High School for Theatre Arts                 161       67.9%
-## Thurgood Marshall Academy for Learning and Social Change       421       77.8%
-## Brooklyn Frontiers High School                                 170       91.4%
-## West End Secondary School                                     &lt;NA&gt;        &lt;NA&gt;
-##                                                          Economic_Need_Index
-## Brooklyn High School for Law and Technology                            83.4%
-## International High School at Prospect Heights                      Above 95%
-## Repertory Company High School for Theatre Arts                         49.8%
-## Thurgood Marshall Academy for Learning and Social Change               82.7%
-## Brooklyn Frontiers High School                                         81.8%
-## West End Secondary School                                               &lt;NA&gt;</code></pre>
+##                                                          hs_enroll
+## Brooklyn High School for Law and Technology                    578
+## International High School at Prospect Heights                  370
+## Repertory Company High School for Theatre Arts                 237
+## Thurgood Marshall Academy for Learning and Social Change       374
+## Brooklyn Frontiers High School                                 186
+## West End Secondary School                                       NA</code></pre>
 <p>It is interesting that the total number of students are not equal in both data sets.</p>
+<p>Number of observations with different reported population:</p>
 <pre><code>## [1] 420  66</code></pre>
+<p>Number of observations with identical reported population:</p>
 <pre><code>## [1]  5 66</code></pre>
 <p>Only 5 schools have total number of students identical in both data sets.</p>
 <p>Investigating the data, we see that there are population data missing for 2 schools from the <code>Demographics</code> dataset.
-Column <code>Total_Emrollment</code> comes from Demographics data, and <code>total_students</code> come from Directory data.</p>
-<pre><code>##                                                     dbn       neighborhood
-## West End Secondary School                        03M291     Lincoln Square
-## The Eagle Academy for Young Men of Staten Island 31R028 Stapleton-Rosebank
-##                                                  total_students
+Column <code>Total_Enrollment</code> comes from Demographics data, and <code>total_students</code> come from Directory data.</p>
+<p>Schools that are in the Directory data but not in the demographics data:</p>
+<pre><code>##                                                  total_students
 ## West End Secondary School                                   339
 ## The Eagle Academy for Young Men of Staten Island            253
-##                                                  Total_Enrollment hs_enroll
-## West End Secondary School                                      NA        NA
-## The Eagle Academy for Young Men of Staten Island               NA        NA
-##                                                  non_hs grades2018 PK Grade_K
-## West End Secondary School                            NA    6 to 10 NA      NA
-## The Eagle Academy for Young Men of Staten Island     NA    6 to 11 NA      NA
-##                                                  Grade_1 Grade_2 Grade_3
-## West End Secondary School                             NA      NA      NA
-## The Eagle Academy for Young Men of Staten Island      NA      NA      NA
-##                                                  Grade_4 Grade_5 Grade_6
-## West End Secondary School                             NA      NA      NA
-## The Eagle Academy for Young Men of Staten Island      NA      NA      NA
-##                                                  Grade_7 Grade_8 Grade_9
-## West End Secondary School                             NA      NA      NA
-## The Eagle Academy for Young Men of Staten Island      NA      NA      NA
-##                                                  Grade_10 Grade_11 Grade_12
-## West End Secondary School                              NA       NA       NA
-## The Eagle Academy for Young Men of Staten Island       NA       NA       NA
-##                                                    Borough
-## West End Secondary School                        MANHATTAN
-## The Eagle Academy for Young Men of Staten Island STATEN IS
-##                                                                                                  finalgrades
-## West End Secondary School                        6 to 10 - This school is expanding to serve grades 6 to 12.
-## The Eagle Academy for Young Men of Staten Island 6 to 11 - This school is expanding to serve grades 6 to 12.
-##                                                                                          program1
-## West End Secondary School                                               West End Secondary School
-## The Eagle Academy for Young Men of Staten Island The Eagle Academy for Young Men of Staten Island
-##                                                  program2 program3 program4
-## West End Secondary School                            &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;
-##                                                  program5 program6 program7
-## West End Secondary School                            &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;
-##                                                  program8 program9 program10
-## West End Secondary School                            &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;
-##                                                  language_classes
-## West End Secondary School                                    &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island             &lt;NA&gt;
-##                                                  advancedplacement_courses
-## West End Secondary School                                             &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island                      &lt;NA&gt;
-##                                                  diplomaendorsements
-## West End Secondary School                                       &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island                &lt;NA&gt;
-##                                                  graduation_rate
-## West End Secondary School                                   &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island            &lt;NA&gt;
-##                                                  attendance_rate
-## West End Secondary School                                     NA
-## The Eagle Academy for Young Men of Staten Island              NA
-##                                                  pct_stu_enough_variety
-## West End Secondary School                                          0.91
-## The Eagle Academy for Young Men of Staten Island                   0.75
-##                                                  college_career_rate
-## West End Secondary School                                       &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island                &lt;NA&gt;
-##                                                  specialized
-## West End Secondary School                                 NA
-## The Eagle Academy for Young Men of Staten Island          NA
-##                                                                admissionspriority11
-## West End Secondary School                        Priority to continuing 8th graders
-## The Eagle Academy for Young Men of Staten Island Priority to continuing 8th graders
-##                                                                         admissionspriority21
-## West End Secondary School                                    Then to New York City residents
-## The Eagle Academy for Young Men of Staten Island Then to Staten Island students or residents
-##                                                  School_Name Year n_Female
-## West End Secondary School                               &lt;NA&gt; &lt;NA&gt;       NA
-## The Eagle Academy for Young Men of Staten Island        &lt;NA&gt; &lt;NA&gt;       NA
-##                                                  pct_Female n_Male pct_Male
-## West End Secondary School                                NA     NA       NA
-## The Eagle Academy for Young Men of Staten Island         NA     NA       NA
-##                                                  n_Asian pct_Asian n_Black
-## West End Secondary School                             NA        NA      NA
-## The Eagle Academy for Young Men of Staten Island      NA        NA      NA
-##                                                  pct_Black n_Hispanic
-## West End Secondary School                               NA         NA
-## The Eagle Academy for Young Men of Staten Island        NA         NA
-##                                                  pct_Hispanic
-## West End Secondary School                                  NA
-## The Eagle Academy for Young Men of Staten Island           NA
-##                                                  n_Multiple_Race_Categories_Not_Represented
-## West End Secondary School                                                                NA
-## The Eagle Academy for Young Men of Staten Island                                         NA
-##                                                  pct_Multiple_Race_Categories_Not_Represented
-## West End Secondary School                                                                  NA
-## The Eagle Academy for Young Men of Staten Island                                           NA
-##                                                  n_White pct_White
-## West End Secondary School                             NA        NA
-## The Eagle Academy for Young Men of Staten Island      NA        NA
-##                                                  n_Students_with_Disabilities
-## West End Secondary School                                                  NA
-## The Eagle Academy for Young Men of Staten Island                           NA
-##                                                  pct_Students_with_Disabilities
-## West End Secondary School                                                    NA
-## The Eagle Academy for Young Men of Staten Island                             NA
-##                                                  n_English_Language_Learners
-## West End Secondary School                                                 NA
-## The Eagle Academy for Young Men of Staten Island                          NA
-##                                                  pct_English_Language_Learners
-## West End Secondary School                                                   NA
-## The Eagle Academy for Young Men of Staten Island                            NA
-##                                                  n_Poverty pct_Poverty
-## West End Secondary School                             &lt;NA&gt;        &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island      &lt;NA&gt;        &lt;NA&gt;
-##                                                  Economic_Need_Index
-## West End Secondary School                                       &lt;NA&gt;
-## The Eagle Academy for Young Men of Staten Island                &lt;NA&gt;</code></pre>
+##                                                  Total_Enrollment
+## West End Secondary School                                      NA
+## The Eagle Academy for Young Men of Staten Island               NA</code></pre>
 <pre><code>##                                                  grades2018
 ## West End Secondary School                           6 to 10
 ## The Eagle Academy for Young Men of Staten Island    6 to 11
@@ -655,639 +292,27 @@ Column <code>Total_Emrollment</code> comes from Demographics data, and <code>tot
 ## West End Secondary School                        6 to 10 - This school is expanding to serve grades 6 to 12.
 ## The Eagle Academy for Young Men of Staten Island 6 to 11 - This school is expanding to serve grades 6 to 12.</code></pre>
 <p>We can see that these two schools share that they do not serve grades until 12th grade.
-According to aforementioned NYC high school description (grade 9 to 12), we can filter out these schools.
+According to the aforementioned NYC high school description (grade 9 to 12), we can filter out these schools.
 Also, since the demographic data are from the Demographics dataset, we recalculate the other values into proportion with the demographics total population.</p>
-<pre><code>##                                                             dbn
-## Brooklyn High School for Law and Technology              16K498
-## International High School at Prospect Heights            17K524
-## Repertory Company High School for Theatre Arts           02M531
-## Thurgood Marshall Academy for Learning and Social Change 05M670
-## Brooklyn Frontiers High School                           15K423
-## Bard High School Early College Queens                    24Q299
-##                                                                     neighborhood
-## Brooklyn High School for Law and Technology                   Bedford-Stuyvesant
-## International High School at Prospect Heights                Crown Heights South
-## Repertory Company High School for Theatre Arts                           Midtown
-## Thurgood Marshall Academy for Learning and Social Change    Central Harlem North
-## Brooklyn Frontiers High School                           DUMBO-Downtown Brooklyn
-## Bard High School Early College Queens                    Hunters Point-Sunnyside
-##                                                          total_students
-## Brooklyn High School for Law and Technology                         594
-## International High School at Prospect Heights                       417
-## Repertory Company High School for Theatre Arts                      242
-## Thurgood Marshall Academy for Learning and Social Change            547
-## Brooklyn Frontiers High School                                      168
-## Bard High School Early College Queens                               623
-##                                                          Total_Enrollment
-## Brooklyn High School for Law and Technology                           578
-## International High School at Prospect Heights                         370
-## Repertory Company High School for Theatre Arts                        237
-## Thurgood Marshall Academy for Learning and Social Change              541
-## Brooklyn Frontiers High School                                        186
-## Bard High School Early College Queens                                 637
-##                                                          hs_enroll non_hs
-## Brooklyn High School for Law and Technology                    578      0
-## International High School at Prospect Heights                  370      0
-## Repertory Company High School for Theatre Arts                 237      0
-## Thurgood Marshall Academy for Learning and Social Change       374    167
-## Brooklyn Frontiers High School                                 186      0
-## Bard High School Early College Queens                          637      0
-##                                                          grades2018 PK Grade_K
-## Brooklyn High School for Law and Technology                 9 to 12  0       0
-## International High School at Prospect Heights               9 to 12  0       0
-## Repertory Company High School for Theatre Arts              9 to 12  0       0
-## Thurgood Marshall Academy for Learning and Social Change    6 to 12  0       0
-## Brooklyn Frontiers High School                              9 to 12  0       0
-## Bard High School Early College Queens                       9 to 12  0       0
-##                                                          Grade_1 Grade_2
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0       0
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_3 Grade_4
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0       0
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_5 Grade_6
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0      53
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_7 Grade_8
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change      58      56
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_9 Grade_10
-## Brooklyn High School for Law and Technology                  152      161
-## International High School at Prospect Heights                 88       85
-## Repertory Company High School for Theatre Arts                61       67
-## Thurgood Marshall Academy for Learning and Social Change     109      101
-## Brooklyn Frontiers High School                                39       54
-## Bard High School Early College Queens                        148      177
-##                                                          Grade_11 Grade_12
-## Brooklyn High School for Law and Technology                   128      137
-## International High School at Prospect Heights                  90      107
-## Repertory Company High School for Theatre Arts                 58       51
-## Thurgood Marshall Academy for Learning and Social Change       76       88
-## Brooklyn Frontiers High School                                 69       24
-## Bard High School Early College Queens                         159      153
-##                                                            Borough finalgrades
-## Brooklyn High School for Law and Technology               BROOKLYN     9 to 12
-## International High School at Prospect Heights             BROOKLYN     9 to 12
-## Repertory Company High School for Theatre Arts           MANHATTAN     9 to 12
-## Thurgood Marshall Academy for Learning and Social Change MANHATTAN     6 to 12
-## Brooklyn Frontiers High School                            BROOKLYN     9 to 12
-## Bard High School Early College Queens                       QUEENS     9 to 12
-##                                                                                               program1
-## Brooklyn High School for Law and Technology                                 Academy for Social Justice
-## International High School at Prospect Heights            International High School at Prospect Heights
-## Repertory Company High School for Theatre Arts                                            Theater Arts
-## Thurgood Marshall Academy for Learning and Social Change           Social Change and Community Service
-## Brooklyn Frontiers High School                                          Brooklyn Frontiers High School
-## Bard High School Early College Queens                            Bard High School Early College Queens
-##                                                                     program2
-## Brooklyn High School for Law and Technology              Computer Technology
-## International High School at Prospect Heights                           &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                          &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change                &lt;NA&gt;
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## Bard High School Early College Queens                                   &lt;NA&gt;
-##                                                          program3 program4
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;     &lt;NA&gt;
-##                                                          program5 program6
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;     &lt;NA&gt;
-##                                                          program7 program8
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;     &lt;NA&gt;
-##                                                          program9 program10
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;      &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;      &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;      &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;      &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;      &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;      &lt;NA&gt;
-##                                                                          language_classes
-## Brooklyn High School for Law and Technology                                       Spanish
-## International High School at Prospect Heights                                        &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                            French, Spanish
-## Thurgood Marshall Academy for Learning and Social Change                          Spanish
-## Brooklyn Frontiers High School                                                     French
-## Bard High School Early College Queens                    Arabic, Latin, Mandarin, Spanish
-##                                                                                                                                                                                                                              advancedplacement_courses
-## Brooklyn High School for Law and Technology                                                                             AP Chemistry, AP English Language and Composition, AP English Literature and Composition, AP Environmental Science, AP Spanish
-## International High School at Prospect Heights                                                                                                                                                                                                     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts           AP Biology, AP English Language and Composition, AP English Literature and Composition, AP Environmental Science, AP Psychology, AP Spanish, AP U.S. Government and Politics, AP U.S. History
-## Thurgood Marshall Academy for Learning and Social Change                                                                                                                                        AP English Literature and Composition, AP U.S. History
-## Brooklyn Frontiers High School                                                                                                                                                                                                                    &lt;NA&gt;
-## Bard High School Early College Queens                                                                                                                                                                                                             &lt;NA&gt;
-##                                                          diplomaendorsements
-## Brooklyn High School for Law and Technology                             Math
-## International High School at Prospect Heights                           &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                          Arts
-## Thurgood Marshall Academy for Learning and Social Change                &lt;NA&gt;
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## Bard High School Early College Queens                                   &lt;NA&gt;
-##                                                          graduation_rate
-## Brooklyn High School for Law and Technology                    0.7604844
-## International High School at Prospect Heights                  0.7100270
-## Repertory Company High School for Theatre Arts                 0.9802532
-## Thurgood Marshall Academy for Learning and Social Change       0.8189834
-## Brooklyn Frontiers High School                                        NA
-## Bard High School Early College Queens                          0.9682418
-##                                                          attendance_rate
-## Brooklyn High School for Law and Technology                    0.8735294
-## International High School at Prospect Heights                  0.9917838
-## Repertory Company High School for Theatre Arts                 0.9291983
-## Thurgood Marshall Academy for Learning and Social Change       0.9200924
-## Brooklyn Frontiers High School                                 0.6864516
-## Bard High School Early College Queens                          0.9486813
-##                                                          pct_stu_enough_variety
-## Brooklyn High School for Law and Technology                           0.5960554
-## International High School at Prospect Heights                         1.0368649
-## Repertory Company High School for Theatre Arts                        0.6943460
-## Thurgood Marshall Academy for Learning and Social Change              0.5965434
-## Brooklyn Frontiers High School                                        0.6141935
-## Bard High School Early College Queens                                 0.9193407
-##                                                          college_career_rate
-## Brooklyn High School for Law and Technology                        0.5035640
-## International High School at Prospect Heights                      0.5973243
-## Repertory Company High School for Theatre Arts                     0.8883544
-## Thurgood Marshall Academy for Learning and Social Change           0.6066543
-## Brooklyn Frontiers High School                                            NA
-## Bard High School Early College Queens                              0.9193407
-##                                                          specialized
-## Brooklyn High School for Law and Technology                       NA
-## International High School at Prospect Heights                     NA
-## Repertory Company High School for Theatre Arts                    NA
-## Thurgood Marshall Academy for Learning and Social Change          NA
-## Brooklyn Frontiers High School                                    NA
-## Bard High School Early College Queens                             NA
-##                                                                        admissionspriority11
-## Brooklyn High School for Law and Technology                 Open to New York City residents
-## International High School at Prospect Heights                                          &lt;NA&gt;
-## Repertory Company High School for Theatre Arts              Open to New York City residents
-## Thurgood Marshall Academy for Learning and Social Change Priority to continuing 8th graders
-## Brooklyn Frontiers High School                                                         &lt;NA&gt;
-## Bard High School Early College Queens                       Open to New York City residents
-##                                                                              admissionspriority21
-## Brooklyn High School for Law and Technology                                                  &lt;NA&gt;
-## International High School at Prospect Heights                                                &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                                               &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change Then to District 5 students or residents
-## Brooklyn Frontiers High School                                                               &lt;NA&gt;
-## Bard High School Early College Queens                                                        &lt;NA&gt;
-##                                                                                                School_Name
-## Brooklyn High School for Law and Technology                    Brooklyn High School for Law and Technology
-## International High School at Prospect Heights                International High School at Prospect Heights
-## Repertory Company High School for Theatre Arts              Repertory Company High School for Theatre Arts
-## Thurgood Marshall Academy for Learning and Social Change Thurgood Marshall Academy for Learning and Social
-## Brooklyn Frontiers High School                                              Brooklyn Frontiers High School
-## Bard High School Early College Queens                                Bard High School Early College Queens
-##                                                             Year n_Female
-## Brooklyn High School for Law and Technology              2019-20      244
-## International High School at Prospect Heights            2019-20      139
-## Repertory Company High School for Theatre Arts           2019-20      188
-## Thurgood Marshall Academy for Learning and Social Change 2019-20      285
-## Brooklyn Frontiers High School                           2019-20       83
-## Bard High School Early College Queens                    2019-20      407
-##                                                          pct_Female n_Male
-## Brooklyn High School for Law and Technology                   0.422    334
-## International High School at Prospect Heights                 0.376    231
-## Repertory Company High School for Theatre Arts                0.793     49
-## Thurgood Marshall Academy for Learning and Social Change      0.527    256
-## Brooklyn Frontiers High School                                0.446    103
-## Bard High School Early College Queens                         0.639    230
-##                                                          pct_Male n_Asian
-## Brooklyn High School for Law and Technology                 0.578      20
-## International High School at Prospect Heights               0.624      62
-## Repertory Company High School for Theatre Arts              0.207       3
-## Thurgood Marshall Academy for Learning and Social Change    0.473       9
-## Brooklyn Frontiers High School                              0.554       7
-## Bard High School Early College Queens                       0.361     214
-##                                                          pct_Asian n_Black
-## Brooklyn High School for Law and Technology                  0.035     351
-## International High School at Prospect Heights                0.168      79
-## Repertory Company High School for Theatre Arts               0.013      74
-## Thurgood Marshall Academy for Learning and Social Change     0.017     363
-## Brooklyn Frontiers High School                               0.038     110
-## Bard High School Early College Queens                        0.336      75
-##                                                          pct_Black n_Hispanic
-## Brooklyn High School for Law and Technology                  0.607        176
-## International High School at Prospect Heights                0.214        185
-## Repertory Company High School for Theatre Arts               0.312         95
-## Thurgood Marshall Academy for Learning and Social Change     0.671        153
-## Brooklyn Frontiers High School                               0.591         60
-## Bard High School Early College Queens                        0.118        134
-##                                                          pct_Hispanic
-## Brooklyn High School for Law and Technology                     0.304
-## International High School at Prospect Heights                   0.500
-## Repertory Company High School for Theatre Arts                  0.401
-## Thurgood Marshall Academy for Learning and Social Change        0.283
-## Brooklyn Frontiers High School                                  0.323
-## Bard High School Early College Queens                           0.210
-##                                                          n_Multiple_Race_Categories_Not_Represented
-## Brooklyn High School for Law and Technology                                                      16
-## International High School at Prospect Heights                                                     9
-## Repertory Company High School for Theatre Arts                                                   14
-## Thurgood Marshall Academy for Learning and Social Change                                          9
-## Brooklyn Frontiers High School                                                                    3
-## Bard High School Early College Queens                                                            17
-##                                                          pct_Multiple_Race_Categories_Not_Represented
-## Brooklyn High School for Law and Technology                                                     0.028
-## International High School at Prospect Heights                                                   0.024
-## Repertory Company High School for Theatre Arts                                                  0.059
-## Thurgood Marshall Academy for Learning and Social Change                                        0.017
-## Brooklyn Frontiers High School                                                                  0.016
-## Bard High School Early College Queens                                                           0.027
-##                                                          n_White pct_White
-## Brooklyn High School for Law and Technology                   15     0.026
-## International High School at Prospect Heights                 35     0.095
-## Repertory Company High School for Theatre Arts                51     0.215
-## Thurgood Marshall Academy for Learning and Social Change       7     0.013
-## Brooklyn Frontiers High School                                 6     0.032
-## Bard High School Early College Queens                        197     0.309
-##                                                          n_Students_with_Disabilities
-## Brooklyn High School for Law and Technology                                       125
-## International High School at Prospect Heights                                      15
-## Repertory Company High School for Theatre Arts                                     42
-## Thurgood Marshall Academy for Learning and Social Change                          137
-## Brooklyn Frontiers High School                                                     76
-## Bard High School Early College Queens                                              53
-##                                                          pct_Students_with_Disabilities
-## Brooklyn High School for Law and Technology                                       0.216
-## International High School at Prospect Heights                                     0.041
-## Repertory Company High School for Theatre Arts                                    0.177
-## Thurgood Marshall Academy for Learning and Social Change                          0.253
-## Brooklyn Frontiers High School                                                    0.409
-## Bard High School Early College Queens                                             0.083
-##                                                          n_English_Language_Learners
-## Brooklyn High School for Law and Technology                                       42
-## International High School at Prospect Heights                                    311
-## Repertory Company High School for Theatre Arts                                     0
-## Thurgood Marshall Academy for Learning and Social Change                          21
-## Brooklyn Frontiers High School                                                     7
-## Bard High School Early College Queens                                              2
-##                                                          pct_English_Language_Learners
-## Brooklyn High School for Law and Technology                                      0.073
-## International High School at Prospect Heights                                    0.841
-## Repertory Company High School for Theatre Arts                                   0.000
-## Thurgood Marshall Academy for Learning and Social Change                         0.039
-## Brooklyn Frontiers High School                                                   0.038
-## Bard High School Early College Queens                                            0.003
-##                                                          n_Poverty pct_Poverty
-## Brooklyn High School for Law and Technology                    477       82.5%
-## International High School at Prospect Heights                  302       81.6%
-## Repertory Company High School for Theatre Arts                 161       67.9%
-## Thurgood Marshall Academy for Learning and Social Change       421       77.8%
-## Brooklyn Frontiers High School                                 170       91.4%
-## Bard High School Early College Queens                          294       46.2%
-##                                                          Economic_Need_Index
-## Brooklyn High School for Law and Technology                            83.4%
-## International High School at Prospect Heights                      Above 95%
-## Repertory Company High School for Theatre Arts                         49.8%
-## Thurgood Marshall Academy for Learning and Social Change               82.7%
-## Brooklyn Frontiers High School                                         81.8%
-## Bard High School Early College Queens                                  44.8%</code></pre>
 <p>Take out the <code>total_students</code> column and the <code>School_Name</code> column, since two dataframes were joined by <code>dbn</code> and the school names are written differently.</p>
-<pre><code>##                                                             dbn
-## Brooklyn High School for Law and Technology              16K498
-## International High School at Prospect Heights            17K524
-## Repertory Company High School for Theatre Arts           02M531
-## Thurgood Marshall Academy for Learning and Social Change 05M670
-## Brooklyn Frontiers High School                           15K423
-## Bard High School Early College Queens                    24Q299
-##                                                                     neighborhood
-## Brooklyn High School for Law and Technology                   Bedford-Stuyvesant
-## International High School at Prospect Heights                Crown Heights South
-## Repertory Company High School for Theatre Arts                           Midtown
-## Thurgood Marshall Academy for Learning and Social Change    Central Harlem North
-## Brooklyn Frontiers High School                           DUMBO-Downtown Brooklyn
-## Bard High School Early College Queens                    Hunters Point-Sunnyside
-##                                                          total_students
-## Brooklyn High School for Law and Technology                         594
-## International High School at Prospect Heights                       417
-## Repertory Company High School for Theatre Arts                      242
-## Thurgood Marshall Academy for Learning and Social Change            547
-## Brooklyn Frontiers High School                                      168
-## Bard High School Early College Queens                               623
-##                                                          hs_enroll non_hs
-## Brooklyn High School for Law and Technology                    578      0
-## International High School at Prospect Heights                  370      0
-## Repertory Company High School for Theatre Arts                 237      0
-## Thurgood Marshall Academy for Learning and Social Change       374    167
-## Brooklyn Frontiers High School                                 186      0
-## Bard High School Early College Queens                          637      0
-##                                                          grades2018 PK Grade_K
-## Brooklyn High School for Law and Technology                 9 to 12  0       0
-## International High School at Prospect Heights               9 to 12  0       0
-## Repertory Company High School for Theatre Arts              9 to 12  0       0
-## Thurgood Marshall Academy for Learning and Social Change    6 to 12  0       0
-## Brooklyn Frontiers High School                              9 to 12  0       0
-## Bard High School Early College Queens                       9 to 12  0       0
-##                                                          Grade_1 Grade_2
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0       0
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_3 Grade_4
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0       0
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_5 Grade_6
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change       0      53
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_7 Grade_8
-## Brooklyn High School for Law and Technology                    0       0
-## International High School at Prospect Heights                  0       0
-## Repertory Company High School for Theatre Arts                 0       0
-## Thurgood Marshall Academy for Learning and Social Change      58      56
-## Brooklyn Frontiers High School                                 0       0
-## Bard High School Early College Queens                          0       0
-##                                                          Grade_9 Grade_10
-## Brooklyn High School for Law and Technology                  152      161
-## International High School at Prospect Heights                 88       85
-## Repertory Company High School for Theatre Arts                61       67
-## Thurgood Marshall Academy for Learning and Social Change     109      101
-## Brooklyn Frontiers High School                                39       54
-## Bard High School Early College Queens                        148      177
-##                                                          Grade_11 Grade_12
-## Brooklyn High School for Law and Technology                   128      137
-## International High School at Prospect Heights                  90      107
-## Repertory Company High School for Theatre Arts                 58       51
-## Thurgood Marshall Academy for Learning and Social Change       76       88
-## Brooklyn Frontiers High School                                 69       24
-## Bard High School Early College Queens                         159      153
-##                                                            Borough finalgrades
-## Brooklyn High School for Law and Technology               BROOKLYN     9 to 12
-## International High School at Prospect Heights             BROOKLYN     9 to 12
-## Repertory Company High School for Theatre Arts           MANHATTAN     9 to 12
-## Thurgood Marshall Academy for Learning and Social Change MANHATTAN     6 to 12
-## Brooklyn Frontiers High School                            BROOKLYN     9 to 12
-## Bard High School Early College Queens                       QUEENS     9 to 12
-##                                                                                               program1
-## Brooklyn High School for Law and Technology                                 Academy for Social Justice
-## International High School at Prospect Heights            International High School at Prospect Heights
-## Repertory Company High School for Theatre Arts                                            Theater Arts
-## Thurgood Marshall Academy for Learning and Social Change           Social Change and Community Service
-## Brooklyn Frontiers High School                                          Brooklyn Frontiers High School
-## Bard High School Early College Queens                            Bard High School Early College Queens
-##                                                                     program2
-## Brooklyn High School for Law and Technology              Computer Technology
-## International High School at Prospect Heights                           &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                          &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change                &lt;NA&gt;
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## Bard High School Early College Queens                                   &lt;NA&gt;
-##                                                          program3 program4
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;     &lt;NA&gt;
-##                                                          program5 program6
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;     &lt;NA&gt;
-##                                                          program7 program8
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;     &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;     &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;     &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;     &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;     &lt;NA&gt;
-##                                                          program9 program10
-## Brooklyn High School for Law and Technology                  &lt;NA&gt;      &lt;NA&gt;
-## International High School at Prospect Heights                &lt;NA&gt;      &lt;NA&gt;
-## Repertory Company High School for Theatre Arts               &lt;NA&gt;      &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change     &lt;NA&gt;      &lt;NA&gt;
-## Brooklyn Frontiers High School                               &lt;NA&gt;      &lt;NA&gt;
-## Bard High School Early College Queens                        &lt;NA&gt;      &lt;NA&gt;
-##                                                                          language_classes
-## Brooklyn High School for Law and Technology                                       Spanish
-## International High School at Prospect Heights                                        &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                            French, Spanish
-## Thurgood Marshall Academy for Learning and Social Change                          Spanish
-## Brooklyn Frontiers High School                                                     French
-## Bard High School Early College Queens                    Arabic, Latin, Mandarin, Spanish
-##                                                                                                                                                                                                                              advancedplacement_courses
-## Brooklyn High School for Law and Technology                                                                             AP Chemistry, AP English Language and Composition, AP English Literature and Composition, AP Environmental Science, AP Spanish
-## International High School at Prospect Heights                                                                                                                                                                                                     &lt;NA&gt;
-## Repertory Company High School for Theatre Arts           AP Biology, AP English Language and Composition, AP English Literature and Composition, AP Environmental Science, AP Psychology, AP Spanish, AP U.S. Government and Politics, AP U.S. History
-## Thurgood Marshall Academy for Learning and Social Change                                                                                                                                        AP English Literature and Composition, AP U.S. History
-## Brooklyn Frontiers High School                                                                                                                                                                                                                    &lt;NA&gt;
-## Bard High School Early College Queens                                                                                                                                                                                                             &lt;NA&gt;
-##                                                          diplomaendorsements
-## Brooklyn High School for Law and Technology                             Math
-## International High School at Prospect Heights                           &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                          Arts
-## Thurgood Marshall Academy for Learning and Social Change                &lt;NA&gt;
-## Brooklyn Frontiers High School                                          &lt;NA&gt;
-## Bard High School Early College Queens                                   &lt;NA&gt;
-##                                                          graduation_rate
-## Brooklyn High School for Law and Technology                    0.7604844
-## International High School at Prospect Heights                  0.7100270
-## Repertory Company High School for Theatre Arts                 0.9802532
-## Thurgood Marshall Academy for Learning and Social Change       0.8189834
-## Brooklyn Frontiers High School                                        NA
-## Bard High School Early College Queens                          0.9682418
-##                                                          attendance_rate
-## Brooklyn High School for Law and Technology                    0.8735294
-## International High School at Prospect Heights                  0.9917838
-## Repertory Company High School for Theatre Arts                 0.9291983
-## Thurgood Marshall Academy for Learning and Social Change       0.9200924
-## Brooklyn Frontiers High School                                 0.6864516
-## Bard High School Early College Queens                          0.9486813
-##                                                          pct_stu_enough_variety
-## Brooklyn High School for Law and Technology                           0.5960554
-## International High School at Prospect Heights                         1.0368649
-## Repertory Company High School for Theatre Arts                        0.6943460
-## Thurgood Marshall Academy for Learning and Social Change              0.5965434
-## Brooklyn Frontiers High School                                        0.6141935
-## Bard High School Early College Queens                                 0.9193407
-##                                                          college_career_rate
-## Brooklyn High School for Law and Technology                        0.5035640
-## International High School at Prospect Heights                      0.5973243
-## Repertory Company High School for Theatre Arts                     0.8883544
-## Thurgood Marshall Academy for Learning and Social Change           0.6066543
-## Brooklyn Frontiers High School                                            NA
-## Bard High School Early College Queens                              0.9193407
-##                                                          specialized
-## Brooklyn High School for Law and Technology                       NA
-## International High School at Prospect Heights                     NA
-## Repertory Company High School for Theatre Arts                    NA
-## Thurgood Marshall Academy for Learning and Social Change          NA
-## Brooklyn Frontiers High School                                    NA
-## Bard High School Early College Queens                             NA
-##                                                                        admissionspriority11
-## Brooklyn High School for Law and Technology                 Open to New York City residents
-## International High School at Prospect Heights                                          &lt;NA&gt;
-## Repertory Company High School for Theatre Arts              Open to New York City residents
-## Thurgood Marshall Academy for Learning and Social Change Priority to continuing 8th graders
-## Brooklyn Frontiers High School                                                         &lt;NA&gt;
-## Bard High School Early College Queens                       Open to New York City residents
-##                                                                              admissionspriority21
-## Brooklyn High School for Law and Technology                                                  &lt;NA&gt;
-## International High School at Prospect Heights                                                &lt;NA&gt;
-## Repertory Company High School for Theatre Arts                                               &lt;NA&gt;
-## Thurgood Marshall Academy for Learning and Social Change Then to District 5 students or residents
-## Brooklyn Frontiers High School                                                               &lt;NA&gt;
-## Bard High School Early College Queens                                                        &lt;NA&gt;
-##                                                             Year n_Female
-## Brooklyn High School for Law and Technology              2019-20      244
-## International High School at Prospect Heights            2019-20      139
-## Repertory Company High School for Theatre Arts           2019-20      188
-## Thurgood Marshall Academy for Learning and Social Change 2019-20      285
-## Brooklyn Frontiers High School                           2019-20       83
-## Bard High School Early College Queens                    2019-20      407
-##                                                          pct_Female n_Male
-## Brooklyn High School for Law and Technology                   0.422    334
-## International High School at Prospect Heights                 0.376    231
-## Repertory Company High School for Theatre Arts                0.793     49
-## Thurgood Marshall Academy for Learning and Social Change      0.527    256
-## Brooklyn Frontiers High School                                0.446    103
-## Bard High School Early College Queens                         0.639    230
-##                                                          pct_Male n_Asian
-## Brooklyn High School for Law and Technology                 0.578      20
-## International High School at Prospect Heights               0.624      62
-## Repertory Company High School for Theatre Arts              0.207       3
-## Thurgood Marshall Academy for Learning and Social Change    0.473       9
-## Brooklyn Frontiers High School                              0.554       7
-## Bard High School Early College Queens                       0.361     214
-##                                                          pct_Asian n_Black
-## Brooklyn High School for Law and Technology                  0.035     351
-## International High School at Prospect Heights                0.168      79
-## Repertory Company High School for Theatre Arts               0.013      74
-## Thurgood Marshall Academy for Learning and Social Change     0.017     363
-## Brooklyn Frontiers High School                               0.038     110
-## Bard High School Early College Queens                        0.336      75
-##                                                          pct_Black n_Hispanic
-## Brooklyn High School for Law and Technology                  0.607        176
-## International High School at Prospect Heights                0.214        185
-## Repertory Company High School for Theatre Arts               0.312         95
-## Thurgood Marshall Academy for Learning and Social Change     0.671        153
-## Brooklyn Frontiers High School                               0.591         60
-## Bard High School Early College Queens                        0.118        134
-##                                                          pct_Hispanic
-## Brooklyn High School for Law and Technology                     0.304
-## International High School at Prospect Heights                   0.500
-## Repertory Company High School for Theatre Arts                  0.401
-## Thurgood Marshall Academy for Learning and Social Change        0.283
-## Brooklyn Frontiers High School                                  0.323
-## Bard High School Early College Queens                           0.210
-##                                                          n_Multiple_Race_Categories_Not_Represented
-## Brooklyn High School for Law and Technology                                                      16
-## International High School at Prospect Heights                                                     9
-## Repertory Company High School for Theatre Arts                                                   14
-## Thurgood Marshall Academy for Learning and Social Change                                          9
-## Brooklyn Frontiers High School                                                                    3
-## Bard High School Early College Queens                                                            17
-##                                                          pct_Multiple_Race_Categories_Not_Represented
-## Brooklyn High School for Law and Technology                                                     0.028
-## International High School at Prospect Heights                                                   0.024
-## Repertory Company High School for Theatre Arts                                                  0.059
-## Thurgood Marshall Academy for Learning and Social Change                                        0.017
-## Brooklyn Frontiers High School                                                                  0.016
-## Bard High School Early College Queens                                                           0.027
-##                                                          n_White pct_White
-## Brooklyn High School for Law and Technology                   15     0.026
-## International High School at Prospect Heights                 35     0.095
-## Repertory Company High School for Theatre Arts                51     0.215
-## Thurgood Marshall Academy for Learning and Social Change       7     0.013
-## Brooklyn Frontiers High School                                 6     0.032
-## Bard High School Early College Queens                        197     0.309
-##                                                          n_Students_with_Disabilities
-## Brooklyn High School for Law and Technology                                       125
-## International High School at Prospect Heights                                      15
-## Repertory Company High School for Theatre Arts                                     42
-## Thurgood Marshall Academy for Learning and Social Change                          137
-## Brooklyn Frontiers High School                                                     76
-## Bard High School Early College Queens                                              53
-##                                                          pct_Students_with_Disabilities
-## Brooklyn High School for Law and Technology                                       0.216
-## International High School at Prospect Heights                                     0.041
-## Repertory Company High School for Theatre Arts                                    0.177
-## Thurgood Marshall Academy for Learning and Social Change                          0.253
-## Brooklyn Frontiers High School                                                    0.409
-## Bard High School Early College Queens                                             0.083
-##                                                          n_English_Language_Learners
-## Brooklyn High School for Law and Technology                                       42
-## International High School at Prospect Heights                                    311
-## Repertory Company High School for Theatre Arts                                     0
-## Thurgood Marshall Academy for Learning and Social Change                          21
-## Brooklyn Frontiers High School                                                     7
-## Bard High School Early College Queens                                              2
-##                                                          pct_English_Language_Learners
-## Brooklyn High School for Law and Technology                                      0.073
-## International High School at Prospect Heights                                    0.841
-## Repertory Company High School for Theatre Arts                                   0.000
-## Thurgood Marshall Academy for Learning and Social Change                         0.039
-## Brooklyn Frontiers High School                                                   0.038
-## Bard High School Early College Queens                                            0.003
-##                                                          n_Poverty pct_Poverty
-## Brooklyn High School for Law and Technology                    477       82.5%
-## International High School at Prospect Heights                  302       81.6%
-## Repertory Company High School for Theatre Arts                 161       67.9%
-## Thurgood Marshall Academy for Learning and Social Change       421       77.8%
-## Brooklyn Frontiers High School                                 170       91.4%
-## Bard High School Early College Queens                          294       46.2%
-##                                                          Economic_Need_Index
-## Brooklyn High School for Law and Technology                            83.4%
-## International High School at Prospect Heights                      Above 95%
-## Repertory Company High School for Theatre Arts                         49.8%
-## Thurgood Marshall Academy for Learning and Social Change               82.7%
-## Brooklyn Frontiers High School                                         81.8%
-## Bard High School Early College Queens                                  44.8%</code></pre>
+<p>Add quartile of graduation rate to get a sense of how schools are performing</p>
+<p>Save final dataframe to a csv for use with D3</p>
 </div>
 <div id="high-school-location-data" class="section level3">
-<h3><span class="header-section-number">3.0.4</span> High school location data</h3>
-<pre><code>## # A tibble: 6 x 9
-##   dbn    school_name Borough city    zip Latitude Longitude `Census Tract` NTA  
-##   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;
-## 1 16K498 Brooklyn H… BROOKL… Broo… 11221     40.7     -73.9            375 Stuy…
-## 2 17K524 Internatio… BROOKL… Broo… 11225     40.7     -74.0            213 Crow…
-## 3 02M531 Repertory … MANHAT… Manh… 10036     40.8     -74.0            119 Midt…
-## 4 05M670 Thurgood M… MANHAT… Manh… 10030     40.8     -73.9            228 Cent…
-## 5 15K423 Brooklyn F… BROOKL… Broo… 11201     40.7     -74.0             43 DUMB…
-## 6 03M291 West End S… MANHAT… Manh… 10023     40.8     -74.0            151 Linc…</code></pre>
+<h3><span class="header-section-number">3.1.4</span> High school location data</h3>
+<pre><code>## # A tibble: 6 x 10
+##   dbn   school_name total_students Borough city    zip Latitude Longitude
+##   &lt;chr&gt; &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 16K4… Brooklyn H…            594 BROOKL… Broo… 11221     40.7     -73.9
+## 2 17K5… Internatio…            417 BROOKL… Broo… 11225     40.7     -74.0
+## 3 02M5… Repertory …            242 MANHAT… Manh… 10036     40.8     -74.0
+## 4 05M6… Thurgood M…            547 MANHAT… Manh… 10030     40.8     -73.9
+## 5 15K4… Brooklyn F…            168 BROOKL… Broo… 11201     40.7     -74.0
+## 6 03M2… West End S…            339 MANHAT… Manh… 10023     40.8     -74.0
+## # … with 2 more variables: `Census Tract` &lt;dbl&gt;, NTA &lt;chr&gt;</code></pre>
 <p>This dataframe contains only the information on the location extracted from the high school directory file.</p>
 
+</div>
 </div>
 </div>
             </section>

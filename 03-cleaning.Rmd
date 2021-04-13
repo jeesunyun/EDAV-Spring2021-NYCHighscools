@@ -11,12 +11,12 @@ library(stringr)
 
 ### Demographics data
 
-Grades included in the demographics data
+Grades included in the demographics data:
 ```{r}
 names(hs_demo)[grepl("Grade", names(hs_demo))];
 ```
 
-School years included in the demographics data, and some variables included in the demographics data.
+School years included in the demographics data, and some variables included in the demographics data:
 ```{r}
 unique(hs_demo["Year"]); names(hs_demo)[grepl("%", names(hs_demo))]; head(names(hs_demo))
 ```
@@ -54,7 +54,7 @@ hs_demo_tidy <- hs_demo %>%
   dplyr::select(DBN, School_Name, Year, Total_Enrollment, hs_enroll, non_hs, everything(), -`Grade_3K+PK_(Half_Day_&_Full_Day)`) %>%
   dplyr::filter( Grade_10 !=0 & Grade_11 !=0 & Grade_12 != 0 )
 
-head(hs_demo_tidy)
+head(hs_demo_tidy)[1:5]
 ```
 
 
@@ -81,7 +81,7 @@ hs_dir_tidy.2019 <- hs_dir.2019 %>%
                 language_classes, advancedplacement_courses, diplomaendorsements,graduation_rate,
                 attendance_rate, pct_stu_enough_variety, college_career_rate, specialized, 
                 admissionspriority11, admissionspriority21)
-head(hs_dir_tidy.2019)
+head(hs_dir_tidy.2019)[1:5]
 ```
 
 
@@ -97,7 +97,7 @@ hs_join.2019 <- hs_dir_tidy.2019 %>%
   mutate(across(where(is.character), ~na_if(., "N/A"))) %>% 
   column_to_rownames(var = "school_name")
 
-print(head(hs_join.2019))
+head(hs_join.2019)[1:5]
 ```
 
 It is interesting that the total number of students are not equal in both data sets.
