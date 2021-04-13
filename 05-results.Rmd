@@ -42,8 +42,11 @@ ggplot(nyc_tracts) + geom_sf() + theme_minimal()
 
 ```
 
-
 This map boundary of NYC will be the basis for the geospatial plots.
+
+* Why we need a boundries map before we get into our business?
+
+  - The census data, along with our other datasets, contains longitudes and latitude data, including the NTA codes with geospatial information. We need to create a tile map, a base map for us to plot our data on first. Once this tile map is created, we can plot our points and generate approperiate visualizations.
 
 
 
@@ -73,10 +76,10 @@ ggplot(mn_ntas) +
 ```
 
 
-
-To confirm that the map boundary that we created above works, we implemented an example map that shows the percentage of people that has a Bachelor's degree and aboce in NYC.
+To confirm that the map boundary that we created above works, we implemented an example map that shows the percentage of people that has a Bachelor's degree and above in NYC.
 We can see that the area that has the most university graduates are in Manhattan, especially up to what appears to be Morningside Heights, and in Brooklym close to Manhattan. 
 
+Such an example demonstration of New York census data and what kind of information it recorded, is widely used in investigating child poverty of New York.
 
 
 ## Explore characteristics shared by schools
@@ -89,7 +92,7 @@ t(table(hs_final$grades2018))
 
 
 The table shows that schools are mostly from grades 9 to 12, and 6 to 12.
-We want to see characteristics of these schools, especially in what classes and diploa are offered.
+We want to see characteristics of these schools, especially in what classes and diploma are offered.
 We separate the columns of such columns by `","` since they are currently in a free text form and change them to categories.
 
 
@@ -338,7 +341,10 @@ plot_hist <- ggplot(nyc_schools, aes(x = fct_infreq(factype))) +
 plot_hist
 ```
 
-This does not only limit to highschools, but is an overview of all different categories of schooling in NYC.
+
+We have create an overview histogram that showed how many, and what kind of the schools NYC has in total. All of the school are carefully labeled. From the histogram, we can see that the Public schools are clearly the majority of the educational institutions, follow by charter schools, which are run under private board and custom agendas(part of them are private and for-profit). The histogram showed the popularity of public institution in K-12 system in NYC.
+
+In the dataset we have noticed that there could be a fine line between high school institution and non-high-school institutions among all of these different names of categories. And this line became our boundries of investigations. Our questions below has been divided between high school and non-high-school scenarios.
 As seen previously in the data cleaning process, high schools are not strictly from grades 9 to 12 but there are also schools from grade 6 to 12, or K to 12(all grades) schools.
 
 Thus, it would be inefficient and ineffective to plot something like below, only showing for highschools:
@@ -379,6 +385,52 @@ locations_sf <- st_as_sf(locations, coords = c("longitude", "latitude"), crs = 4
 mapview(locations_sf)
 ```
 
+We read in the New York School Data, which recorded name, type, and location information for all New York schools for people under 18. We use ggmap package to create this interactive map and use Google Map API to map the geospatial data to the map.
+
+This interactive map have multiple styles of base map. Each plot point represents a school, zoom in will reaveal more details: if click on the point, it will show the information of the school: name, categories of the school and its id. It's not hard for us to find out the general distribution of the schools are concentrating on the north of Manhattan island and middle of Brooklyn. Except these 2 hot zones, the other part of the NYC has their schools scattered.
+
+
+### Investigating the school locations.
+
+```{r}
+library(ggmap)
+nyc <- c(lon = -74.0059, lat = 40.7128)
+nyc_map <- get_map(location = nyc, zoom = 11)
+
+
+charter_school_df <- locations_df[locations_df$factype == c(
+                                                          "Elementary School - Charter"
+                                                          , "K-8 School - Charter"
+                                                          , "K-12 all grades School - Charter"),]
+
+  
+public_school_df <- locations_df[locations_df$factype == c(
+                                                          "Elementary School - Public"
+                                                          , "K-8 School - Public"
+                                                          , "K-12 all grades School - Public"),]
+# Coding the graph.
+plot_charter_vs_public_school_df <- ggmap(nyc_map) +
+  geom_point(data = charter_school_df,
+             aes(x = longitude, y = latitude, color = "Charter"), alpha = 0.55) +
+  geom_point(data = public_school_df,
+             aes(x = longitude, y = latitude, color = "Public"), alpha = 0.55) +
+  scale_color_manual(values = c(Charter = "red", Public = "blue")) +
+  labs(title="Charter School vs. Public School for Elementary to Middle Schools (< K-8)",
+             subtitle="Geo Map of NYC Charter/Public schools (below High School)",
+                     y="Count", x="School Types") +
+        theme(legend.title = element_text(size = 8),
+               legend.text = element_text(size = 5))
+
+plot_charter_vs_public_school_df
+
+
+```
+
+
+The charter schools are schools that do not charge fees to student who take state exams. Compare to public schools, they receive less funding but have more autonomy in the administration of education. From the plot, we can see the charter schools(in red dots), which are designed to compete with public schools, are much fewer compared to purple dots. This showed in the elementary to middle school level, people trust NYC public schools in general. The distribution of the publics schools among all NYC tracts could also be considered equal: they are not visibly over-crowded in one or more specific areas.
+
+This provided the evidence that the public schools from elementary levels are well supported by NYC education branch of the government funding.
+
 
 ### Maps high schools
 
@@ -415,6 +467,11 @@ plot_charter_vs_public_high_school_df <- ggmap(nyc_map) +
 plot_charter_vs_public_high_school_df
 ```
 
+
+In the high school level, we witnessed that the amount of the charter schools and the public schools are almost equal. One reason behind this is that Charter school in High school level can recruit more students compare to Elementary level, which provided more fundings to the Charter school. This allows Charter school to enhance its performance. The other reason is that compare to elementary public schools, public high school receive less fundings from the NYC government. This, even though didn't suggest that Charter high school are necessarily better than public high schools, but its indication revealed that we should invest more on public high school education.
+
+
+
 ### Graph of the vocational high school
 
 ```{r}
@@ -433,6 +490,12 @@ plot_vocational_school_df <- ggmap(nyc_map) +
 plot_vocational_school_df
 
 ```
+
+
+Vocational high school, alternative high school and educational skills center are vocation-purpose institutions. It aims at providing another option for educating middle students to a specific profession and introduce them to the job market. Vocational training institutions are assisting to the college system and beneficial to the whole society.
+
+In this graph, we see there are not many such institutions in NYC city. Could this be a direction of public support? In Germany both such institutions are well-funded and it helped greatly to the job market and lowers the unemployment rate.
+
 
 ### Intermediate schools
 
@@ -458,23 +521,9 @@ plot_intermediate_school_df <- ggmap(nyc_map) +
 plot_intermediate_school_df
 ```
 
-### Student Diversity Satisfaction vs. Actual School Diversity 
-```{r}
+Another interesting question we would like to investigate is the Intermediate school option. Intermediate schools are the schools for students in Grade 7-8, which equals to middle school level. Intermediate schools provided another option for students who graduated from elementary school level (over 6-grades) but not in a K-8 or K-12 school. The reason why we are investigating this is to see how many parents will decide to opt-out of the middle-high school system and reallocate their kids to another school specifically. 
 
-hs_final %>%
-  rename(Asian = n_Asian, Black = n_Black, Hispanic = n_Hispanic, Multiple = n_Multiple_Race_Categories_Not_Represented, White = n_White) %>%
-  pivot_longer(cols=c("Asian", "Black", "Hispanic", "Multiple", "White"), names_to = "demographic", values_to="count") %>% 
-  filter(count < quantile(count, .99) + 1.5 * IQR(count)) %>%
-  ggplot() +
-  geom_point(aes(x = pct_stu_enough_variety, y = count), alpha=0.2, stroke=0) +
-  xlab("% Student Body Satisfied w/ Diversity") +
-  ylab("# of Students") +
-  facet_grid(demographic ~ .)
-
-```
-
-One of the questions on our mind was whether or not the perception that students' had of the diversity in their schools actually corresponded with the actual diversity of their schools. To get an sense of this relationship, we generated a scatterplot of the # of students in each school, faceted by demographic, against the % of the student body that was satisfied with the diversity. From this, we were able to see a general trend where an increased representation, through # of students, was correlated with an increased positive sentiment of the student body on the diversity.
-
+The Intermediate schools, along with Junior high schools, are popular options in NYC. The graph showed a relatively balanced numbers of Intermediate schools and non-intermediate schools.
 
 
 ### Special education school mapping
@@ -497,5 +546,24 @@ plot_special_education_school_df
 
 ```
 
+The special education schools are for those who are with their disabilities. The special education school helps them to sustain/support themselves in the society. In NYC there are around 20 of these schools, but in NYC there are around 1 million people with disabilities, 20% of them are below 18, which means they are in the age of being educated. While NYC has provided enough public support in civil levels like public transportations, I urge special attention to education support for people with disabilities.
 
+
+
+## Student Diversity Satisfaction vs. Actual School Diversity 
+```{r}
+
+hs_final %>%
+  rename(Asian = n_Asian, Black = n_Black, Hispanic = n_Hispanic, Multiple = n_Multiple_Race_Categories_Not_Represented, White = n_White) %>%
+  pivot_longer(cols=c("Asian", "Black", "Hispanic", "Multiple", "White"), names_to = "demographic", values_to="count") %>% 
+  filter(count < quantile(count, .99) + 1.5 * IQR(count)) %>%
+  ggplot() +
+  geom_point(aes(x = pct_stu_enough_variety, y = count), alpha=0.2, stroke=0) +
+  xlab("% Student Body Satisfied w/ Diversity") +
+  ylab("# of Students") +
+  facet_grid(demographic ~ .)
+
+```
+
+One of the questions on our mind was whether or not the perception that students' had of the diversity in their schools actually corresponded with the actual diversity of their schools. To get an sense of this relationship, we generated a scatterplot of the # of students in each school, faceted by demographic, against the % of the student body that was satisfied with the diversity. From this, we were able to see a general trend where an increased representation, through # of students, was correlated with an increased positive sentiment of the student body on the diversity.
 

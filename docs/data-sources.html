@@ -93,7 +93,7 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a><ul>
 <li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#dataset-information"><i class="fa fa-check"></i><b>2.1</b> Dataset information</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="data-sources.html"><a href="data-sources.html#school-demographics-and-high-school-directory-data"><i class="fa fa-check"></i><b>2.1.1</b> School demographics and high school directory data</a></li>
-<li class="chapter" data-level="2.1.2" data-path="data-sources.html"><a href="data-sources.html#nyc-censys-and-health-data"><i class="fa fa-check"></i><b>2.1.2</b> NYC censys and health data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-sources.html"><a href="data-sources.html#nyc-census-and-health-data"><i class="fa fa-check"></i><b>2.1.2</b> NYC census and health data</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#problems-with-nyc-datasets-health-and-census-data."><i class="fa fa-check"></i><b>2.2</b> Problems with NYC datasets health and census data.</a></li>
 </ul></li>
@@ -116,12 +116,13 @@
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#different-categories-of-schools-in-nyc"><i class="fa fa-check"></i><b>5.3</b> Different Categories of schools in NYC</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="results.html"><a href="results.html#geo-spatitial-interactive-map-of-nyc-school-datasets"><i class="fa fa-check"></i><b>5.3.1</b> Geo-spatitial Interactive Map of NYC school datasets</a></li>
-<li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#maps-high-schools"><i class="fa fa-check"></i><b>5.3.2</b> Maps high schools</a></li>
-<li class="chapter" data-level="5.3.3" data-path="results.html"><a href="results.html#graph-of-the-vocational-high-school"><i class="fa fa-check"></i><b>5.3.3</b> Graph of the vocational high school</a></li>
-<li class="chapter" data-level="5.3.4" data-path="results.html"><a href="results.html#intermediate-schools"><i class="fa fa-check"></i><b>5.3.4</b> Intermediate schools</a></li>
-<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#student-diversity-satisfaction-vs.actual-school-diversity"><i class="fa fa-check"></i><b>5.3.5</b> Student Diversity Satisfaction vs. Actual School Diversity</a></li>
+<li class="chapter" data-level="5.3.2" data-path="results.html"><a href="results.html#investigating-the-school-locations."><i class="fa fa-check"></i><b>5.3.2</b> Investigating the school locations.</a></li>
+<li class="chapter" data-level="5.3.3" data-path="results.html"><a href="results.html#maps-high-schools"><i class="fa fa-check"></i><b>5.3.3</b> Maps high schools</a></li>
+<li class="chapter" data-level="5.3.4" data-path="results.html"><a href="results.html#graph-of-the-vocational-high-school"><i class="fa fa-check"></i><b>5.3.4</b> Graph of the vocational high school</a></li>
+<li class="chapter" data-level="5.3.5" data-path="results.html"><a href="results.html#intermediate-schools"><i class="fa fa-check"></i><b>5.3.5</b> Intermediate schools</a></li>
 <li class="chapter" data-level="5.3.6" data-path="results.html"><a href="results.html#special-education-school-mapping"><i class="fa fa-check"></i><b>5.3.6</b> Special education school mapping</a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#student-diversity-satisfaction-vs.actual-school-diversity"><i class="fa fa-check"></i><b>5.4</b> Student Diversity Satisfaction vs. Actual School Diversity</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a><ul>
 <li class="chapter" data-level="6.1" data-path="interactive-component.html"><a href="interactive-component.html#our-process"><i class="fa fa-check"></i><b>6.1</b> Our Process</a></li>
@@ -212,8 +213,8 @@ Doing joins of these data by school names, we will be able to get a comprehensiv
 <p>The demographics data includes data related to grades, race and ethnicity, disabilities, and economic status.
 The directory data had 462 variables, which were too many to list them all, but includes detailed information on the school, from location to program descriptions.</p>
 </div>
-<div id="nyc-censys-and-health-data" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> NYC censys and health data</h3>
+<div id="nyc-census-and-health-data" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> NYC census and health data</h3>
 <pre><code>## # A tibble: 5 x 5
 ##   CensusTract County Borough TotalPop   Men
 ##         &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
@@ -243,8 +244,6 @@ The directory data had 462 variables, which were too many to list them all, but 
 ## [29] &quot;WorkAtHome&quot;      &quot;MeanCommute&quot;     &quot;Employed&quot;        &quot;PrivateWork&quot;    
 ## [33] &quot;PublicWork&quot;      &quot;SelfEmployed&quot;    &quot;FamilyWork&quot;      &quot;Unemployment&quot;</code></pre>
 <p>Some common and important columns are NTA codes, tracts ids, Race &amp; Ethnicities, Income and Child Poverty. NTA codes are GIS information for geographic marks and locations in NYC. Every single NTA code will match a place mark.</p>
-<p>All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.</p>
-<p>These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.</p>
 <p>For some information like Census codes, the R uses incorrect scientific notation, so we got rid of it.</p>
 <pre><code>## # A tibble: 2,167 x 5
 ##    CensusTract County Borough TotalPop   Men
@@ -260,11 +259,16 @@ The directory data had 462 variables, which were too many to list them all, but 
 ##  9 36005002500 Bronx  Bronx       5355  2338
 ## 10 36005002701 Bronx  Bronx       3016  1375
 ## # … with 2,157 more rows</code></pre>
+<p>This datasets has recorded the census tract information, its borough identity, total population and ethnicity info. Before we start our research and investigation. We need to clean up the datasets. As we have read the description from NYCdata.gov and this datasets is downloaded from the government website, the integrity of the data is assured, what we need to do is to drop the non-registered values in the datasets.</p>
+<p>Why there are NA values inside this governmental dataset?</p>
+<p>It is because the collection technique of the data, with the variables it contains, cannot apply to all of the tracts(the unit of census measurement). When census is being conducted in certain tracts, the data collector will collect the data with their own discretion on how these criterias applies to their tract.</p>
 </div>
 </div>
 <div id="problems-with-nyc-datasets-health-and-census-data." class="section level2">
 <h2><span class="header-section-number">2.2</span> Problems with NYC datasets health and census data.</h2>
-<p>Data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.<br />
+<p>All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.</p>
+<p>These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.</p>
+<p>However, data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.<br />
 </p>
 <p>Also, NYC datasets is not very easy to use and understand. The researchers must investigate and read the description on how to interpret the information inside the datasets like NTA codes, track ids, longitude and latitude. There are many N/As inside the datasets which indicated some degree of incomplete of the raw data collection. From a programming perspective, the NYC datasets are not very suitable for R: the packages to process GIS information and spatial data require the researcher to read those detailed docs for specific packages like <code>nycgeo</code>.</p>
 

@@ -61,7 +61,9 @@ print(head(names(hs_dir.2019)))
 The demographics data includes data related to grades, race and ethnicity, disabilities, and economic status.
 The directory data had 462 variables, which were too many to list them all, but includes detailed information on the school, from location to program descriptions.
 
-### NYC censys and health data
+
+
+### NYC census and health data
 ```{r}
 nyc.df <- read_csv("datasets/nyc_census_tracts.txt")
 head(nyc.df, 5)[1:5]
@@ -84,18 +86,28 @@ options(scipen=999)
 Some common and important columns are NTA codes, tracts ids, Race & Ethnicities, Income and Child Poverty. NTA codes are GIS information for geographic marks and locations in NYC. Every single NTA code will match a place mark.
 
 
-All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.
-
-These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.
-
 For some information like Census codes, the R uses incorrect scientific notation, so we got rid of it.
 ```{r}
 # Check the datasets.
 head(nyc.df, 10000)[1:5]
+nyc.df <- na.omit(nyc.df)
 ```
+
+
+This datasets has recorded the census tract information, its borough identity, total population and ethnicity info. Before we start our research and investigation. We need to clean up the datasets. As we have read the description from NYCdata.gov and this datasets is downloaded from the government website, the integrity of the data is assured, what we need to do is to drop the non-registered values in the datasets.
+
+Why there are NA values inside this governmental dataset?
+
+It is because the collection technique of the data, with the variables it contains, cannot apply to all of the tracts(the unit of census measurement). When census is being conducted in certain tracts, the data collector will collect the data with their own discretion on how these criterias applies to their tract.
+
+
 
 ## Problems with NYC datasets health and census data.
 
-Data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.\
+All datasets from NYC governmental background follow a certain pattern: they have a series of certain columns with identification information including NTA codes(Neighborhood Tabulation Areas (NTA)), tracks ids, etc. The arrangements of these columns also have a hierarchical structure: starting from bits of tracts to all of the 5 boroughs.
+
+These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.
+
+However, data related to schools, such as graduation rate or performance data can be easily found to be not available, mainly because they are not mandatory to be reported. Also, a lot of the data are not quantitative, but include free text forms of descriptions, which are not easy to work with.\
 
 Also, NYC datasets is not very easy to use and understand. The researchers must investigate and read the description on how to interpret the information inside the datasets like NTA codes, track ids, longitude and latitude. There are many N/As inside the datasets which indicated some degree of incomplete of the raw data collection. From a programming perspective, the NYC datasets are not very suitable for R: the packages to process GIS information and spatial data require the researcher to read those detailed docs for specific packages like `nycgeo`.
