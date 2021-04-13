@@ -71,6 +71,24 @@ ggplot(final_demo, aes(x= , y= , fill= neighborhood))+
   
 ```
 
+### Student Diversity Satisfaction vs. Actual School Diversity 
+```{r}
+
+hs_final %>%
+  rename(Asian = n_Asian, Black = n_Black, Hispanic = n_Hispanic, Multiple = n_Multiple_Race_Categories_Not_Represented, White = n_White) %>%
+  pivot_longer(cols=c("Asian", "Black", "Hispanic", "Multiple", "White"), names_to = "demographic", values_to="count") %>% 
+  filter(count < quantile(count, .99) + 1.5 * IQR(count)) %>%
+  ggplot() +
+  geom_point(aes(x = pct_stu_enough_variety, y = count), alpha=0.2, stroke=0) +
+  xlab("% Student Body Satisfied w/ Diversity") +
+  ylab("# of Students") +
+  facet_grid(demographic ~ .)
+
+```
+
+One of the questions on our mind was whether or not the perception that students' had of the diversity in their schools actually corresponded with the actual diversity of their schools. To get an sense of this relationship, we generated a scatterplot of the # of students in each school, faceted by demographic, against the % of the student body that was satisfied with the diversity. From this, we were able to see a general trend where an increased representation, through # of students, was correlated with an increased positive sentiment of the student body on the diversity.
+
+
 
 2. How different demographics are represented by neighborhood
 3. 
