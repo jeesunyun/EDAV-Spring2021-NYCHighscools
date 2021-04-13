@@ -61,20 +61,22 @@ The directory data had 462 variables, which were too many to list them all, but 
 
 ### NYC censys and health data
 ```{r}
-nyc_census_df <- read_csv("datasets/nyc_census_tracts.txt")
-head(nyc_census_df, 5)
+nyc.df <- read_csv("datasets/nyc_census_tracts.txt")
+head(nyc.df, 5)
 
 # NTA Health Data from NYC health
 nta_health <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nta-health.csv")
 head(nta_health,5)
 
 # Demonstration on Information of the datasets
-print(paste('This dataframe of NYC census data included ', dim(nyc_census_df)[1], 'rows of info and ', dim(nyc_census_df)[2], 'columns.'))
-print(paste('The total number of missing rows of data ', sum(is.na(nyc_census_df)), 
-           round(100*sum(is.na(nyc_census_df))/(nrow(nyc_census_df)*ncol(nyc_census_df)), 2), '% of the total.'))
+print(paste('This dataframe of NYC census data included ', dim(nyc.df)[1], 'rows of info and ', dim(nyc.df)[2], 'columns.'))
+print(paste('The total number of missing rows of data ', sum(is.na(nyc.df)), 
+           round(100*sum(is.na(nyc.df))/(nrow(nyc.df)*ncol(nyc.df)), 2), '% of the total.'))
 print('Below are the columns names of the data, this includes the categories of the datas recorded:')
-print(names(nyc_census_df))
+print(names(nyc.df))
 
+# For some information like Census codes, the R uses incorrect scientific notation, need to get rid of.
+options(scipen=999)
 ```
 
 Some common and important columns are NTA codes, tracts ids, Race & Ethnicities, Income and Child Poverty. NTA codes are GIS information for geographic marks and locations in NYC. Every single NTA code will match a place mark.
@@ -84,6 +86,11 @@ All datasets from NYC governmental background follow a certain pattern: they hav
 
 These structural datasets greatly benefited our project. NTA codes column in many of these datasets means that we can join different datasets together and conduct the combined research towards of topics. Its relation with GIS spatial information also assisted our visualization part. Thus with the completion of our project, we would like to thank NYC government who did all of these dedicated work and share them for education and public policy making purposes.
 
+For some information like Census codes, the R uses incorrect scientific notation, so we got rid of it.
+```{r}
+# Check the datasets.
+head(nyc.df, 10000)
+```
 
 ## Problems with NYC datasets health and census data.
 
