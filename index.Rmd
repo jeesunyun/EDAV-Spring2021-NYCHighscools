@@ -7,10 +7,11 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-This project aims to explore and visualize information related to high schools in NYC.
-Through this analysis, we hope to answer the following questions:
+New York City is one of the largest cities in the world and, in accordance with that fact, is home to the largest school system in the United States. Over 1.1 million students are taught across 1,800 schools. This project aims to explore and visualize some of the information related to the various schools throughout NYC -- with a slight focus on high schools.
+
+Through this analysis, we hoped to gain some insight on the following questions:
 
 1. What does the distribution of schools look like in a map? In terms of number of schools and students; different types of schools,etc.
 2. How do the demographics differ across different schools? How do the demographics differ in schools of different neighborhoods?
 3. How are schools among different boroughs distinct in terms of variety of programs/courses available?
-
+4. Is there some kind of discrepancy between the experienced diversity of high school students and the reality of the diversity in these schools?

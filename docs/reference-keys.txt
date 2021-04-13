@@ -29,5 +29,5 @@ interactive-component
 our-process
 our-solution
 conclusion
-limitations
 lessons-learned
+limitations
