@@ -1,21 +1,18 @@
-### Render the book
+# Spring2021 EDAV Final Project
+## NYC High school Demographics and Location Data
+Brian Hernandez, Changxing Wang, Jee sun Yun
 
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")` or clicking the *Build book* button which should appear in the Build tab (in the same pane as Environment, History, Connections, ...).
+*This project was done as a final project for the EDAV course.*
 
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
-
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
-
-(You will need to repeat steps 2 and 4 every time you wish to update the book online.)
+In this project we utilize data from NYC Open Data on high schools in New York.
+This project aims to explore and visualize some of the information related to the various schools throughout NYC -- with a slight focus on high schools.
 
 
+The published bookdown can be found [here](https://jeesunyun.github.io/nyc-hs/).
 
 *This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.*	
 
 
-### Additional features	
-
-Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
 
 
 
